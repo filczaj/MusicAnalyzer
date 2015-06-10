@@ -16,6 +16,7 @@ namespace MusicAnalyzer.Analyzer
         List<MyFrame> resultNotes;
         WAVReader wavReader;
         SoundAnalysis soundAnalysis;
+        NoteTools noteTools;
 
         public NotesPicker(short[] inputData, int bitrate, WAVReader wavreader)
         {
@@ -23,6 +24,7 @@ namespace MusicAnalyzer.Analyzer
             this.bitrate = bitrate;
             this.wavReader = wavreader;
             this.soundAnalysis = new SoundAnalysis(wavreader);
+            this.noteTools = new NoteTools();
         }
 
         public List<int> findAllNotes(){
@@ -56,18 +58,30 @@ namespace MusicAnalyzer.Analyzer
 
         public List<Note> removeRepeatedNotes(List<Note> allNotes)
         {
-            String tempNote = "";
+            String tempNote = "X0";
+            double tempFreq = 0.0;
             for (int i = 0; i < allNotes.Count;)
             {
-                if (allNotes[i].note == tempNote) allNotes.RemoveAt(i);
+                if ((allNotes[i].note[0] == tempNote[0]) || (Math.Abs(allNotes[i].freq - tempFreq) <= 5)) allNotes.RemoveAt(i);
                 else
                 {
-                    tempNote = allNotes[i].note;
-                    i++;
+                    if (allNotes[i].freq == 0) allNotes.RemoveAt(i); else
+                    {
+                        
+                        tempNote = allNotes[i].note;
+                        tempFreq = allNotes[i].freq;
+                        i++;
+                    }
                 }
             }
+            allNotes = noteTools.setNotesDuration(allNotes);
+            for (int i = 0; i < allNotes.Count;)
+            {
+                if (allNotes[i].duration <= 250) allNotes.RemoveAt(i); else i++;
+            }
+            
             return allNotes;
-        }
+        }    
 
         private double getRangeAVG(int starter, int end, int count){
             double[] probes = new double[count];

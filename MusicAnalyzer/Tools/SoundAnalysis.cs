@@ -33,9 +33,9 @@ namespace MusicAnalyzer.Tools
             double[] data = new double[fourierData.Length/2];
             for (int i = 0; i < fourierData.Length/2; i++)
             {
-                //if (i < 50)
-                  //  data[i] = 0;
-                //else
+                if (i < 50)
+                    data[i] = 0;
+                else
                     data[i] = Math.Sqrt(Math.Pow(fourierData[i].Re, 2) + Math.Pow(fourierData[i].Im, 2));
             }
             return maxIndex(data);
