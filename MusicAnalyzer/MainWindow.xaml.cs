@@ -31,7 +31,6 @@ namespace MusicAnalyzer
     {
         AudioPlayer ap;
         WAVReader wavReader = new WAVReader();
-        Complex[] data;
         public MyFrame[] resData;
         short[] channelData;
         int bitrate;
@@ -49,6 +48,7 @@ namespace MusicAnalyzer
             this.channelData = wavReader.channelBuffer;
             this.bitrate = wavReader.bitrate;
             this.soundAnalysis = new SoundAnalysis(wavReader);
+            this.freqMapper = new FreqMapper();
         }
 
         private void openFileButton_Click(object sender, RoutedEventArgs e)
@@ -97,12 +97,8 @@ namespace MusicAnalyzer
         {
             if (fileNameBox.Text != "" && channelsBox.Text != "" && bitrateBox.Text != "")
             {
-                timesListBox.Items.Clear();
                 this.bitrate = Convert.ToInt32(bitrateBox.Text);
-                watcher = Stopwatch.StartNew();
                 wavReader.read(fileNameBox.Text, bitrate, Convert.ToInt32(channelsBox.Text));
-                watcher.Stop();
-                timesListBox.Items.Add("Read: " + watcher.ElapsedMilliseconds.ToString());
                 this.channelData = wavReader.channelBuffer;
                 framesBox.Text = wavReader.channelBuffer.Length.ToString();
                 updateGraph(-1);
@@ -121,22 +117,18 @@ namespace MusicAnalyzer
 
         private void notesFinderButton_Click(object sender, RoutedEventArgs e)
         {
-            freqMapper = new FreqMapper();
             picker = new NotesPicker(channelData, bitrate, wavReader);
             watcher = Stopwatch.StartNew();
             resultNotes = picker.findAllPitchChanges();
             watcher.Stop();
-            timesListBox.Items.Add("Find: " + watcher.ElapsedMilliseconds.ToString());
             allNotes = freqMapper.notesMapper(resultNotes);
             allNotes = picker.removeRepeatedNotes(allNotes);
             resultNotes = freqMapper.notesReverseMapper(allNotes);
+            MessageBox.Show("All notes found in time: " + watcher.ElapsedMilliseconds.ToString(), "Notes found.", MessageBoxButton.OK);
             pitchListBox.Items.Clear();
             foreach (MyFrame note in resultNotes)
                 pitchListBox.Items.Add(note.index.ToString());
-            watcher = Stopwatch.StartNew();
             updateGraph();
-            watcher.Stop();
-            timesListBox.Items.Add("Draw: " + watcher.ElapsedMilliseconds.ToString());
         }
 
         private void updateGraph()
@@ -169,13 +161,7 @@ namespace MusicAnalyzer
                 Complex[] resData = soundAnalysis.getFourierData();
                 double[] data = new double[resData.Length / 2];
                 for (int i = 0; i < resData.Length /2; i++)
-                {
-                    //if (i < 50)
-                      //  data[i] = 0;
-                    //else
-                        data[i] = Math.Max(Math.Sqrt(Math.Pow(resData[i].Re, 2) + Math.Pow(resData[i].Im, 2)) - 15.0, 0);
-                    //data[i] = Math.Abs(resData[i].Re);
-                }
+                    data[i] = Math.Sqrt(Math.Pow(resData[i].Re, 2) + Math.Pow(resData[i].Im, 2));
                 for (int i = 0; i < data.Length; i++)
                     graphResults.Add(new MyFrame(2.0 * data[i], 2 * i));
             }
@@ -198,7 +184,6 @@ namespace MusicAnalyzer
 
         private List<MyFrame> convertResultsToGraph(List<MyFrame> dataResults)
         {
-            if (dataResults.Count == 0) return dataResults;
             dataResults.Insert(0, new MyFrame(0.0, 0));
             int originCount = dataResults.Count;
             for (int i = 0; i < originCount * 2 - 2; i += 2)
@@ -216,7 +201,6 @@ namespace MusicAnalyzer
                 pitchHzBox.Text = resultNotes[index].value.ToString();
                 pitchBox.Text = freqMapper.findPeach(resultNotes[index].value);
                 soundAnalysis.runDFT(resultNotes[index].index);
-                double freq = soundAnalysis.getBasicHarmonic();
                 updateGraph(resultNotes[index].index);
             }
         }

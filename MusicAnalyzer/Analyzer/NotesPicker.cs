@@ -49,9 +49,10 @@ namespace MusicAnalyzer.Analyzer
             {
                 soundAnalysis.runDFT(i);
                 tempFreq = soundAnalysis.getBasicHarmonic();
-                if (lastFreq != tempFreq)
+                if (Math.Abs(lastFreq - tempFreq) < 4) {
                     resultNotes.Add(new MyFrame(2.0*tempFreq, i*1000/bitrate));
-                lastFreq = tempFreq;
+                   lastFreq = tempFreq;
+                }
             }
             return resultNotes;
         }
@@ -62,12 +63,11 @@ namespace MusicAnalyzer.Analyzer
             double tempFreq = 0.0;
             for (int i = 0; i < allNotes.Count;)
             {
-                if ((allNotes[i].note[0] == tempNote[0]) || (Math.Abs(allNotes[i].freq - tempFreq) <= 5)) allNotes.RemoveAt(i);
+                if ((allNotes[i].note[0] == tempNote[0]) || (Math.Abs(allNotes[i].freq - tempFreq) <= 3)) allNotes.RemoveAt(i);
                 else
                 {
                     if (allNotes[i].freq == 0) allNotes.RemoveAt(i); else
-                    {
-                        
+                    {   
                         tempNote = allNotes[i].note;
                         tempFreq = allNotes[i].freq;
                         i++;
@@ -79,7 +79,6 @@ namespace MusicAnalyzer.Analyzer
             {
                 if (allNotes[i].duration <= 250) allNotes.RemoveAt(i); else i++;
             }
-            
             return allNotes;
         }    
 

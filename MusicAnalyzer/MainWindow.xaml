@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
         xmlns:conv="clr-namespace:MusicAnalyzer"
-        Title="MainWindow" Height="659" Width="1220">
+        Title="MainWindow" Height="600" Width="1220">
     <Grid x:Name="mainGrid" Margin="0,0,0,0">
         <Button x:Name="openFileButton" Content="Open File" HorizontalAlignment="Left" Margin="36,28,0,0" VerticalAlignment="Top" Width="75" Click="openFileButton_Click"/>
         <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="23" Margin="138,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
@@ -16,9 +16,9 @@
         <TextBlock HorizontalAlignment="Left" Height="21" Margin="485,30,0,0" TextWrapping="Wrap" Text="Channels" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="channelsBox" HorizontalAlignment="Left" Height="21" Margin="545,30,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="34"/>
         <Button x:Name="readButton" Content="Read" HorizontalAlignment="Left" Margin="601,28,0,0" VerticalAlignment="Top" Width="75" Click="readButton_Click"/>
-        <Button Content="Find tonation!" HorizontalAlignment="Left" Margin="1077,10,0,0" VerticalAlignment="Top" Width="125" Height="97" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
-        <ListBox x:Name="pitchListBox" HorizontalAlignment="Left" Height="379" Margin="47,191,0,0" VerticalAlignment="Top" Width="106" SelectionChanged="pitchListBox_SelectionChanged"/>
-        <d3:ChartPlotter x:Name="pitchPlotter" Background="White" Margin="221,191,28,10">
+        <Button Content="Find tonation!" HorizontalAlignment="Left" Margin="1062,28,0,0" VerticalAlignment="Top" Width="118" Height="79" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
+        <ListBox x:Name="pitchListBox" HorizontalAlignment="Left" Height="379" Margin="36,155,0,0" VerticalAlignment="Top" Width="106" SelectionChanged="pitchListBox_SelectionChanged"/>
+        <d3:ChartPlotter x:Name="pitchPlotter" Background="White" Margin="210,155,32,36">
             <d3:ChartPlotter.MainHorizontalAxis>
                 <d3:HorizontalIntegerAxis x:Name="timeAxis"/>
             </d3:ChartPlotter.MainHorizontalAxis>
@@ -26,13 +26,11 @@
             <d3:VerticalAxisTitle Content="Frequency [Hz]"/>
             <d3:HorizontalAxisTitle Content="time [ms]"/>
         </d3:ChartPlotter>
-        <TextBlock HorizontalAlignment="Left" Margin="234,145,0,0" TextWrapping="Wrap" Text="Pitch" VerticalAlignment="Top" Height="20" Width="39"/>
-        <TextBox x:Name="pitchBox" HorizontalAlignment="Left" Height="29" Margin="308,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106"/>
-        <TextBlock HorizontalAlignment="Left" Margin="452,145,0,0" TextWrapping="Wrap" Text="Frequency[Hz]" VerticalAlignment="Top" Height="20" Width="112"/>
-        <TextBox x:Name="pitchHzBox" HorizontalAlignment="Left" Height="29" Margin="593,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="105"/>
-        <TextBlock HorizontalAlignment="Left" Margin="48,122,0,0" TextWrapping="Wrap" Text="Pitch changes at time: [ms]" VerticalAlignment="Top" Width="71"/>
+        <TextBlock HorizontalAlignment="Left" Margin="223,109,0,0" TextWrapping="Wrap" Text="Pitch" VerticalAlignment="Top" Height="20" Width="39"/>
+        <TextBox x:Name="pitchBox" HorizontalAlignment="Left" Height="29" Margin="297,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="106"/>
+        <TextBlock HorizontalAlignment="Left" Margin="441,109,0,0" TextWrapping="Wrap" Text="Frequency[Hz]" VerticalAlignment="Top" Height="20" Width="112"/>
+        <TextBox x:Name="pitchHzBox" HorizontalAlignment="Left" Height="29" Margin="582,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="105"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,86,0,0" TextWrapping="Wrap" Text="Pitch changes at time: [ms]" VerticalAlignment="Top" Width="71"/>
         <Button x:Name="notesFinderButton" Content="Find notes!" HorizontalAlignment="Left" Margin="920,91,0,0" VerticalAlignment="Top" Width="112" Height="52" FontWeight="Bold" Click="notesFinderButton_Click"/>
-        <Label x:Name="timesLabel" Content="Times:" HorizontalAlignment="Left" Margin="36,73,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="timesListBox" HorizontalAlignment="Left" Height="100" Margin="124,70,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
