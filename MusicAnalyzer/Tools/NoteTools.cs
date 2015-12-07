@@ -9,9 +9,9 @@ namespace MusicAnalyzer.Tools
 {
     class NoteTools
     {
-        private String basicNotesFile = "D:\\magisterka\\basicPitches.txt";
-        private String majorScaleSeqFile = "D:\\magisterka\\majorSequence.txt";
-        private String minorScaleSeqFile = "D:\\magisterka\\minorSequence.txt";
+        private String basicNotesFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\basicPitches.txt";
+        private String majorScaleSeqFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\majorSequence.txt";
+        private String minorScaleSeqFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\minorSequence.txt";
         public Dictionary<String, int> notesSequence;
         public List<int> majorScaleSeq, minorScaleSeq;
 

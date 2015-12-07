@@ -10,7 +10,7 @@ namespace MusicAnalyzer.Tools
 {
     class FreqMapper
     {
-        String pitchesFile = "D:\\magisterka\\pitches.txt";
+        String pitchesFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\pitches.txt";
         Array lines;
         List<String> notes;
         List<double> frequencies;

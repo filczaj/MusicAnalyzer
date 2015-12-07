@@ -9,8 +9,8 @@ namespace MusicAnalyzer.Models
 {
     class Tonation
     {
-        private String majorChordsFile = "D:\\magisterka\\majorChords.txt";
-        private String minorChordsFile = "D:\\magisterka\\minorChords.txt";
+        private String majorChordsFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\majorChords.txt";
+        private String minorChordsFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\minorChords.txt";
 
         Chord tonic, subdominant, dominant;
         List<int> mainScaleNotes;

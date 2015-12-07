@@ -29,6 +29,7 @@ namespace MusicAnalyzer
     /// </summary>
     public partial class MainWindow : Window
     {
+        string configDirectory;
         AudioPlayer ap;
         WAVReader wavReader = new WAVReader();
         public MyFrame[] resData;
@@ -44,6 +45,11 @@ namespace MusicAnalyzer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public MainWindow(string config_directory)
+        {
+            this.configDirectory = config_directory;
             this.wavReader = new WAVReader();
             this.channelData = wavReader.channelBuffer;
             this.bitrate = wavReader.bitrate;
@@ -56,7 +62,7 @@ namespace MusicAnalyzer
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".wav";
             dlg.Filter = "Wave Files (*.wav)|*.wav";
-            dlg.InitialDirectory = @"D:\magisterka";
+            dlg.InitialDirectory = configDirectory;
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
@@ -107,12 +113,7 @@ namespace MusicAnalyzer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (allNotes != null)
-            {
-                var window = new HarmonyFinderWindow(allNotes, bitrate);
-                window.Owner = this;
-                window.Show();
-            }
+            System.Windows.MessageBox.Show("To do!!!");
         }
 
         private void notesFinderButton_Click(object sender, RoutedEventArgs e)
