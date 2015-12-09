@@ -1,0 +1,29 @@
+﻿<Window x:Class="MusicAnalyzer.GUI.PlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:PSAMWPFControlLibrary="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
+        xmlns:PSAMControlLibrary="clr-namespace:PSAMControlLibrary;assembly=PSAMControlLibrary"
+        Title="MusicAnalyzer - player" Height="560.638" Width="859.043">
+    <Grid>
+        <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Height="86" Width="831">
+            <Grid HorizontalAlignment="Left" Height="62" Margin="10,0,-2,0" VerticalAlignment="Top" Width="811">
+                <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="playButton_Click"/>
+                <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="392,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="pauseButton_Click"/>
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="597,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="stopButton_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="headerBox" Header="File" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="831">
+            <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="811" Margin="10,0,-2,0">
+                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="129" Height="32"/>
+                <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="9,0,0,0" VerticalAlignment="Top" Width="32" Source="/MusicAnalyzer;component/Icons/note.png"/>
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox x:Name="visualBox" Header="MIDI Tracks" HorizontalAlignment="Left" Height="363" Margin="10,71,0,0" VerticalAlignment="Top" Width="831">
+            <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="344" VerticalAlignment="Top" Width="821" Margin="0,0,-2,-3">
+                <PSAMWPFControlLibrary:Window1 x:Name="viewer" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
