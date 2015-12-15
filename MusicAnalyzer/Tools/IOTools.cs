@@ -86,7 +86,7 @@ namespace MusicAnalyzer.Tools
                     percentage = (i + 1f) / newProperties.TrackCount;
 
                     loadWorker.ReportProgress((int)(100 * percentage));
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(500);
                 }
 
                 if (loadWorker.CancellationPending)
@@ -95,7 +95,7 @@ namespace MusicAnalyzer.Tools
                 }
                 else
                 {
-                    this.midiFileStruct = new MidiFileStruct(newTracks, newProperties);
+                    this.midiFileStruct = new MidiFileStruct(newTracks, newProperties, fileName);
                 }
             }
         }

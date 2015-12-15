@@ -3,26 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PSAMWPFControlLibrary="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
         xmlns:PSAMControlLibrary="clr-namespace:PSAMControlLibrary;assembly=PSAMControlLibrary"
-        Title="MusicAnalyzer - player" Height="560.638" Width="859.043">
+        Title="MusicAnalyzer - player" Height="650" Width="859.043">
     <Grid>
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem Header="_Change file" Click="MenuItem_Click" />
+                <Separator />
+                <MenuItem Header="_Save" Click="MenuItem_Click_1" />
+                <MenuItem Header="_Save As..." Click="MenuItem_Click_2" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="MenuItem_Click_3" />
+            </MenuItem>
+        </Menu>
         <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Height="86" Width="831">
             <Grid HorizontalAlignment="Left" Height="62" Margin="10,0,-2,0" VerticalAlignment="Top" Width="811">
-                <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="playButton_Click"/>
-                <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="392,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="pauseButton_Click"/>
-                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="597,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="stopButton_Click"/>
+                <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="playButton_Click"/>
+                <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="pauseButton_Click"/>
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="stopButton_Click"/>
+                <Label Content="Volume" Margin="458,10,0,0" VerticalAlignment="Top" Width="66" Height="25" />
+                <Slider x:Name="volumeSlider" HorizontalAlignment="Left" Margin="556,35,0,0" VerticalAlignment="Top" Width="153"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="headerBox" Header="File" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="831">
+        <GroupBox x:Name="headerBox" Header="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="831">
             <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="811" Margin="10,0,-2,0">
-                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="129" Height="32"/>
-                <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0"/>
+                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="129" Height="32" Click="backButton_Click_1"/>
+                <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0" IsEnabled="False"/>
                 <Image HorizontalAlignment="Left" Height="32" Margin="9,0,0,0" VerticalAlignment="Top" Width="32" Source="/MusicAnalyzer;component/Icons/note.png"/>
             </Grid>
         </GroupBox>
-        
+
         <GroupBox x:Name="visualBox" Header="MIDI Tracks" HorizontalAlignment="Left" Height="363" Margin="10,71,0,0" VerticalAlignment="Top" Width="831">
             <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="344" VerticalAlignment="Top" Width="821" Margin="0,0,-2,-3">
-                <PSAMWPFControlLibrary:Window1 x:Name="viewer" />
+
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="createGroup" Header="Create track" HorizontalAlignment="Left" Height="86" Margin="10,525,0,0" VerticalAlignment="Top" Width="831">
+            <Grid x:Name="createGrid">
+                <Label Content="Choose instrument" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="151">
+                    <ComboBoxItem Content="Piano"/>
+                </ComboBox>
+                <Button Content="Add new track" HorizontalAlignment="Left" Margin="219,12,0,0" VerticalAlignment="Top" Width="106" Height="42"/>
+                <Button Content="Delete track(s)" HorizontalAlignment="Left" Margin="390,11,0,0" VerticalAlignment="Top" Width="106" Height="42"/>
+                <Button Content="Compose music!" HorizontalAlignment="Left" Margin="564,12,0,0" VerticalAlignment="Top" Width="106" Height="42"/>
             </Grid>
         </GroupBox>
     </Grid>

@@ -7,16 +7,24 @@ using System.Threading.Tasks;
 
 namespace MusicAnalyzer.Models
 {
-    class MidiFileStruct
+    public class MidiFileStruct
     {
+        private string _fileName;
+        public string fileName 
+        {
+            get { return this._fileName; } 
+            set { this._fileName = value; } 
+        }
+
         private List<Track> tracks = new List<Track>();
 
         private MidiFileProperties properties = new MidiFileProperties();
 
-        public MidiFileStruct(List<Track> tracks_, MidiFileProperties props)
+        public MidiFileStruct(List<Track> tracks_, MidiFileProperties props, string file_)
         {
             this.tracks = tracks_;
             this.properties = props;
+            this.fileName = file_;
         }
 
         public List<Track> getTracks(){

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using MusicAnalyzer.Tools;
+using MusicAnalyzer.GUI;
 
 namespace MusicAnalyzer
 {
@@ -24,16 +25,12 @@ namespace MusicAnalyzer
     {
         string configDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
         string midisDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Midis";
-        bool isFileRead = false;
         IOTools reader;
 
         public StartWindow()
         {
             InitializeComponent();
             configDirTextBox.Text = configDirectory;
-            reader = new IOTools();
-            reader.LoadProgressChanged += HandleLoadProgressChanged;
-            reader.LoadCompleted += HandleLoadCompleted;
         }
 
         private void openMidButton_Click(object sender, RoutedEventArgs e)
@@ -67,13 +64,15 @@ namespace MusicAnalyzer
         {
             if (File.Exists(midFileTextBox.Text))
             {
+                reader = new IOTools();
+                reader.LoadProgressChanged += HandleLoadProgressChanged;
+                reader.LoadCompleted += HandleLoadCompleted;
                 reader.initWorker();
                 reader.LoadAsync(midFileTextBox.Text);
             }
             else
             {
                 MessageBox.Show("Please specify a correct input file.", "File error", MessageBoxButton.OK);
-                isFileRead = false;
             }
         }
 
@@ -83,19 +82,6 @@ namespace MusicAnalyzer
             Application.Current.Shutdown();
         }
 
-        private void analyzeButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (isFileRead && Directory.Exists(configDirectory))
-            {
-                var window = new MainWindow(configDirectory);
-                window.Owner = this;
-                window.Show();
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Plesase read an input file and set config directory.", "Incomplete data");
-            }
-        }
         private void HandleLoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             readProgressBar.Value = e.ProgressPercentage;
@@ -108,13 +94,20 @@ namespace MusicAnalyzer
             {
                 readProgressBar.Visibility = Visibility.Hidden;
                 readProgressBar.Visibility = Visibility.Visible;
-                isFileRead = true;
-                MessageBox.Show("Sequence type: " + reader.midiFileStruct.getProperties().SequenceType.ToString(), "Tracks read: " + reader.midiFileStruct.getTracks().Count.ToString(), MessageBoxButton.OK);
+                if (Directory.Exists(configDirectory))
+                {
+                    var window = new PlayerWindow(configDirectory, reader.midiFileStruct);
+                    window.Owner = this;
+                    window.Show();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
+                }
             }
             else
             {
                 MessageBox.Show("Reading the file failed.\n " + e.Error.Message, "Error", MessageBoxButton.OK);
-                isFileRead = false;
             }
         }
     }
