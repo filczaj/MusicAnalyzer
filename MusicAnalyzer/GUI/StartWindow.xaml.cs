@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using MusicAnalyzer.Tools;
 using MusicAnalyzer.GUI;
+using Sanford.Multimedia.Midi;
 
 namespace MusicAnalyzer
 {
@@ -25,7 +26,7 @@ namespace MusicAnalyzer
     {
         string configDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
         string midisDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Midis";
-        IOTools reader;
+        Sequence reader;
 
         public StartWindow()
         {
@@ -64,10 +65,9 @@ namespace MusicAnalyzer
         {
             if (File.Exists(midFileTextBox.Text))
             {
-                reader = new IOTools();
+                reader = new Sequence();
                 reader.LoadProgressChanged += HandleLoadProgressChanged;
                 reader.LoadCompleted += HandleLoadCompleted;
-                reader.initWorker();
                 reader.LoadAsync(midFileTextBox.Text);
             }
             else
@@ -96,7 +96,7 @@ namespace MusicAnalyzer
                 readProgressBar.Visibility = Visibility.Visible;
                 if (Directory.Exists(configDirectory))
                 {
-                    var window = new PlayerWindow(configDirectory, reader.midiFileStruct);
+                    var window = new PlayerWindow(configDirectory, reader);
                     window.Owner = this;
                     window.Show();
                 }

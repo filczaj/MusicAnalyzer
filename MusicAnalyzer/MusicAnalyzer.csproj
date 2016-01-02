@@ -146,6 +146,7 @@
     <Compile Include="Tools\IOTools.cs" />
     <Compile Include="Tools\NoteTools.cs" />
     <Compile Include="Tools\SoundAnalysis.cs" />
+    <Compile Include="Tools\SystemTools.cs" />
     <Page Include="GUI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,6 +234,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\volume_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\volume_up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />

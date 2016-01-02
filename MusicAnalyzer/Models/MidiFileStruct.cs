@@ -20,6 +20,11 @@ namespace MusicAnalyzer.Models
 
         private MidiFileProperties properties = new MidiFileProperties();
 
+        public MidiFileStruct()
+        {
+
+        }
+
         public MidiFileStruct(List<Track> tracks_, MidiFileProperties props, string file_)
         {
             this.tracks = tracks_;
