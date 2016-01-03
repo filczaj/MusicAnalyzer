@@ -1,5 +1,4 @@
-﻿using MusicAnalyzer.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
+using NAudio.Midi;
 
 namespace MusicAnalyzer.GUI
 {
@@ -24,11 +24,13 @@ namespace MusicAnalyzer.GUI
     {
         string configDirectory;
         //MidiFileStruct midiFile;
+        string fileName;
         Sequence sequence;
         bool playing = false;
         bool closing = false;
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         Sequencer player;
+        int selectedTrack = -1;
 
         private OutputDevice outDevice;
         private int outDeviceID = 0;
@@ -38,7 +40,7 @@ namespace MusicAnalyzer.GUI
             InitializeComponent();
         }
 
-        public PlayerWindow(string configDir, Sequence reader)
+        public PlayerWindow(string configDir, Sequence reader, string fullFileName)
         {
             InitializeComponent();
             this.configDirectory = configDir;
@@ -53,7 +55,7 @@ namespace MusicAnalyzer.GUI
             this.player.Chased += new System.EventHandler<Sanford.Multimedia.Midi.ChasedEventArgs>(this.HandleChased);
             this.player.Position = 0;
 
-            this.fileNameBox.Text = "";
+            this.fileNameBox.Text = fileName = fullFileName;
 
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
@@ -157,11 +159,25 @@ namespace MusicAnalyzer.GUI
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             //save
+            sequence.SaveAsync(fileName);
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             // save as
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = fileName.Split('\\').Last() + "_1";
+            dlg.DefaultExt = ".mid";
+            dlg.Filter = "MIDI files (.mid)|*.mid";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                //sequence = new Sequence();
+                //player.Sequence = sequence;
+                fileName = dlg.FileName;
+                fileNameBox.Text = fileName;
+                sequence.SaveAsync(fileName);
+            }
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
@@ -173,12 +189,22 @@ namespace MusicAnalyzer.GUI
 
         private void addTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            // to do!
+            int ccount = sequence.Count;
+            Track newTrack = new Track();
+            ChannelMessage mess = new ChannelMessage(ChannelCommand.NoteOn, 0, 48, 100);
+            ChannelMessage mess2 = new ChannelMessage(ChannelCommand.NoteOff, 0, 48, 100);
+            newTrack.Insert(0, mess);
+            newTrack.Insert(20000, mess2);
+            sequence.Add(newTrack);
+            MessageBox.Show("Tracks before= " + ccount.ToString() + ", after= " + sequence.Count.ToString(), "Track added", MessageBoxButton.OK);
         }
 
         private void deleteTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            // to do!
+            int ccount = sequence.Count;
+            if (selectedTrack >= 0)
+                sequence.Remove(sequence[selectedTrack]);
+            MessageBox.Show("Tracks before= " + ccount.ToString() + ", after= " + sequence.Count.ToString(), "Track added", MessageBoxButton.OK);
         }
 
         private void composeButton_Click(object sender, RoutedEventArgs e)

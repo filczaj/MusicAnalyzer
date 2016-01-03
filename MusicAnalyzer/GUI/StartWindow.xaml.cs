@@ -79,7 +79,6 @@ namespace MusicAnalyzer
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Application.Current.Shutdown();
         }
 
         private void HandleLoadProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -96,7 +95,7 @@ namespace MusicAnalyzer
                 readProgressBar.Visibility = Visibility.Visible;
                 if (Directory.Exists(configDirectory))
                 {
-                    var window = new PlayerWindow(configDirectory, reader);
+                    var window = new PlayerWindow(configDirectory, reader, midFileTextBox.Text);
                     window.Owner = this;
                     window.Show();
                 }
