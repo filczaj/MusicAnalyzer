@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PSAMWPFControlLibrary="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
         xmlns:PSAMControlLibrary="clr-namespace:PSAMControlLibrary;assembly=PSAMControlLibrary"
-        Title="MusicAnalyzer - player" Height="650" Width="859.043" Closing="Window_Closing" Loaded="Window_Loaded">
+        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer - player" Height="650" Width="859.043" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Menu>
             <MenuItem Header="_File">

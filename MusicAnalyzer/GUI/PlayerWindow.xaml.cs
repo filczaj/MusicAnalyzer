@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
 using NAudio.Midi;
+using MusicAnalyzer.Models;
 
 namespace MusicAnalyzer.GUI
 {
@@ -23,7 +24,6 @@ namespace MusicAnalyzer.GUI
     public partial class PlayerWindow : Window
     {
         string configDirectory;
-        //MidiFileStruct midiFile;
         string fileName;
         Sequence sequence;
         bool playing = false;
@@ -34,6 +34,8 @@ namespace MusicAnalyzer.GUI
 
         private OutputDevice outDevice;
         private int outDeviceID = 0;
+        
+        MusicPiece musicPiece;
 
         public PlayerWindow()
         {
@@ -45,6 +47,14 @@ namespace MusicAnalyzer.GUI
             InitializeComponent();
             this.configDirectory = configDir;
             this.sequence = reader;
+            initPlayer();
+            this.musicPiece = new MusicPiece(reader, configDirectory);
+
+            this.fileNameBox.Text = fileName = fullFileName;          
+        }
+
+        private void initPlayer()
+        {
             this.sequence.Format = 1;
             player = new Sequencer();
             player.Sequence = sequence;
@@ -54,9 +64,6 @@ namespace MusicAnalyzer.GUI
             this.player.SysExMessagePlayed += new System.EventHandler<Sanford.Multimedia.Midi.SysExMessageEventArgs>(this.HandleSysExMessagePlayed);
             this.player.Chased += new System.EventHandler<Sanford.Multimedia.Midi.ChasedEventArgs>(this.HandleChased);
             this.player.Position = 0;
-
-            this.fileNameBox.Text = fileName = fullFileName;
-
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
         }
@@ -189,22 +196,14 @@ namespace MusicAnalyzer.GUI
 
         private void addTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            int ccount = sequence.Count;
             Track newTrack = new Track();
-            ChannelMessage mess = new ChannelMessage(ChannelCommand.NoteOn, 0, 48, 100);
-            ChannelMessage mess2 = new ChannelMessage(ChannelCommand.NoteOff, 0, 48, 100);
-            newTrack.Insert(0, mess);
-            newTrack.Insert(20000, mess2);
             sequence.Add(newTrack);
-            MessageBox.Show("Tracks before= " + ccount.ToString() + ", after= " + sequence.Count.ToString(), "Track added", MessageBoxButton.OK);
         }
 
         private void deleteTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            int ccount = sequence.Count;
             if (selectedTrack >= 0)
                 sequence.Remove(sequence[selectedTrack]);
-            MessageBox.Show("Tracks before= " + ccount.ToString() + ", after= " + sequence.Count.ToString(), "Track added", MessageBoxButton.OK);
         }
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
@@ -217,7 +216,6 @@ namespace MusicAnalyzer.GUI
             closing = true;
             if (playing)
                 stopButton_Click(null, null);
-            //base.OnClosing(e);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>piano.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accord">
       <HintPath>..\packages\Accord.2.14.0\lib\net40\Accord.dll</HintPath>
@@ -135,6 +138,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MusicPiece.cs" />
+    <Compile Include="Tools\MidiTools.cs" />
     <Compile Include="GUI\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>
     </Compile>
@@ -142,6 +147,7 @@
     <Compile Include="GUI\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\NotesList.cs" />
     <Compile Include="Tools\FreqMapper.cs" />
     <Compile Include="Tools\IOTools.cs" />
     <Compile Include="Tools\NoteTools.cs" />
@@ -240,6 +246,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\volume_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="piano.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\piano.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\piano.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />

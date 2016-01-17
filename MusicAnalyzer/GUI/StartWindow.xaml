@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MusicAnalyzer.StartWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MusicAnalyzer" Height="169" Width="751">
+        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer" Height="169" Width="751">
     <Grid>
         <Menu IsMainMenu="True">
             <TabControl Height="126" Width="733">

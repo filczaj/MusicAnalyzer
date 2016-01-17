@@ -1,0 +1,4 @@
+Key: AMajor Ismajor: True Start: 0 End: 34560 chords: 3; 3; 3 ScaleNotes: 7
+Key: DMajor Ismajor: True Start: 34560 End: 15840 chords: 3; 3; 3 ScaleNotes: 7
+Key: DMajor Ismajor: True Start: 15840 End: 24480 chords: 3; 3; 3 ScaleNotes: 7
+Key: AMajor Ismajor: True Start: 24480 End: 0 chords: 3; 3; 3 ScaleNotes: 7

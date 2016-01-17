@@ -7,17 +7,53 @@ using MusicAnalyzer.Models;
 
 namespace MusicAnalyzer.Tools
 {
-    class NoteTools
+    public class NoteTools
     {
-        private String basicNotesFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\basicPitches.txt";
-        private String majorScaleSeqFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\majorSequence.txt";
-        private String minorScaleSeqFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\minorSequence.txt";
-        public Dictionary<String, int> notesSequence;
+        private string configDirectory;
+        private String basicNotesFile;
+        private String majorScaleSeqFile; 
+        private String minorScaleSeqFile;
+        private String majorChordsFile;
+        private String minorChordsFile;
+        public Dictionary<int, string> basicNotesSequence;
         public List<int> majorScaleSeq, minorScaleSeq;
 
-        public NoteTools(){
+        public readonly int lowNoteID = 21; // A0
+        public readonly int highNoteID = 109; // C8
+        
+        public Dictionary<string, int> intervals = new Dictionary<string, int> { 
+            {"Prime", 0 },
+            {"SecondLow", 1 },
+            {"Second", 2 },
+            {"TerceLow", 3 },
+            {"Terce", 4 },
+            {"Quart", 5 },
+            {"Triton", 6 },
+            {"Fith", 7 },
+            {"SixthLow", 8 },
+            {"Sixth", 9 },
+            {"SeventhLow", 10 },
+            {"Seventh", 11 },
+            {"Octave", 12 }
+        };
+
+        protected void initTools()
+        {
             readNotesSequences();
             setScaleSequences();
+        }
+        public NoteTools(string configDir)
+        {
+            configDirectory = configDir;
+            basicNotesFile = configDir + "\\basicPitches.txt";
+            majorScaleSeqFile = configDir + "\\majorSequence.txt";
+            minorScaleSeqFile = configDir + "\\minorSequence.txt";
+            majorChordsFile = configDir + "\\majorChords.txt";
+            minorChordsFile = configDir + "\\minorChords.txt";
+        }
+
+        #region Old
+        public NoteTools(){
         }
 
         public List<Note> setNotesDuration(List<Note> notesList)
@@ -58,13 +94,15 @@ namespace MusicAnalyzer.Tools
             return Convert.ToInt32(note.note[note.note.Length - 1]);
         }
 
+#endregion
+
         private void readNotesSequences()
         {
             Array lines = IOTools.ReadFrom(basicNotesFile).ToArray<String>();
-            notesSequence = new Dictionary<string, int>();
+            basicNotesSequence = new Dictionary<int, string>();
             foreach (String line in lines)
             {
-                notesSequence[line.Split(' ')[1].Trim()] = Int32.Parse(line.Split(' ')[0].Trim());
+                basicNotesSequence[Int32.Parse(line.Split(' ')[0].Trim())] = line.Split(' ')[1].Trim();
             }
         }
 
@@ -81,6 +119,81 @@ namespace MusicAnalyzer.Tools
             foreach (String line in lines)
             {
                 minorScaleSeq.Add(Int32.Parse(line.Trim()));
+            }
+        }
+
+        public List<int> setMainScaleNotes(bool majorMinor)
+        {
+            if (majorMinor)
+                return majorScaleSeq;
+            else
+                return minorScaleSeq;
+        }
+
+        public List<Chord> setMainChords(bool majorMinor)
+        {
+            String chordsFile;
+            List<Chord> chords = new List<Chord>();
+            if (majorMinor)
+                chordsFile = majorChordsFile;
+            else
+                chordsFile = minorChordsFile;
+            IEnumerable<String> lines = IOTools.ReadFrom(chordsFile);
+
+            Chord chord = new Chord(majorMinor, true, 0);
+            chord.chordNotes = new List<int>();
+            int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            chord = new Chord(majorMinor, true, 0);
+            chord.chordNotes = new List<int>();
+            asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            chord = new Chord(majorMinor, true, 0);
+            chord.chordNotes = new List<int>();
+            asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            return chords;
+        }
+
+        public Note fillNoteData(Note n)
+        {
+            n.note = getNoteById(n.noteID);
+            n.basicNote = getBasicNoteById(n.noteID);
+            return n;
+        }
+
+        public string getNoteById(int id)
+        {
+            int key = (id - 3) % 12;
+            int octave = (id + 9) / 12;
+            if (basicNotesSequence.ContainsKey(key))
+                return basicNotesSequence[key] + octave.ToString();
+            else
+                return "";
+        }
+
+        public string getBasicNoteById(int id)
+        {
+            int key = (id - 3) % 12;
+            if (basicNotesSequence.ContainsKey(key))
+                return basicNotesSequence[key];
+            else
+                return "";
+        }
+
+        public void setNoteOff(int noteID, int endTime, NotesList allNotes)
+        {
+            Note n = allNotes.FirstOrDefault(x => (x.endTime == -1 && x.noteID == noteID));
+            if (n != null && n.noteID == noteID)
+            {
+                n.endTime = endTime;
+                n.duration = n.endTime - n.startTime;
             }
         }
     }

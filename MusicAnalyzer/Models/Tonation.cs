@@ -4,73 +4,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MusicAnalyzer.Tools;
+using Sanford.Multimedia;
+using Sanford.Multimedia.Midi;
 
 namespace MusicAnalyzer.Models
 {
-    class Tonation
+    public class Tonation
     {
-        private String majorChordsFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\majorChords.txt";
-        private String minorChordsFile = ""; //MusicAnalyzer.MainWindow.configDirectory + "\\minorChords.txt";
-
         Chord tonic, subdominant, dominant;
         List<int> mainScaleNotes;
-        String tonationKey;
-        int offset;
+        int offset; // to do!!!!
         bool majorMinor;
         NoteTools noteTools;
-
-        public Tonation()
-        {
-            noteTools = new NoteTools();
-            setMainChords();
-        }
+        public int startTick, endTick;
+        public Key key;
 
         public Tonation(String key, bool majorMinor)
         {
             noteTools = new NoteTools();
-            tonationKey = key;
-            offset = noteTools.notesSequence[tonationKey];
             this.majorMinor = majorMinor;
-            setScaleNotes();
-            setMainChords();
-        }
-
-        private void setScaleNotes(){
-            mainScaleNotes = new List<int>();
-            List<int> notesSeq;
-            if (majorMinor)
-                notesSeq = noteTools.majorScaleSeq;
-            else
-                notesSeq = noteTools.minorScaleSeq;
-            foreach (int n in notesSeq)
+            this.mainScaleNotes = noteTools.setMainScaleNotes(majorMinor);
+            List<Chord> chords = noteTools.setMainChords(majorMinor);
+            if (chords.Count == 3)
             {
-                mainScaleNotes.Add((n + offset)%12);
+                tonic = chords[0];
+                dominant = chords[1];
+                subdominant = chords[2];
             }
         }
 
-        private void setMainChords()
+        public Tonation(MetaMessage metaM, int ticks, NoteTools tools)
         {
-            String chordsFile;
-            if (majorMinor)
-                chordsFile = majorChordsFile;
-            else
-                chordsFile = minorChordsFile;
-            IEnumerable<String>lines = IOTools.ReadFrom(chordsFile);
+            KeySignatureBuilder keyBuilder = new KeySignatureBuilder(metaM);
+            this.key = keyBuilder.Key;
+            this.majorMinor = (key > Key.ASharpMinor);
+            this.startTick = ticks;
+            this.noteTools = tools;
+            this.mainScaleNotes = noteTools.setMainScaleNotes(majorMinor);
+            List<Chord> chords = noteTools.setMainChords(majorMinor);
+            if (chords.Count == 3)
+            {
+                tonic = chords[0];
+                subdominant = chords[1];
+                dominant = chords[2];
+            }
+        }
 
-            tonic = new Chord(majorMinor, true, 0);
-            tonic.chordNotes = new List<int>();
-            int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s) + offset).ToArray();
-            tonic.chordNotes.AddRange(asIntegers);
-
-            subdominant = new Chord(majorMinor, true, 0);
-            subdominant.chordNotes = new List<int>();
-            asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s) + offset).ToArray();
-            subdominant.chordNotes.AddRange(asIntegers);
-
-            dominant = new Chord(majorMinor, true, 0);
-            dominant.chordNotes = new List<int>();
-            asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s) + offset).ToArray();
-            dominant.chordNotes.AddRange(asIntegers);
+        public override string ToString()
+        {
+            return "Key: " + key.ToString() + " Ismajor: " + majorMinor.ToString() + " Start: " + startTick.ToString()
+                + " End: " + endTick.ToString() + " chords: " + tonic.chordNotes.Count.ToString() + "; " + dominant.chordNotes.Count.ToString() + "; "
+                    + subdominant.chordNotes.Count.ToString() + " ScaleNotes: " + mainScaleNotes.Count.ToString();
         }
     }
 }

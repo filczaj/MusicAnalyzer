@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicAnalyzer.Models
 {
-    class Chord
+    public class Chord
     {
         public List<int> chordNotes;
         bool isScaleBasic;
