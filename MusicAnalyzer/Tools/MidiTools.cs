@@ -62,9 +62,11 @@ namespace MusicAnalyzer.Tools
                     }
                     if (message != null)
                     {
-                        if (message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID)
+                        if (message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 > 0)
                         {
                             Note n = new Note(message.Data1 - lowNoteID, e.AbsoluteTicks);
+                            if (allNotes.Count() > 0)
+                                allNotes.ElementAt(allNotes.Count()-1).duration = e.DeltaTicks;
                             n = fillNoteData(n);
                             allNotes.Add(n);
                         }
@@ -82,7 +84,7 @@ namespace MusicAnalyzer.Tools
         public List<Tonation> grabTonations(Sequence sequence)
         {
             MetaMessage metaM;
-            findAndSaveMetaTypes(sequence);
+            //findAndSaveMetaTypes(sequence);
             List<Tonation> tonations = new List<Tonation>();
             foreach (Track track in sequence)
             {
@@ -103,12 +105,48 @@ namespace MusicAnalyzer.Tools
                     }
                 }
             }
-            // sort tonations
+            var sortedTonations = from t in tonations
+                          orderby t.startTick
+                          select t;
+            tonations = sortedTonations.ToList<Tonation>();
             for (int i = 0; i < tonations.Count; i++)
             {
                 tonations[i].endTick = tonations[(i + 1) % tonations.Count].startTick;
             }
             return tonations;
+        }
+
+        public void findMeter(Sequence sequence)
+        {
+            MetaMessage metaM;
+            List<string> timeSigns = new List<string>();
+            List<int> tempos = new List<int>();
+            foreach (Track track in sequence)
+            {
+                foreach (MidiEvent e in track.Iterator())
+                {
+                    try
+                    {
+                        metaM = (e.MidiMessage as MetaMessage);
+                    }
+                    catch (InvalidCastException ex)
+                    {
+                        metaM = null;
+                    }
+                    if (metaM != null && metaM.MetaType == MetaType.TimeSignature)
+                    {
+                        TimeSignatureBuilder builder = new TimeSignatureBuilder(metaM);
+                        timeSigns.Add((int)builder.Numerator + " / " + builder.Denominator + " at: " + e.AbsoluteTicks);
+                    }
+                }
+            }
+            string fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\TimeSignatures.txt";
+            List<string> allLines = new List<string>();
+            foreach (string n in timeSigns)
+            {
+                allLines.Add("Metrum : " + n);
+            }
+            IOTools.saveTo(allLines, fileName);
         }
 
         public void serialize(IEnumerable<Note> allNotes)
@@ -120,6 +158,26 @@ namespace MusicAnalyzer.Tools
                 allLines.Add(n.ToString());
             }
             IOTools.saveTo(allLines, fileName);
+
+            #region debug
+            //fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\allStartTimesSorted.txt";
+            //allLines = new List<string>();
+            //Dictionary<int, int> startTimes = new Dictionary<int, int>();
+            //foreach (Note n in allNotes)
+            //{
+            //    if (startTimes.ContainsKey(n.startTime))
+            //        startTimes[n.startTime] += 1;
+            //    else startTimes.Add(n.startTime, 1);
+            //}
+            //var items = from pair in startTimes
+            //            orderby pair.Value descending
+            //            select pair;
+            //foreach (KeyValuePair<int, int> pair in items)
+            //{
+            //    allLines.Add(pair.Key + " : " + pair.Value);
+            //}
+            //IOTools.saveTo(allLines, fileName);
+            #endregion
         }
     }
 }

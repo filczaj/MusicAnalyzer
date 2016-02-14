@@ -41,5 +41,10 @@ namespace MusicAnalyzer.Models
             if (notes != null)
                 notes.RemoveAt(index);
         }
+
+        public int Count()
+        {
+            return notes.Count;
+        }
     }
 }

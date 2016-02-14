@@ -9,7 +9,7 @@ namespace MusicAnalyzer.Tools
 {
     public class NoteTools
     {
-        private string configDirectory;
+        public string configDirectory;
         private String basicNotesFile;
         private String majorScaleSeqFile; 
         private String minorScaleSeqFile;
@@ -20,22 +20,6 @@ namespace MusicAnalyzer.Tools
 
         public readonly int lowNoteID = 21; // A0
         public readonly int highNoteID = 109; // C8
-        
-        public Dictionary<string, int> intervals = new Dictionary<string, int> { 
-            {"Prime", 0 },
-            {"SecondLow", 1 },
-            {"Second", 2 },
-            {"TerceLow", 3 },
-            {"Terce", 4 },
-            {"Quart", 5 },
-            {"Triton", 6 },
-            {"Fith", 7 },
-            {"SixthLow", 8 },
-            {"Sixth", 9 },
-            {"SeventhLow", 10 },
-            {"Seventh", 11 },
-            {"Octave", 12 }
-        };
 
         protected void initTools()
         {
@@ -122,37 +106,37 @@ namespace MusicAnalyzer.Tools
             }
         }
 
-        public List<int> setMainScaleNotes(bool majorMinor)
+        public List<int> setMainScaleNotes(ChordMode mode)
         {
-            if (majorMinor)
+            if (mode == ChordMode.Major)
                 return majorScaleSeq;
             else
                 return minorScaleSeq;
         }
 
-        public List<Chord> setMainChords(bool majorMinor)
+        public List<Chord> setMainChords(ChordMode mode)
         {
             String chordsFile;
             List<Chord> chords = new List<Chord>();
-            if (majorMinor)
+            if (mode == ChordMode.Major)
                 chordsFile = majorChordsFile;
             else
                 chordsFile = minorChordsFile;
             IEnumerable<String> lines = IOTools.ReadFrom(chordsFile);
 
-            Chord chord = new Chord(majorMinor, true, 0);
+            Chord chord = new Chord(mode, true, 0);
             chord.chordNotes = new List<int>();
             int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new Chord(majorMinor, true, 0);
+            chord = new Chord(mode, true, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new Chord(majorMinor, true, 0);
+            chord = new Chord(mode, true, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
@@ -165,6 +149,8 @@ namespace MusicAnalyzer.Tools
         {
             n.note = getNoteById(n.noteID);
             n.basicNote = getBasicNoteById(n.noteID);
+            if (n.startTime > 0 && n.duration > 0)
+                n.endTime = n.startTime + n.duration;
             return n;
         }
 
@@ -195,6 +181,21 @@ namespace MusicAnalyzer.Tools
                 n.endTime = endTime;
                 n.duration = n.endTime - n.startTime;
             }
+        }
+
+        public Offset setOffset(Sanford.Multimedia.Key key)
+        {
+            Offset offset = Offset.CMajor;
+            string s_key = Enum.GetName(typeof(Sanford.Multimedia.Key), key);
+            try
+            {
+                offset = (Offset)Enum.Parse(typeof(Offset), s_key);
+            }
+            catch (InvalidCastException ex)
+            {
+
+            }
+            return offset;
         }
     }
 }

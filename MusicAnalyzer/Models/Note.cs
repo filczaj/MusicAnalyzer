@@ -41,7 +41,7 @@ namespace MusicAnalyzer.Models
 
         public override string ToString()
         {
-            return note + " " + startTime.ToString() + " " + duration.ToString() + " " + basicNote;
+            return note + " " + startTime.ToString() + " " + duration.ToString();
         }
     }
 }

@@ -138,7 +138,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Analyzer\MusicIntelligence.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\Match.cs" />
     <Compile Include="Models\MusicPiece.cs" />
+    <Compile Include="Models\Offset.cs" />
     <Compile Include="Tools\MidiTools.cs" />
     <Compile Include="GUI\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>

@@ -1,4 +1,4 @@
-Key: AMajor Ismajor: True Start: 0 End: 34560 chords: 3; 3; 3 ScaleNotes: 7
-Key: DMajor Ismajor: True Start: 34560 End: 15840 chords: 3; 3; 3 ScaleNotes: 7
-Key: DMajor Ismajor: True Start: 15840 End: 24480 chords: 3; 3; 3 ScaleNotes: 7
-Key: AMajor Ismajor: True Start: 24480 End: 0 chords: 3; 3; 3 ScaleNotes: 7
+Key: AMajor Mode: Major Offset: AMajor Start: 0 End: 15840
+Key: DMajor Mode: Major Offset: DMinor Start: 15840 End: 24480
+Key: AMajor Mode: Major Offset: AMajor Start: 24480 End: 34560
+Key: DMajor Mode: Major Offset: DMinor Start: 34560 End: 0

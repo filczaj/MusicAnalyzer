@@ -49,7 +49,6 @@ namespace MusicAnalyzer.GUI
             this.sequence = reader;
             initPlayer();
             this.musicPiece = new MusicPiece(reader, configDirectory);
-
             this.fileNameBox.Text = fileName = fullFileName;          
         }
 
@@ -208,7 +207,8 @@ namespace MusicAnalyzer.GUI
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
         {
-            // to do!!!!!!!!!!!!!
+            musicPiece.orderAllNotesByStartTime();
+            musicPiece.findChordChanges();
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
