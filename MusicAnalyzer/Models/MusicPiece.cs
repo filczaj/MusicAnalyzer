@@ -39,7 +39,8 @@ namespace MusicAnalyzer.Models
                 if (!orderedNoteChords.ContainsKey(n.startTime))
                 {
                     orderedNoteChords.Add(n.startTime, new Chord(n));
-                }
+                } else
+                    orderedNoteChords[n.startTime].addNote(n);
                 //int[] nextChords = orderedNoteChords.Keys.Where(x => x >= n.startTime && x <= n.endTime).ToArray();
                 if (orderedNotesList.IndexOf(n) == orderedNotesList.Count - 1)
                     break;

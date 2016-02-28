@@ -1,262 +1,262 @@
-TimeStamp: 09, Mode: Other
-TimeStamp: 9600, Mode: Other
-TimeStamp: 12004, Mode: Other
-TimeStamp: 14402, Mode: Other
-TimeStamp: 19209, Mode: Other
-TimeStamp: 28802, Mode: Other
-TimeStamp: 38405, Mode: Other
-TimeStamp: 40809, Mode: Other
-TimeStamp: 43208, Mode: Other
-TimeStamp: 48008, Mode: Other
-TimeStamp: 57609, Mode: Other
-TimeStamp: 58809, Mode: Other
-TimeStamp: 60009, Mode: Other
-TimeStamp: 62409, Mode: Other
-TimeStamp: 64809, Mode: Other
-TimeStamp: 66008, Mode: Other
-TimeStamp: 67205, Mode: Other
-TimeStamp: 68404, Mode: Other
-TimeStamp: 69605, Mode: Other
-TimeStamp: 70808, Mode: Other
-TimeStamp: 72009, Mode: Other
-TimeStamp: 73208, Mode: Other
-TimeStamp: 74405, Mode: Other
-TimeStamp: 76804, Mode: Other
-TimeStamp: 78009, Mode: Other
-TimeStamp: 79205, Mode: Other
-TimeStamp: 80404, Mode: Other
-TimeStamp: 81602, Mode: Other
-TimeStamp: 84000, Mode: Other
-TimeStamp: 86405, Mode: Other
-TimeStamp: 88809, Mode: Other
-TimeStamp: 91208, Mode: Other
-TimeStamp: 92408, Mode: Other
-TimeStamp: 936011, Mode: Other
-TimeStamp: 94809, Mode: Other
-TimeStamp: 96008, Mode: Other
-TimeStamp: 98409, Mode: Other
-TimeStamp: 100809, Mode: Other
-TimeStamp: 103204, Mode: Other
-TimeStamp: 105005, Mode: Other
-TimeStamp: 105604, Mode: Other
-TimeStamp: 106804, Mode: Other
-TimeStamp: 108002, Mode: Other
-TimeStamp: 1092011, Mode: Other
-TimeStamp: 110402, Mode: Other
-TimeStamp: 112205, Mode: Other
-TimeStamp: 112804, Mode: Other
-TimeStamp: 115209, Mode: Other
-TimeStamp: 117600, Mode: Other
-TimeStamp: 119405, Mode: Other
-TimeStamp: 120004, Mode: Other
-TimeStamp: 1212011, Mode: Other
-TimeStamp: 122402, Mode: Other
-TimeStamp: 123604, Mode: Other
-TimeStamp: 124805, Mode: Other
-TimeStamp: 127200, Mode: Other
-TimeStamp: 129609, Mode: Other
-TimeStamp: 130808, Mode: Other
-TimeStamp: 132005, Mode: Other
-TimeStamp: 133204, Mode: Other
-TimeStamp: 134402, Mode: Other
-TimeStamp: 135600, Mode: Other
-TimeStamp: 136804, Mode: Other
-TimeStamp: 1380011, Mode: Other
-TimeStamp: 139202, Mode: Other
-TimeStamp: 140404, Mode: Other
-TimeStamp: 141605, Mode: Other
-TimeStamp: 142809, Mode: Other
-TimeStamp: 144009, Mode: Other
-TimeStamp: 146400, Mode: Other
-TimeStamp: 1476011, Mode: Other
-TimeStamp: 148800, Mode: Other
-TimeStamp: 1500011, Mode: Other
-TimeStamp: 151209, Mode: Other
-TimeStamp: 152407, Mode: Other
-TimeStamp: 153605, Mode: Other
-TimeStamp: 1548010, Mode: Other
-TimeStamp: 156004, Mode: Other
-TimeStamp: 158402, Mode: Other
-TimeStamp: 1608010, Mode: Other
-TimeStamp: 163205, Mode: Other
-TimeStamp: 164409, Mode: Other
-TimeStamp: 165607, Mode: Other
-TimeStamp: 166804, Mode: Other
-TimeStamp: 168001, Mode: Other
-TimeStamp: 170402, Mode: Other
-TimeStamp: 172807, Mode: Other
-TimeStamp: 1752010, Mode: Other
-TimeStamp: 177602, Mode: Other
-TimeStamp: 178801, Mode: Other
-TimeStamp: 180001, Mode: Other
-TimeStamp: 181202, Mode: Other
-TimeStamp: 182404, Mode: Other
-TimeStamp: 183607, Mode: Other
-TimeStamp: 184805, Mode: Other
-TimeStamp: 187202, Mode: Other
-TimeStamp: 192005, Mode: Other
-TimeStamp: 193209, Mode: Other
-TimeStamp: 194407, Mode: Other
-TimeStamp: 195604, Mode: Other
-TimeStamp: 196801, Mode: Other
-TimeStamp: 199202, Mode: Other
-TimeStamp: 201602, Mode: Other
-TimeStamp: 204005, Mode: Other
-TimeStamp: 2052010, Mode: Other
-TimeStamp: 2064011, Mode: Other
-TimeStamp: 207604, Mode: Other
-TimeStamp: 208807, Mode: Other
-TimeStamp: 210004, Mode: Other
-TimeStamp: 211201, Mode: Other
-TimeStamp: 213602, Mode: Other
-TimeStamp: 216002, Mode: Other
-TimeStamp: 2184010, Mode: Other
-TimeStamp: 220805, Mode: Other
-TimeStamp: 222009, Mode: Other
-TimeStamp: 223207, Mode: Other
-TimeStamp: 224404, Mode: Other
-TimeStamp: 225601, Mode: Other
-TimeStamp: 228002, Mode: Other
-TimeStamp: 230402, Mode: Other
-TimeStamp: 232805, Mode: Other
-TimeStamp: 235208, Mode: Other
-TimeStamp: 2376011, Mode: Other
-TimeStamp: 2388011, Mode: Other
-TimeStamp: 240007, Mode: Other
-TimeStamp: 242409, Mode: Other
-TimeStamp: 244804, Mode: Other
-TimeStamp: 246004, Mode: Other
-TimeStamp: 247204, Mode: Other
-TimeStamp: 249604, Mode: Other
-TimeStamp: 250804, Mode: Other
-TimeStamp: 252005, Mode: Other
-TimeStamp: 254407, Mode: Other
-TimeStamp: 255607, Mode: Other
-TimeStamp: 256808, Mode: Other
-TimeStamp: 258008, Mode: Other
-TimeStamp: 259209, Mode: Other
-TimeStamp: 264000, Mode: Other
-TimeStamp: 265204, Mode: Other
-TimeStamp: 266402, Mode: Other
-TimeStamp: 2676011, Mode: Other
-TimeStamp: 268808, Mode: Other
-TimeStamp: 271209, Mode: Other
-TimeStamp: 273605, Mode: Other
-TimeStamp: 276009, Mode: Other
-TimeStamp: 2784011, Mode: Other
-TimeStamp: 279608, Mode: Other
-TimeStamp: 2808011, Mode: Other
-TimeStamp: 282009, Mode: Other
-TimeStamp: 283208, Mode: Other
-TimeStamp: 285609, Mode: Other
-TimeStamp: 288009, Mode: Other
-TimeStamp: 290409, Mode: Other
-TimeStamp: 291602, Mode: Other
-TimeStamp: 292205, Mode: Other
-TimeStamp: 292804, Mode: Other
-TimeStamp: 294004, Mode: Other
-TimeStamp: 295202, Mode: Other
-TimeStamp: 2964011, Mode: Other
-TimeStamp: 297605, Mode: Other
-TimeStamp: 299404, Mode: Other
-TimeStamp: 300009, Mode: Other
-TimeStamp: 302409, Mode: Other
-TimeStamp: 304809, Mode: Other
-TimeStamp: 306608, Mode: Other
-TimeStamp: 307209, Mode: Other
-TimeStamp: 3084011, Mode: Other
-TimeStamp: 309605, Mode: Other
-TimeStamp: 310805, Mode: Other
-TimeStamp: 312004, Mode: Other
-TimeStamp: 313202, Mode: Other
-TimeStamp: 314400, Mode: Other
-TimeStamp: 316800, Mode: Other
-TimeStamp: 3180011, Mode: Other
-TimeStamp: 319209, Mode: Other
-TimeStamp: 320408, Mode: Other
-TimeStamp: 321609, Mode: Other
-TimeStamp: 322800, Mode: Other
-TimeStamp: 324002, Mode: Other
-TimeStamp: 325204, Mode: Other
-TimeStamp: 326405, Mode: Other
-TimeStamp: 327600, Mode: Other
-TimeStamp: 328808, Mode: Other
-TimeStamp: 331209, Mode: Other
-TimeStamp: 333600, Mode: Other
-TimeStamp: 336002, Mode: Other
-TimeStamp: 3372011, Mode: Other
-TimeStamp: 338409, Mode: Other
-TimeStamp: 339605, Mode: Other
-TimeStamp: 340802, Mode: Other
-TimeStamp: 3420010, Mode: Other
-TimeStamp: 343201, Mode: Other
-TimeStamp: 345602, Mode: Other
-TimeStamp: 346803, Mode: Other
-TimeStamp: 348004, Mode: Other
-TimeStamp: 350401, Mode: Other
-TimeStamp: 352805, Mode: Other
-TimeStamp: 354006, Mode: Other
-TimeStamp: 355207, Mode: Other
-TimeStamp: 357602, Mode: Other
-TimeStamp: 360009, Mode: Other
-TimeStamp: 3624010, Mode: Other
-TimeStamp: 364807, Mode: Other
-TimeStamp: 3672010, Mode: Other
-TimeStamp: 369609, Mode: Other
-TimeStamp: 374402, Mode: Other
-TimeStamp: 376809, Mode: Other
-TimeStamp: 378008, Mode: Other
-TimeStamp: 379207, Mode: Other
-TimeStamp: 380405, Mode: Other
-TimeStamp: 381607, Mode: Other
-TimeStamp: 382804, Mode: Other
-TimeStamp: 384007, Mode: Other
-TimeStamp: 385205, Mode: Other
-TimeStamp: 386404, Mode: Other
-TimeStamp: 387602, Mode: Other
-TimeStamp: 3888010, Mode: Other
-TimeStamp: 3912010, Mode: Other
-TimeStamp: 392401, Mode: Other
-TimeStamp: 393602, Mode: Other
-TimeStamp: 394804, Mode: Other
-TimeStamp: 396004, Mode: Other
-TimeStamp: 397202, Mode: Other
-TimeStamp: 398407, Mode: Other
-TimeStamp: 399606, Mode: Other
-TimeStamp: 400805, Mode: Other
-TimeStamp: 403202, Mode: Other
-TimeStamp: 408005, Mode: Other
-TimeStamp: 409209, Mode: Other
-TimeStamp: 410407, Mode: Other
-TimeStamp: 411609, Mode: Other
-TimeStamp: 4128010, Mode: Other
-TimeStamp: 415209, Mode: Other
-TimeStamp: 417604, Mode: Other
-TimeStamp: 420000, Mode: Other
-TimeStamp: 4224010, Mode: Other
-TimeStamp: 424801, Mode: Other
-TimeStamp: 426004, Mode: Other
-TimeStamp: 427207, Mode: Other
-TimeStamp: 429607, Mode: Other
-TimeStamp: 432002, Mode: Other
-TimeStamp: 434400, Mode: Other
-TimeStamp: 436805, Mode: Other
-TimeStamp: 438009, Mode: Other
-TimeStamp: 439207, Mode: Other
-TimeStamp: 440407, Mode: Other
-TimeStamp: 441607, Mode: Other
-TimeStamp: 444007, Mode: Other
-TimeStamp: 446402, Mode: Other
-TimeStamp: 451206, Mode: Other
-TimeStamp: 456006, Mode: Other
-TimeStamp: 460802, Mode: Other
-TimeStamp: 465607, Mode: Other
-TimeStamp: 470407, Mode: Other
-TimeStamp: 475202, Mode: Other
-TimeStamp: 480008, Mode: Other
-TimeStamp: 484809, Mode: Other
-TimeStamp: 489602, Mode: Other
-TimeStamp: 4944010, Mode: Other
-TimeStamp: 4992010, Mode: Other
-TimeStamp: 508802, Mode: Other
-TimeStamp: 511202, Mode: Other
+TimeStamp: 0Chord notes count = 1; 9, Mode: Other
+TimeStamp: 960Chord notes count = 1; 0, Mode: Other
+TimeStamp: 1200Chord notes count = 1; 4, Mode: Other
+TimeStamp: 1440Chord notes count = 1; 2, Mode: Other
+TimeStamp: 1920Chord notes count = 4; 0, 2, 5, 9, Mode: Other
+TimeStamp: 2880Chord notes count = 3; 2, 7, 11, Mode: Major
+TimeStamp: 3840Chord notes count = 3; 5, 7, 11, Mode: Other
+TimeStamp: 4080Chord notes count = 4; 0, 2, 5, 9, Mode: Other
+TimeStamp: 4320Chord notes count = 4; 2, 4, 5, 8, Mode: Other
+TimeStamp: 4800Chord notes count = 3; 2, 4, 8, Mode: Other
+TimeStamp: 5760Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 5880Chord notes count = 3; 2, 4, 9, Mode: Other
+TimeStamp: 6000Chord notes count = 2; 4, 9, Mode: Other
+TimeStamp: 6240Chord notes count = 3; 2, 4, 9, Mode: Other
+TimeStamp: 6480Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 6600Chord notes count = 3; 2, 8, 11, Mode: Diminished
+TimeStamp: 6720Chord notes count = 4; 0, 4, 5, 9, Mode: Other
+TimeStamp: 6840Chord notes count = 3; 4, 8, 11, Mode: Major
+TimeStamp: 6960Chord notes count = 4; 0, 4, 5, 9, Mode: Other
+TimeStamp: 7080Chord notes count = 3; 2, 8, 11, Mode: Diminished
+TimeStamp: 7200Chord notes count = 1; 9, Mode: Other
+TimeStamp: 7320Chord notes count = 1; 8, Mode: Other
+TimeStamp: 7440Chord notes count = 2; 5, 11, Mode: Other
+TimeStamp: 7680Chord notes count = 2; 0, 4, Mode: Other
+TimeStamp: 7800Chord notes count = 2; 4, 9, Mode: Other
+TimeStamp: 7920Chord notes count = 4; 2, 5, 8, 9, Mode: Diminished
+TimeStamp: 8040Chord notes count = 2; 4, 11, Mode: Other
+TimeStamp: 8160Chord notes count = 3; 2, 5, 8, Mode: Diminished
+TimeStamp: 8400Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 8640Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 8880Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 9120Chord notes count = 2; 8, 11, Mode: Other
+TimeStamp: 9240Chord notes count = 2; 8, 11, Mode: Other
+TimeStamp: 9360Chord notes count = 4; 2, 4, 9, 11, Mode: Other
+TimeStamp: 9480Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 9600Chord notes count = 3; 4, 8, 11, Mode: Major
+TimeStamp: 9840Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 10080Chord notes count = 1; 9, Mode: Other
+TimeStamp: 10320Chord notes count = 2; 0, 4, Mode: Other
+TimeStamp: 10500Chord notes count = 2; 5, 8, Mode: Other
+TimeStamp: 10560Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 10680Chord notes count = 1; 4, Mode: Other
+TimeStamp: 10800Chord notes count = 2; 2, 11, Mode: Other
+TimeStamp: 10920Chord notes count = 1; 11, Mode: Other
+TimeStamp: 11040Chord notes count = 4; 2, 4, 8, 11, Mode: Other
+TimeStamp: 11220Chord notes count = 2; 5, 11, Mode: Other
+TimeStamp: 11280Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 11520Chord notes count = 1; 9, Mode: Other
+TimeStamp: 11760Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 11940Chord notes count = 2; 5, 8, Mode: Other
+TimeStamp: 12000Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 12120Chord notes count = 1; 11, Mode: Other
+TimeStamp: 12240Chord notes count = 2; 2, 5, Mode: Other
+TimeStamp: 12360Chord notes count = 4; 2, 4, 8, 11, Mode: Other
+TimeStamp: 12480Chord notes count = 4; 4, 5, 8, 11, Mode: Other
+TimeStamp: 12720Chord notes count = 2; 0, 9, Mode: Other
+TimeStamp: 12960Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 13080Chord notes count = 1; 8, Mode: Other
+TimeStamp: 13200Chord notes count = 2; 5, 9, Mode: Other
+TimeStamp: 13320Chord notes count = 2; 0, 4, Mode: Other
+TimeStamp: 13440Chord notes count = 4; 0, 2, 4, 11, Mode: Other
+TimeStamp: 13560Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 13680Chord notes count = 4; 2, 4, 8, 11, Mode: Other
+TimeStamp: 13800Chord notes count = 2; 8, 11, Mode: Other
+TimeStamp: 13920Chord notes count = 3; 2, 5, 8, Mode: Diminished
+TimeStamp: 14040Chord notes count = 2; 4, 8, Mode: Other
+TimeStamp: 14160Chord notes count = 3; 0, 5, 9, Mode: Major
+TimeStamp: 14280Chord notes count = 2; 0, 9, Mode: Other
+TimeStamp: 14400Chord notes count = 3; 0, 9, 11, Mode: Other
+TimeStamp: 14640Chord notes count = 3; 0, 2, 9, Mode: Other
+TimeStamp: 14760Chord notes count = 1; 11, Mode: Other
+TimeStamp: 14880Chord notes count = 3; 0, 5, 9, Mode: Major
+TimeStamp: 15000Chord notes count = 2; 2, 11, Mode: Other
+TimeStamp: 15120Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 15240Chord notes count = 4; 2, 7, 9, 11, Mode: Other
+TimeStamp: 15360Chord notes count = 4; 2, 5, 9, 10, Mode: Minor
+TimeStamp: 15480Chord notes count = 1; 10, Mode: Other
+TimeStamp: 15600Chord notes count = 4; 1, 4, 7, 9, Mode: Diminished
+TimeStamp: 15840Chord notes count = 2; 2, 9, Mode: Other
+TimeStamp: 16080Chord notes count = 2; 2, 10, Mode: Other
+TimeStamp: 16320Chord notes count = 3; 0, 2, 5, Mode: Other
+TimeStamp: 16440Chord notes count = 1; 9, Mode: Other
+TimeStamp: 16560Chord notes count = 2; 2, 7, Mode: Other
+TimeStamp: 16680Chord notes count = 3; 1, 2, 4, Mode: Other
+TimeStamp: 16800Chord notes count = 3; 1, 2, 10, Mode: Other
+TimeStamp: 17040Chord notes count = 2; 2, 9, Mode: Other
+TimeStamp: 17280Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 17520Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 17760Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 17880Chord notes count = 1; 1, Mode: Other
+TimeStamp: 18000Chord notes count = 3; 1, 4, 9, Mode: Major
+TimeStamp: 18120Chord notes count = 3; 2, 4, 9, Mode: Other
+TimeStamp: 18240Chord notes count = 3; 1, 4, 9, Mode: Major
+TimeStamp: 18360Chord notes count = 1; 7, Mode: Other
+TimeStamp: 18480Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 18720Chord notes count = 1; 2, Mode: Other
+TimeStamp: 19200Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 19320Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 19440Chord notes count = 4; 1, 4, 7, 9, Mode: Diminished
+TimeStamp: 19560Chord notes count = 4; 4, 7, 9, 10, Mode: Other
+TimeStamp: 19680Chord notes count = 3; 1, 7, 9, Mode: Other
+TimeStamp: 19920Chord notes count = 4; 2, 5, 8, 10, Mode: Diminished
+TimeStamp: 20160Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 20400Chord notes count = 2; 5, 9, Mode: Other
+TimeStamp: 20520Chord notes count = 1; 10, Mode: Other
+TimeStamp: 20640Chord notes count = 1; 11, Mode: Other
+TimeStamp: 20760Chord notes count = 2; 1, 4, Mode: Other
+TimeStamp: 20880Chord notes count = 4; 1, 4, 7, 10, Mode: Diminished
+TimeStamp: 21000Chord notes count = 2; 4, 10, Mode: Other
+TimeStamp: 21120Chord notes count = 4; 1, 4, 9, 10, Mode: Major
+TimeStamp: 21360Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 21600Chord notes count = 1; 2, Mode: Other
+TimeStamp: 21840Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 22080Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 22200Chord notes count = 1; 9, Mode: Other
+TimeStamp: 22320Chord notes count = 1; 7, Mode: Other
+TimeStamp: 22440Chord notes count = 1; 4, Mode: Other
+TimeStamp: 22560Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 22800Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 23040Chord notes count = 1; 2, Mode: Other
+TimeStamp: 23280Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 23520Chord notes count = 4; 0, 2, 8, 9, Mode: Other
+TimeStamp: 23760Chord notes count = 1; 11, Mode: Other
+TimeStamp: 23880Chord notes count = 1; 11, Mode: Other
+TimeStamp: 24000Chord notes count = 4; 2, 5, 7, 11, Mode: Other
+TimeStamp: 24240Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 24480Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 24600Chord notes count = 3; 0, 4, 7, Mode: Major
+TimeStamp: 24720Chord notes count = 4; 0, 2, 4, 5, Mode: Other
+TimeStamp: 24960Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 25080Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 25200Chord notes count = 4; 0, 2, 5, 9, Mode: Other
+TimeStamp: 25440Chord notes count = 3; 2, 7, 11, Mode: Major
+TimeStamp: 25560Chord notes count = 4; 0, 2, 4, 7, Mode: Other
+TimeStamp: 25680Chord notes count = 4; 2, 4, 5, 8, Mode: Other
+TimeStamp: 25800Chord notes count = 4; 2, 4, 5, 8, Mode: Other
+TimeStamp: 25920Chord notes count = 1; 9, Mode: Other
+TimeStamp: 26400Chord notes count = 1; 0, Mode: Other
+TimeStamp: 26520Chord notes count = 1; 4, Mode: Other
+TimeStamp: 26640Chord notes count = 1; 2, Mode: Other
+TimeStamp: 26760Chord notes count = 1; 11, Mode: Other
+TimeStamp: 26880Chord notes count = 1; 8, Mode: Other
+TimeStamp: 27120Chord notes count = 1; 9, Mode: Other
+TimeStamp: 27360Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 27600Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 27840Chord notes count = 2; 5, 11, Mode: Other
+TimeStamp: 27960Chord notes count = 1; 8, Mode: Other
+TimeStamp: 28080Chord notes count = 4; 2, 4, 9, 11, Mode: Other
+TimeStamp: 28200Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 28320Chord notes count = 3; 2, 4, 8, Mode: Other
+TimeStamp: 28560Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 28800Chord notes count = 1; 9, Mode: Other
+TimeStamp: 29040Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 29160Chord notes count = 1; 2, Mode: Other
+TimeStamp: 29220Chord notes count = 2; 5, 8, Mode: Other
+TimeStamp: 29280Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 29400Chord notes count = 1; 4, Mode: Other
+TimeStamp: 29520Chord notes count = 2; 2, 11, Mode: Other
+TimeStamp: 29640Chord notes count = 1; 11, Mode: Other
+TimeStamp: 29760Chord notes count = 4; 2, 4, 5, 8, Mode: Other
+TimeStamp: 29940Chord notes count = 2; 2, 4, Mode: Other
+TimeStamp: 30000Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 30240Chord notes count = 1; 9, Mode: Other
+TimeStamp: 30480Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 30660Chord notes count = 3; 4, 8, 11, Mode: Major
+TimeStamp: 30720Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 30840Chord notes count = 1; 11, Mode: Other
+TimeStamp: 30960Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 31080Chord notes count = 4; 2, 5, 9, 11, Mode: Minor
+TimeStamp: 31200Chord notes count = 3; 4, 8, 11, Mode: Major
+TimeStamp: 31320Chord notes count = 1; 2, Mode: Other
+TimeStamp: 31440Chord notes count = 2; 0, 9, Mode: Other
+TimeStamp: 31680Chord notes count = 2; 0, 9, Mode: Other
+TimeStamp: 31800Chord notes count = 2; 8, 11, Mode: Other
+TimeStamp: 31920Chord notes count = 3; 4, 5, 9, Mode: Other
+TimeStamp: 32040Chord notes count = 2; 4, 8, Mode: Other
+TimeStamp: 32160Chord notes count = 4; 0, 4, 5, 9, Mode: Other
+TimeStamp: 32280Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 32400Chord notes count = 3; 2, 8, 11, Mode: Diminished
+TimeStamp: 32520Chord notes count = 3; 4, 9, 11, Mode: Other
+TimeStamp: 32640Chord notes count = 4; 4, 5, 8, 11, Mode: Other
+TimeStamp: 32760Chord notes count = 1; 0, Mode: Other
+TimeStamp: 32880Chord notes count = 3; 2, 4, 8, Mode: Other
+TimeStamp: 33120Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 33360Chord notes count = 4; 0, 4, 7, 9, Mode: Major
+TimeStamp: 33600Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 33720Chord notes count = 1; 11, Mode: Other
+TimeStamp: 33840Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 33960Chord notes count = 4; 0, 2, 5, 9, Mode: Other
+TimeStamp: 34080Chord notes count = 4; 2, 4, 7, 11, Mode: Other
+TimeStamp: 34200Chord notes count = 2; 5, 10, Mode: Other
+TimeStamp: 34320Chord notes count = 3; 1, 4, 9, Mode: Major
+TimeStamp: 34560Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 34680Chord notes count = 2; 3, 6, Mode: Other
+TimeStamp: 34800Chord notes count = 3; 4, 7, 9, Mode: Other
+TimeStamp: 35040Chord notes count = 1; 1, Mode: Other
+TimeStamp: 35280Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 35400Chord notes count = 2; 0, 6, Mode: Other
+TimeStamp: 35520Chord notes count = 2; 7, 10, Mode: Other
+TimeStamp: 35760Chord notes count = 1; 2, Mode: Other
+TimeStamp: 36000Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 36240Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 36480Chord notes count = 4; 2, 5, 7, 10, Mode: Other
+TimeStamp: 36720Chord notes count = 3; 2, 7, 10, Mode: Minor
+TimeStamp: 36960Chord notes count = 3; 1, 7, 9, Mode: Other
+TimeStamp: 37440Chord notes count = 1; 2, Mode: Other
+TimeStamp: 37680Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 37800Chord notes count = 1; 8, Mode: Other
+TimeStamp: 37920Chord notes count = 4; 1, 2, 5, 7, Mode: Other
+TimeStamp: 38040Chord notes count = 2; 5, 9, Mode: Other
+TimeStamp: 38160Chord notes count = 1; 7, Mode: Other
+TimeStamp: 38280Chord notes count = 1; 4, Mode: Other
+TimeStamp: 38400Chord notes count = 4; 1, 4, 7, 9, Mode: Diminished
+TimeStamp: 38520Chord notes count = 1; 5, Mode: Other
+TimeStamp: 38640Chord notes count = 3; 2, 4, 7, Mode: Other
+TimeStamp: 38760Chord notes count = 2; 2, 5, Mode: Other
+TimeStamp: 38880Chord notes count = 1; 10, Mode: Other
+TimeStamp: 39120Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 39240Chord notes count = 2; 1, 9, Mode: Other
+TimeStamp: 39360Chord notes count = 3; 2, 9, 10, Mode: Other
+TimeStamp: 39480Chord notes count = 3; 1, 4, 7, Mode: Diminished
+TimeStamp: 39600Chord notes count = 1; 4, Mode: Other
+TimeStamp: 39720Chord notes count = 1; 2, Mode: Other
+TimeStamp: 39840Chord notes count = 4; 1, 4, 7, 9, Mode: Diminished
+TimeStamp: 39960Chord notes count = 1; 6, Mode: Other
+TimeStamp: 40080Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 40320Chord notes count = 1; 2, Mode: Other
+TimeStamp: 40800Chord notes count = 1; 5, Mode: Other
+TimeStamp: 40920Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 41040Chord notes count = 4; 1, 4, 7, 10, Mode: Diminished
+TimeStamp: 41160Chord notes count = 3; 1, 4, 9, Mode: Major
+TimeStamp: 41280Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 41520Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 41760Chord notes count = 3; 2, 4, 7, Mode: Other
+TimeStamp: 42000Chord notes count = 3; 0, 2, 9, Mode: Other
+TimeStamp: 42240Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 42480Chord notes count = 3; 1, 4, 10, Mode: Diminished
+TimeStamp: 42600Chord notes count = 3; 1, 4, 10, Mode: Diminished
+TimeStamp: 42720Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 42960Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 43200Chord notes count = 1; 2, Mode: Other
+TimeStamp: 43440Chord notes count = 3; 0, 2, 5, Mode: Other
+TimeStamp: 43680Chord notes count = 3; 2, 5, 10, Mode: Major
+TimeStamp: 43800Chord notes count = 3; 0, 2, 9, Mode: Other
+TimeStamp: 43920Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 44040Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 44160Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 44400Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 44640Chord notes count = 1; 2, Mode: Other
+TimeStamp: 45120Chord notes count = 2; 2, 6, Mode: Other
+TimeStamp: 45600Chord notes count = 3; 2, 6, 9, Mode: Major
+TimeStamp: 46080Chord notes count = 1; 2, Mode: Other
+TimeStamp: 46560Chord notes count = 3; 3, 7, 9, Mode: Other
+TimeStamp: 47040Chord notes count = 3; 3, 7, 10, Mode: Major
+TimeStamp: 47520Chord notes count = 1; 2, Mode: Other
+TimeStamp: 48000Chord notes count = 3; 4, 8, 11, Mode: Major
+TimeStamp: 48480Chord notes count = 3; 0, 4, 9, Mode: Minor
+TimeStamp: 48960Chord notes count = 1; 2, Mode: Other
+TimeStamp: 49440Chord notes count = 4; 1, 6, 9, 10, Mode: Minor
+TimeStamp: 49920Chord notes count = 4; 1, 7, 9, 10, Mode: Other
+TimeStamp: 50880Chord notes count = 3; 2, 5, 9, Mode: Minor
+TimeStamp: 51120Chord notes count = 1; 2, Mode: Other

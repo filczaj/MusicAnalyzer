@@ -27,6 +27,8 @@ namespace MusicAnalyzer.Models
         Minor,
         Enlarged,
         Diminished,
+        Dominant,
+        SeventhDim,
         Other
     };
 
