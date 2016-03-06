@@ -1,3 +1,0 @@
-Metrum : 3 / 4 at: 0
-Metrum : 3 / 8 at: 5760
-Metrum : 3 / 4 at: 44640

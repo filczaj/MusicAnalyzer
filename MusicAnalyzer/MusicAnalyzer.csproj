@@ -141,6 +141,7 @@
     <Compile Include="Analyzer\MusicIntelligence.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Match.cs" />
+    <Compile Include="Models\MeterChange.cs" />
     <Compile Include="Models\MusicPiece.cs" />
     <Compile Include="Models\Offset.cs" />
     <Compile Include="Tools\MidiTools.cs" />

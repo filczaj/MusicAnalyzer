@@ -71,20 +71,19 @@ namespace MusicAnalyzer.Tools
                             allNotes.Add(n);
                         }
                         else if (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID)
-                        {
-                            // find right note and set endTime.
                             setNoteOff(message.Data1 - lowNoteID, e.AbsoluteTicks, allNotes);
-                        }
                     }
                 }
             }
+#if DEBUG
+            genericListSerizliator<Note>(allNotes.ToList<Note>(), configDirectory + "\\allNotes.txt");
+#endif
             return allNotes;
         }
 
         public List<Tonation> grabTonations(Sequence sequence)
         {
             MetaMessage metaM;
-            //findAndSaveMetaTypes(sequence);
             List<Tonation> tonations = new List<Tonation>();
             foreach (Track track in sequence)
             {
@@ -99,10 +98,8 @@ namespace MusicAnalyzer.Tools
                         metaM = null;
                     }
                     if (metaM != null && metaM.MetaType == MetaType.KeySignature)
-                    {
                         if (!tonations.Exists(x => x.startTick == e.AbsoluteTicks))
                             tonations.Add(new Tonation(metaM, e.AbsoluteTicks, this));
-                    }
                 }
             }
             var sortedTonations = from t in tonations
@@ -110,17 +107,18 @@ namespace MusicAnalyzer.Tools
                           select t;
             tonations = sortedTonations.ToList<Tonation>();
             for (int i = 0; i < tonations.Count; i++)
-            {
                 tonations[i].endTick = tonations[(i + 1) % tonations.Count].startTick;
-            }
+            tonations[tonations.Count - 1].endTick = int.MaxValue;
+#if DEBUG
+            MidiTools.genericListSerizliator<Tonation>(tonations, configDirectory + "\\Tonations.txt");
+#endif
             return tonations;
         }
 
-        public void findMeter(Sequence sequence)
+        public List<MeterChange> findMeter(Sequence sequence)
         {
             MetaMessage metaM;
-            List<string> timeSigns = new List<string>();
-            List<int> tempos = new List<int>();
+            List<MeterChange> meters = new List<MeterChange>();
             foreach (Track track in sequence)
             {
                 foreach (MidiEvent e in track.Iterator())
@@ -136,29 +134,19 @@ namespace MusicAnalyzer.Tools
                     if (metaM != null && metaM.MetaType == MetaType.TimeSignature)
                     {
                         TimeSignatureBuilder builder = new TimeSignatureBuilder(metaM);
-                        timeSigns.Add((int)builder.Numerator + " / " + builder.Denominator + " at: " + e.AbsoluteTicks);
+                        meters.Add(new MeterChange((int)builder.Numerator, (int)builder.Denominator, e.AbsoluteTicks));
                     }
                 }
             }
-            string fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\TimeSignatures.txt";
-            List<string> allLines = new List<string>();
-            foreach (string n in timeSigns)
-            {
-                allLines.Add("Metrum : " + n);
-            }
-            IOTools.saveTo(allLines, fileName);
+            
+#if DEBUG
+            genericListSerizliator<MeterChange>(meters, configDirectory + "\\MeterChanges.txt");
+#endif
+            return meters;
         }
 
         public void serialize(IEnumerable<Note> allNotes)
         {
-            string fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\allNotes.txt";
-            List<string> allLines = new List<string>();
-            foreach (Note n in allNotes)
-            {
-                allLines.Add(n.ToString());
-            }
-            IOTools.saveTo(allLines, fileName);
-
             #region debug
             //fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\allStartTimesSorted.txt";
             //allLines = new List<string>();
@@ -178,6 +166,33 @@ namespace MusicAnalyzer.Tools
             //}
             //IOTools.saveTo(allLines, fileName);
             #endregion
+        }
+
+        public static void genericListSerizliator<T>(List<T> elements, string fileName)
+        {
+            List<string> allLines = new List<string>();
+            foreach (T element in elements)
+            {
+                allLines.Add(element.ToString());
+            }
+            IOTools.saveTo(allLines, fileName);
+        }
+
+        public Tonation getSiblingTonation(Tonation t) // returns a minor or major tonation with the same key signature
+        {
+            ChordMode outTonationMode;
+            int newOffset;
+            if (t.key > Sanford.Multimedia.Key.ASharpMinor)
+            {
+                outTonationMode = ChordMode.Minor;
+                newOffset = ((int)t.offset + 9) % 12;
+            }
+            else
+            {
+                outTonationMode = ChordMode.Major;
+                newOffset = ((int)t.offset + 3) % 12;
+            }
+            return new Tonation(newOffset, outTonationMode, t.startTick, new NoteTools(configDirectory));
         }
     }
 }

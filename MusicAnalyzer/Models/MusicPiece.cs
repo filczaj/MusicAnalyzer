@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicAnalyzer.Analyzer;
 
 namespace MusicAnalyzer.Models
 {
     class MusicPiece
     {
+        MusicIntelligence musicIntelligence;
         List<Tonation> tonations;
         Sequence sequence;
         NotesList notesList;
         MidiTools midiTools;
         int trackCount;
         Dictionary<int, Chord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
+        List<MeterChange> meterChanges;
         int composedTrack;
 
         public MusicPiece(Sequence seq, string configDir)
@@ -25,67 +28,24 @@ namespace MusicAnalyzer.Models
             this.notesList = midiTools.decodeNotes(sequence) as NotesList;
             this.tonations = midiTools.grabTonations(sequence);
             this.trackCount = this.sequence.Count;
-            midiTools.findMeter(seq);
-            midiTools.serialize(notesList);
-            serializeTonations(configDir);
+            this.meterChanges = midiTools.findMeter(seq);
+            this.musicIntelligence = new MusicIntelligence();
         }
 
-        public void orderAllNotesByStartTime()
+        public void completeNotesInfo()
         {
-            orderedNoteChords = new Dictionary<int, Chord>();
-            List<Note> orderedNotesList = notesList.OrderBy(x => x.startTime).ToList<Note>();
-            foreach (Note n in orderedNotesList)
-            {
-                if (!orderedNoteChords.ContainsKey(n.startTime))
-                {
-                    orderedNoteChords.Add(n.startTime, new Chord(n));
-                } else
-                    orderedNoteChords[n.startTime].addNote(n);
-                //int[] nextChords = orderedNoteChords.Keys.Where(x => x >= n.startTime && x <= n.endTime).ToArray();
-                if (orderedNotesList.IndexOf(n) == orderedNotesList.Count - 1)
-                    break;
-                Note another = orderedNotesList[orderedNotesList.IndexOf(n) + 1];
-                while (n.endTime >= another.startTime)
-                {
-                    orderedNoteChords[n.startTime].addNote(another);
-                    if (orderedNotesList.IndexOf(another) == orderedNotesList.Count - 1)
-                        break;
-                    another = orderedNotesList[orderedNotesList.IndexOf(another) + 1];
-                }
-            }
-            serializeSortNotes(midiTools.configDirectory);
+            orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools);
+            musicIntelligence.setRightTonation(tonations, notesList, midiTools);
         }
 
-        public void findChordChanges()
+        public void findChordChanges() // at composedTrack
         {
             // tworzy tonikę na dźwięku - new Chord(n, getCurrentTonation(n.startTime);
         }
 
         public Tonation getCurrentTonation(int timeIndex)
         {
-            return tonations.FirstOrDefault(x => timeIndex >= x.startTick && timeIndex <= x.endTick);
-        }
-
-        void serializeTonations(string dir)
-        {
-            string fileName = dir + "\\tonations.txt";
-            List<string> allLines = new List<string>();
-            foreach (Tonation t in tonations)
-            {
-                allLines.Add(t.ToString());
-            }
-            IOTools.saveTo(allLines, fileName);
-        }
-
-        void serializeSortNotes(string dir)
-        {
-            string fileName = dir + "\\sortedNotes.txt";
-            List<string> allLines = new List<string>();
-            foreach (int index in orderedNoteChords.Keys)
-            {
-                allLines.Add("TimeStamp: " + index.ToString() + orderedNoteChords[index].ToString());
-            }
-            IOTools.saveTo(allLines, fileName);
+            return tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
         }
     }
 }

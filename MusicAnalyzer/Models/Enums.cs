@@ -18,7 +18,8 @@ namespace MusicAnalyzer.Models
     {
         Tonic,
         Subdominant,
-        Dominant
+        Dominant,
+        Other
     };
 
     public enum ChordMode

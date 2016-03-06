@@ -197,6 +197,19 @@ namespace MusicAnalyzer.Tools
             }
             return offset;
         }
+
+        public Sanford.Multimedia.Key setKeyOnOffsetAndMode(int offset, ChordMode mode)
+        {
+            string[] offsetNames;
+            if (mode == ChordMode.Major)
+                offsetNames = Enum.GetNames(typeof(Offset)).Where(x => x.Contains("Major") && ((int)(Offset)(Enum.Parse(typeof(Offset), x))) == offset).ToArray();
+            else
+                offsetNames = Enum.GetNames(typeof(Offset)).Where(x => x.Contains("Minor") && ((int)(Offset)(Enum.Parse(typeof(Offset), x))) == offset).ToArray();
+            if (offsetNames.Length > 0)
+                return (Sanford.Multimedia.Key)Enum.Parse(typeof(Sanford.Multimedia.Key), offsetNames[0]);
+            else
+                return Sanford.Multimedia.Key.CMajor;
+        }
     }
 }
 

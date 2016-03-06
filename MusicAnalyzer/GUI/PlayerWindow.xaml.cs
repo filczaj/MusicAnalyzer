@@ -15,6 +15,7 @@ using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
 using NAudio.Midi;
 using MusicAnalyzer.Models;
+using MusicAnalyzer.Analyzer;
 
 namespace MusicAnalyzer.GUI
 {
@@ -49,7 +50,7 @@ namespace MusicAnalyzer.GUI
             this.sequence = reader;
             initPlayer();
             this.musicPiece = new MusicPiece(reader, configDirectory);
-            this.fileNameBox.Text = fileName = fullFileName;          
+            this.fileNameBox.Text = fileName = fullFileName;
         }
 
         private void initPlayer()
@@ -207,7 +208,7 @@ namespace MusicAnalyzer.GUI
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
         {
-            musicPiece.orderAllNotesByStartTime();
+            musicPiece.completeNotesInfo();
             musicPiece.findChordChanges();
         }
         

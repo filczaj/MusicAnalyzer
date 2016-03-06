@@ -12,6 +12,7 @@ namespace MusicAnalyzer.Models
         public bool isScaleBasic;
         public int turnover;
         public ChordMode mode;
+        public ChordType scaleChordType;
         public int priority;
 
         public Chord(ChordMode mode, bool isBasic, int turn)
@@ -31,10 +32,25 @@ namespace MusicAnalyzer.Models
             if (tonation == null)
                 return;
             int noteIndex = tonation.getNoteIndexInScale(n);
-            if (noteIndex == 0 || noteIndex == 4 || noteIndex == 5)
-                this.isScaleBasic = true;
-            else
-                this.isScaleBasic = false;
+            switch (noteIndex)
+            {
+                case 0:
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Tonic;
+                    break;
+                case 5:
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Subdominant;
+                    break;
+                case 7:
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Dominant;
+                    break;
+                default:
+                    this.isScaleBasic = false;
+                    this.scaleChordType = ChordType.Other;
+                    break;
+            }
             this.chordNotes = tonation.getChordNotesOnIndex(noteIndex);
             this.turnover = 0;
             setChordMode();
@@ -60,21 +76,21 @@ namespace MusicAnalyzer.Models
                 (chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.Quart) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.Quart && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow))
                 mode = ChordMode.Minor;
+            else if ((chordNotes.Count > 3) &&
+                ((chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.Second) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Second && chordNotes[2] - chordNotes[1] == (int)Interval.Terce) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.Second && chordNotes[2] - chordNotes[1] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow)))
+                mode = ChordMode.Dominant;
+            else if ((chordNotes.Count > 3) &&
+                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow))
+                mode = ChordMode.SeventhDim;
             else if ((chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Triton) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.Triton && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow))
                 mode = ChordMode.Diminished;
             else if (chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.Terce)
                 mode = ChordMode.Enlarged;
-            else if ((chordNotes.Count > 3) &&
-                ((chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.Second) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Second && chordNotes[2] - chordNotes[1] == (int)Interval.Terce) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.Second && chordNotes[2] - chordNotes[1] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow)))
-                    mode = ChordMode.Dominant;
-            else if ((chordNotes.Count > 3) &&
-                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow))
-                mode = ChordMode.SeventhDim;
             else mode = ChordMode.Other;
         }
 
