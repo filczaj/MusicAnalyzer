@@ -36,13 +36,9 @@ namespace MusicAnalyzer.Tools
                     }
                 }
             }
-            string fileName = "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\MetaTypes.txt";
-            List<string> allLines = new List<string>();
-            foreach (MetaType n in types)
-            {
-                allLines.Add(n.ToString());
-            }
-            IOTools.saveTo(allLines, fileName);
+#if DEBUG
+            MidiTools.genericListSerizliator<MetaType>(types, configDirectory + "\\Tonations.txt");
+#endif
         }
 
         public IEnumerable<Note> decodeNotes(Sequence sequence)
@@ -64,14 +60,17 @@ namespace MusicAnalyzer.Tools
                     {
                         if (message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 > 0)
                         {
-                            Note n = new Note(message.Data1 - lowNoteID, e.AbsoluteTicks);
-                            if (allNotes.Count() > 0)
-                                allNotes.ElementAt(allNotes.Count()-1).duration = e.DeltaTicks;
-                            n = fillNoteData(n);
+                            //allNotes.setLastTrackNoteDuration(message.MidiChannel, e.AbsoluteTicks);
+                            Note n = new Note(message.Data1 - lowNoteID, e.AbsoluteTicks, message.MidiChannel);
                             allNotes.Add(n);
+                            //fillNoteData(n);
                         }
-                        else if (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID)
-                            setNoteOff(message.Data1 - lowNoteID, e.AbsoluteTicks, allNotes);
+                        else if ((message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 == 0) ||
+                            (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID))
+                            {
+                                Note n2 = setNoteOff(message.Data1 - lowNoteID, e.AbsoluteTicks, allNotes, message.MidiChannel);
+                                fillNoteData(n2);
+                            }
                     }
                 }
             }
@@ -108,10 +107,8 @@ namespace MusicAnalyzer.Tools
             tonations = sortedTonations.ToList<Tonation>();
             for (int i = 0; i < tonations.Count; i++)
                 tonations[i].endTick = tonations[(i + 1) % tonations.Count].startTick;
-            tonations[tonations.Count - 1].endTick = int.MaxValue;
-#if DEBUG
-            MidiTools.genericListSerizliator<Tonation>(tonations, configDirectory + "\\Tonations.txt");
-#endif
+            if (tonations.Count > 0)
+                tonations[tonations.Count - 1].endTick = int.MaxValue - 1;
             return tonations;
         }
 
@@ -143,6 +140,11 @@ namespace MusicAnalyzer.Tools
             genericListSerizliator<MeterChange>(meters, configDirectory + "\\MeterChanges.txt");
 #endif
             return meters;
+        }
+
+        public Tonation getCurrentTonation(List<Tonation> tonations, int timeIndex)
+        {
+            return tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
         }
 
         public void serialize(IEnumerable<Note> allNotes)

@@ -8,9 +8,9 @@ using MusicAnalyzer.Tools;
 
 namespace MusicAnalyzer.Analyzer
 {
-    class MusicIntelligence
+    public class MusicIntelligence
     {
-        public void setRightTonation(List<Tonation> tonations, IEnumerable<Note> notesList, MidiTools midiTools) // differentatie Cdur from Amoll
+        public List<Tonation> setRightTonation(List<Tonation> tonations, IEnumerable<Note> notesList, MidiTools midiTools) // differentatie Cdur from Amoll
         {
             int starter;
             int endTick;
@@ -50,13 +50,18 @@ namespace MusicAnalyzer.Analyzer
                     newTonations.Add(t);
             }
             tonations = newTonations;
+#if DEBUG
+            MidiTools.genericListSerizliator<Tonation>(tonations, "C:\\Magisterka\\MusicAnalyzer\\MusicAnalyzer\\ConfigFiles\\Tonations.txt");
+#endif
+            return tonations;
         }
 
-        public Dictionary<int, Chord> createOrderedChords(IEnumerable<Note> notesList, MidiTools midiTools)
+        public SortedList<int, Chord> createOrderedChords(IEnumerable<Note> notesList, MidiTools midiTools)
         {
-            Dictionary<int, Chord> orderedNoteChords = new Dictionary<int, Chord>();
-            List<Note> orderedNotesList = notesList.OrderBy(x => x.startTime).ToList<Note>();
-            foreach (Note n in orderedNotesList)
+            //Dictionary<int, Chord> orderedNoteChords = new Dictionary<int, Chord>();
+            SortedList<int, Chord> orderedNoteChords = new SortedList<int, Chord>();
+            //List<Note> orderedNotesList = notesList.OrderBy(x => x.startTime).ToList<Note>();
+            foreach (Note n in notesList)
             {
                 if (!orderedNoteChords.ContainsKey(n.startTime))
                 {
@@ -64,21 +69,54 @@ namespace MusicAnalyzer.Analyzer
                 }
                 else
                     orderedNoteChords[n.startTime].addNote(n);
-                if (orderedNotesList.IndexOf(n) == orderedNotesList.Count - 1)
+            }
+            foreach (Note n in notesList){
+                if (n.startTime == orderedNoteChords.Keys[orderedNoteChords.Count - 1])
                     break;
-                Note another = orderedNotesList[orderedNotesList.IndexOf(n) + 1];
-                while (n.endTime >= another.startTime)
+                else
                 {
-                    orderedNoteChords[n.startTime].addNote(another);
-                    if (orderedNotesList.IndexOf(another) == orderedNotesList.Count - 1)
-                        break;
-                    another = orderedNotesList[orderedNotesList.IndexOf(another) + 1];
+                    int durationCounter = 1;
+                    int timeIndex = orderedNoteChords.ElementAt(orderedNoteChords.IndexOfKey(n.startTime) + durationCounter).Key;
+                    while (n.endTime >= timeIndex)
+                    {
+                        orderedNoteChords[timeIndex].addNote(n);
+                        if (timeIndex == orderedNoteChords.Keys[orderedNoteChords.Count - 1])
+                            break;
+                        durationCounter++;
+                        timeIndex = orderedNoteChords.ElementAt(orderedNoteChords.IndexOfKey(n.startTime) + durationCounter).Key;
+                    }
                 }
             }
-#if DEBUG
-            MidiTools.genericListSerizliator<Chord>(orderedNoteChords.Values.ToList<Chord>(), midiTools.configDirectory + "\\sortedNotes.txt");
-#endif
             return orderedNoteChords;
+        }
+
+        public void setChordTypes(SortedList<int, Chord> chordsList, List<Tonation> tonations, MidiTools midiTools)
+        {
+            //int noteIndex;
+            foreach (int chordsIndex in chordsList.Keys)
+            {
+                //noteIndex = midiTools.getCurrentTonation(tonations, 0).getNoteIndexInScale(new Note()); // to do!!!!!!
+                chordsList[chordsIndex].setChordType(midiTools.getCurrentTonation(tonations, chordsIndex), this);
+            }
+#if DEBUG
+            MidiTools.genericListSerizliator<Chord>(chordsList.Values.ToList<Chord>(), midiTools.configDirectory + "\\sortedNotes.txt");
+#endif
+        }
+
+        public Match matchChords(Chord a, Chord b)
+        {
+            int counter = 0;
+            foreach (int note in a.chordNotes)
+                if (!b.chordNotes.Contains(note))
+                    counter++;
+            foreach (int note in b.chordNotes)
+                if (!a.chordNotes.Contains(note))
+                    counter++;
+            if (counter == 0) return Match.Perfect;
+            else if (counter == 1) return Match.Good;
+            else if (counter == 2) return Match.Medium;
+            else if (counter == 3) return Match.Poor;
+            else return Match.None;
         }
 
         public Match notesMatch(Chord chord, Note note, Tonation tonation)

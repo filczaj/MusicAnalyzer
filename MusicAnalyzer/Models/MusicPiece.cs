@@ -17,7 +17,7 @@ namespace MusicAnalyzer.Models
         NotesList notesList;
         MidiTools midiTools;
         int trackCount;
-        Dictionary<int, Chord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
+        SortedList<int, Chord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
         List<MeterChange> meterChanges;
         int composedTrack;
 
@@ -34,18 +34,14 @@ namespace MusicAnalyzer.Models
 
         public void completeNotesInfo()
         {
+            tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools);
-            musicIntelligence.setRightTonation(tonations, notesList, midiTools);
+            musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
         }
 
         public void findChordChanges() // at composedTrack
         {
             // tworzy tonikę na dźwięku - new Chord(n, getCurrentTonation(n.startTime);
-        }
-
-        public Tonation getCurrentTonation(int timeIndex)
-        {
-            return tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
         }
     }
 }

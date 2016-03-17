@@ -10,9 +10,14 @@ namespace MusicAnalyzer.Models
     {
         List<Note> notes;
 
-        public NotesList()
-        {
+        public NotesList(){
             notes = new List<Note>();
+        }
+
+        public NotesList(IEnumerable<Note> inNotes){
+            notes = new List<Note>();
+            foreach (Note n in inNotes)
+                notes.Add(n);
         }
         public IEnumerator<Note> GetEnumerator()
         {
@@ -45,6 +50,16 @@ namespace MusicAnalyzer.Models
         public int Count()
         {
             return notes.Count;
+        }
+
+        public void setLastTrackNoteDuration(int channel, int nextStarter)
+        {
+            Note n = notes.LastOrDefault(x => x.trackID == channel);
+            if (n != null)
+            {
+                n.endTime = nextStarter;
+                n.duration = n.endTime - n.startTime;
+            }
         }
     }
 }

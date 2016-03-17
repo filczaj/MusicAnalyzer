@@ -145,13 +145,14 @@ namespace MusicAnalyzer.Tools
             return chords;
         }
 
-        public Note fillNoteData(Note n)
+        public void fillNoteData(Note n)
         {
             n.note = getNoteById(n.noteID);
             n.basicNote = getBasicNoteById(n.noteID);
-            if (n.startTime > 0 && n.duration > 0)
+            if (n.startTime >= 0 && n.duration >= 0 && n.endTime < 0)
                 n.endTime = n.startTime + n.duration;
-            return n;
+            if (n.startTime >= 0 && n.endTime >= 0)
+                n.duration = n.endTime - n.startTime;
         }
 
         public string getNoteById(int id)
@@ -173,14 +174,15 @@ namespace MusicAnalyzer.Tools
                 return "";
         }
 
-        public void setNoteOff(int noteID, int endTime, NotesList allNotes)
+        public Note setNoteOff(int noteID, int endTime, NotesList allNotes, int channel)
         {
-            Note n = allNotes.FirstOrDefault(x => (x.endTime == -1 && x.noteID == noteID));
+            Note n = allNotes.FirstOrDefault(x => (x.endTime == -1 && x.noteID == noteID && x.trackID == channel));
             if (n != null && n.noteID == noteID)
             {
                 n.endTime = endTime;
                 n.duration = n.endTime - n.startTime;
             }
+            return n;
         }
 
         public Offset setOffset(Sanford.Multimedia.Key key)

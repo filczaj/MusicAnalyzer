@@ -17,8 +17,11 @@ namespace MusicAnalyzer.Models
         public int startTime { get; set; }
         public int endTime { get; set; }
         public bool strongMetric { get; set; }
+        public int trackID { get; set; }
 
         public Note() {
+            startTime = -1;
+            endTime = -1;
         }
 
         public Note(double freq, int startTime, int endTime, String note, String basicNote)
@@ -31,17 +34,18 @@ namespace MusicAnalyzer.Models
             this.basicNote = basicNote;
         }
 
-        public Note(int note_id, int starter)
+        public Note(int note_id, int starter, int channel)
         {
             this.noteID = note_id;
             this.startTime = starter;
             this.duration = -1;
             this.endTime = -1;
+            this.trackID = channel;
         }
 
         public override string ToString()
         {
-            return note + " " + startTime.ToString() + " " + duration.ToString();
+            return note + " " + startTime.ToString() + " Duration: " + duration.ToString() + " Track: " + trackID.ToString();
         }
     }
 }

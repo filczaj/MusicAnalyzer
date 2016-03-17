@@ -1,808 +1,808 @@
-B5 44640 217
-B5 46080 217
-B5 47520 217
-B5 48960 0
-B5 50880 37
-B4 51120 0
-FSharp/GFlat4 0 145
-A4 960 37
-CSharp/DFlat5 1200 37
-B4 1440 73
-FSharp/GFlat5 1920 553
-B4 2880 145
-D5 3840 37
-FSharp/GFlat5 4080 37
-F5 4320 73
-F5 4800 553
-FSharp/GFlat5 5760 19
-FSharp/GFlat5 5880 19
-FSharp/GFlat5 6000 37
-FSharp/GFlat5 6240 37
-FSharp/GFlat5 6480 19
-F5 6600 19
-D5 6720 19
-CSharp/DFlat5 6840 19
-D5 6960 19
-F5 7080 19
-FSharp/GFlat5 7200 19
-F5 7320 19
-D5 7440 37
-CSharp/DFlat5 7680 37
-D5 7920 19
-CSharp/DFlat5 8040 19
-B4 8160 37
-A4 8400 37
-D5 8640 37
-FSharp/GFlat5 8880 55
-F5 9240 19
-GSharp/AFlat5 9360 19
-FSharp/GFlat5 9480 19
-F5 9600 37
-FSharp/GFlat5 9840 277
-CSharp/DFlat5 10320 28
-D5 10500 10
-CSharp/DFlat5 10560 277
-B4 11040 28
-D5 11220 10
-CSharp/DFlat5 11280 277
-A4 11760 28
-D5 11940 10
-CSharp/DFlat5 12000 37
-B4 12240 19
-CSharp/DFlat5 12360 19
-D5 12480 37
-A4 12720 37
-FSharp/GFlat5 12960 19
-F5 13080 19
-D5 13200 19
-CSharp/DFlat5 13320 19
-B4 13440 19
-A4 13560 19
-CSharp/DFlat5 13680 37
-B4 13920 19
-CSharp/DFlat5 14040 19
-D5 14160 19
-FSharp/GFlat5 14280 19
-FSharp/GFlat5 14400 37
-A5 14640 55
-GSharp/AFlat5 15000 19
-FSharp/GFlat5 15120 19
-E5 15240 19
-D5 15360 37
-CSharp/DFlat5 15600 0
-B4 15840 73
-D5 16320 19
-FSharp/GFlat5 16440 19
-E5 16560 19
-CSharp/DFlat5 16680 19
-ASharp/BFlat4 16800 37
-B4 17040 37
-E4 17280 37
-G4 17520 37
-B4 17760 37
-ASharp/BFlat4 18000 19
-B4 18120 19
-CSharp/DFlat5 18240 19
-E5 18360 19
-D5 18480 37
-B4 18720 73
-D5 19200 19
-FSharp/GFlat5 19320 19
-E5 19440 19
-CSharp/DFlat5 19560 19
-ASharp/BFlat4 19680 37
-B4 19920 37
-B4 20160 37
-D5 20400 55
-CSharp/DFlat5 20760 19
-E5 20880 19
-CSharp/DFlat5 21000 19
-ASharp/BFlat4 21120 37
-B4 21360 37
-B4 21600 73
-D5 22080 19
-FSharp/GFlat5 22200 19
-E5 22320 19
-CSharp/DFlat5 22440 19
-ASharp/BFlat4 22560 37
-B4 22800 37
-B4 23040 37
-D5 23280 37
-F5 23520 37
-GSharp/AFlat5 23760 19
-GSharp/AFlat5 23880 19
-E5 24000 37
-FSharp/GFlat5 24240 0
-CSharp/DFlat5 24480 19
-CSharp/DFlat5 24600 19
-CSharp/DFlat5 24720 37
-CSharp/DFlat5 24960 19
-CSharp/DFlat5 25080 19
-D5 25200 37
-E5 25440 19
-E5 25560 19
-F5 25680 19
-F5 25800 1459
-D5 27360 37
-FSharp/GFlat5 27600 55
-F5 27960 19
-GSharp/AFlat5 28080 19
-FSharp/GFlat5 28200 19
-F5 28320 37
-FSharp/GFlat5 28560 277
-FSharp/GFlat5 29040 28
-D5 29220 10
-CSharp/DFlat5 29280 277
-D5 29760 28
-CSharp/DFlat5 29940 10
-FSharp/GFlat5 30000 277
-FSharp/GFlat5 30480 28
-F5 30660 10
-FSharp/GFlat5 30720 37
-D5 30960 19
-D5 31080 19
-CSharp/DFlat5 31200 19
-B4 31320 19
-A4 31440 37
-A4 31680 19
-GSharp/AFlat4 31800 19
-FSharp/GFlat4 31920 19
-F4 32040 19
-FSharp/GFlat4 32160 19
-A4 32280 19
-B4 32400 19
-CSharp/DFlat5 32520 19
-D5 32640 37
-F5 32880 37
-FSharp/GFlat5 33120 37
-A5 33360 55
-GSharp/AFlat5 33720 19
-FSharp/GFlat5 33840 19
-D5 33960 19
-B4 34080 37
-ASharp/BFlat4 34320 0
-B4 34560 19
-C5 34680 19
-CSharp/DFlat5 34800 73
-D5 35280 19
-DSharp/EFlat5 35400 19
-E5 35520 73
-FSharp/GFlat5 36000 37
-G5 36240 37
-E5 36480 37
-G5 36720 37
-FSharp/GFlat5 36960 517
-FSharp/GFlat5 37680 19
-F5 37800 19
-E5 37920 19
-D5 38040 259
-E5 38400 19
-D5 38520 19
-CSharp/DFlat5 38640 19
-B4 38760 259
-G4 39120 19
-ASharp/BFlat4 39240 19
-B4 39360 19
-CSharp/DFlat5 39480 259
-E5 39840 19
-DSharp/EFlat5 39960 19
-D5 40080 37
-B4 40320 73
-D5 40800 19
-FSharp/GFlat5 40920 19
-E5 41040 19
-FSharp/GFlat5 41160 19
-G5 41280 37
-FSharp/GFlat5 41520 37
-CSharp/DFlat5 41760 109
-ASharp/BFlat4 42480 19
-CSharp/DFlat5 42600 19
-E5 42720 37
-E5 42960 37
-B4 43200 73
-D5 43680 19
-FSharp/GFlat5 43800 19
-E5 43920 19
-E5 44040 19
-E5 44160 37
-E5 44400 517
-DSharp/EFlat5 45120 73
-DSharp/EFlat5 45600 553
-E5 46560 73
-E5 47040 553
-F5 48000 73
-FSharp/GFlat5 48480 553
-G5 49440 73
-G5 49920 553
-FSharp/GFlat5 50880 37
-B4 51120 0
-FSharp/GFlat4 0 145
-A4 960 37
-CSharp/DFlat5 1200 37
-B4 1440 73
-A4 1920 553
-GSharp/AFlat4 2880 145
-GSharp/AFlat4 3840 37
-A4 4080 37
-B4 4320 73
-B4 4800 553
-A4 5760 19
-B4 5880 19
-CSharp/DFlat5 6000 37
-B4 6240 37
-A4 6480 19
-GSharp/AFlat4 6600 19
-FSharp/GFlat4 6720 19
-F4 6840 19
-FSharp/GFlat4 6960 19
-GSharp/AFlat4 7080 19
-FSharp/GFlat4 7200 37
-GSharp/AFlat4 7440 37
-A4 7680 19
-FSharp/GFlat4 7800 19
-F4 7920 37
-D4 8160 37
-CSharp/DFlat4 8400 37
-B3 8640 37
-CSharp/DFlat4 8880 37
-F4 9120 19
-GSharp/AFlat4 9240 19
-B4 9360 19
-A4 9480 19
-GSharp/AFlat4 9600 37
-A4 9840 277
-A4 10320 28
-F4 10500 10
-FSharp/GFlat4 10560 277
-GSharp/AFlat4 11040 28
-GSharp/AFlat4 11220 10
-A4 11280 277
-FSharp/GFlat4 11760 28
-F4 11940 10
-FSharp/GFlat4 12000 37
-D4 12240 19
-F4 12360 19
-GSharp/AFlat4 12480 37
-FSharp/GFlat4 12720 37
-CSharp/DFlat4 12960 19
-F4 13080 19
-FSharp/GFlat4 13200 19
-A4 13320 19
-GSharp/AFlat4 13440 19
-FSharp/GFlat4 13560 19
-GSharp/AFlat4 13680 55
-F4 14040 19
-FSharp/GFlat4 14160 19
-A4 14280 19
-A4 14400 37
-FSharp/GFlat4 14640 19
-GSharp/AFlat4 14760 19
-A4 14880 19
-B4 15000 19
-A4 15120 19
-GSharp/AFlat4 15240 19
-FSharp/GFlat4 15360 37
-E4 15600 0
-FSharp/GFlat4 15840 37
-G4 16080 37
-A4 16320 37
-B4 16560 19
-ASharp/BFlat4 16680 19
-G4 16800 37
-FSharp/GFlat4 17040 37
-E4 17280 37
-E4 17520 37
-G4 17760 37
-FSharp/GFlat4 18000 19
-FSharp/GFlat4 18120 19
-FSharp/GFlat4 18240 37
-FSharp/GFlat4 18480 37
-B4 18720 73
-B4 19200 19
-B4 19320 19
-ASharp/BFlat4 19440 19
-G4 19560 19
-FSharp/GFlat4 19680 37
-G4 19920 37
-G4 20160 37
-FSharp/GFlat4 20400 19
-G4 20520 19
-GSharp/AFlat4 20640 19
-ASharp/BFlat4 20760 19
-ASharp/BFlat4 20880 19
-G4 21000 19
-G4 21120 37
-FSharp/GFlat4 21360 277
-G4 21840 37
-FSharp/GFlat4 22080 277
-G4 22560 37
-FSharp/GFlat4 22800 277
-G4 23280 37
-FSharp/GFlat4 23520 277
-B4 24000 37
-A4 24240 0
-A4 24480 19
-A4 24600 19
-A4 24720 37
-FSharp/GFlat4 24960 19
-FSharp/GFlat4 25080 19
-FSharp/GFlat4 25200 37
-GSharp/AFlat4 25440 19
-A4 25560 19
-B4 25680 19
-B4 25800 1459
-FSharp/GFlat4 27360 37
-A4 27600 37
-GSharp/AFlat4 27840 37
-B4 28080 19
-A4 28200 19
-B4 28320 37
-A4 28560 277
-A4 29040 28
-F4 29220 10
-FSharp/GFlat4 29280 277
-B4 29760 28
-B4 29940 10
-A4 30000 277
-FSharp/GFlat4 30480 28
-GSharp/AFlat4 30660 10
-A4 30720 37
-FSharp/GFlat4 30960 19
-FSharp/GFlat4 31080 19
-GSharp/AFlat4 31200 37
-FSharp/GFlat4 31440 37
-FSharp/GFlat4 31680 19
-F4 31800 19
-D4 31920 19
-CSharp/DFlat4 32040 19
-D4 32160 19
-FSharp/GFlat4 32280 19
-F4 32400 19
-FSharp/GFlat4 32520 19
-GSharp/AFlat4 32640 19
-A4 32760 19
-B4 32880 37
-A4 33120 37
-CSharp/DFlat5 33360 37
-B4 33600 37
-A4 33840 19
-A4 33960 19
-GSharp/AFlat4 34080 19
-G4 34200 19
-FSharp/GFlat4 34320 0
-D4 34560 19
-DSharp/EFlat4 34680 19
-E4 34800 73
-FSharp/GFlat4 35280 37
-G4 35520 73
-B4 36000 37
-B4 36240 37
-G4 36480 37
-G4 36720 37
-ASharp/BFlat4 36960 517
-B4 37680 37
-ASharp/BFlat4 37920 19
-FSharp/GFlat4 38040 259
-FSharp/GFlat4 38400 37
-E4 38640 19
-D4 38760 259
-D4 39120 19
-FSharp/GFlat4 39240 19
-G4 39360 19
-E4 39480 259
-FSharp/GFlat4 39840 37
-FSharp/GFlat4 40080 37
-B4 40320 73
-D5 40800 19
-D5 40920 19
-ASharp/BFlat4 41040 19
-CSharp/DFlat5 41160 19
-B4 41280 37
-B4 41520 37
-B4 41760 37
-A4 42000 37
-G4 42240 37
-G4 42480 19
-G4 42600 19
-G4 42720 37
-G4 42960 37
-B4 43200 37
-A4 43440 37
-G4 43680 19
-FSharp/GFlat4 43800 19
-G4 43920 19
-G4 44040 19
-G4 44160 37
-G4 44400 517
-DSharp/EFlat4 45120 73
-FSharp/GFlat4 45600 553
-FSharp/GFlat4 46560 73
-G4 47040 553
-GSharp/AFlat4 48000 73
-A4 48480 553
-ASharp/BFlat4 49440 73
-ASharp/BFlat4 49920 553
-B4 50880 37
-B4 51120 0
-FSharp/GFlat3 0 145
-A3 960 37
-CSharp/DFlat4 1200 37
-B3 1440 73
-D4 1920 553
-E4 2880 145
-E4 3840 37
-D4 4080 37
-D4 4320 73
-CSharp/DFlat4 4800 553
-CSharp/DFlat4 5760 19
-CSharp/DFlat4 5880 19
-CSharp/DFlat4 6000 37
-CSharp/DFlat4 6240 37
-CSharp/DFlat4 6480 19
-B3 6600 19
-A3 6720 19
-GSharp/AFlat3 6840 19
-A3 6960 19
-B3 7080 19
-FSharp/GFlat3 7200 73
-A3 7680 19
-CSharp/DFlat4 7800 19
-B3 7920 19
-GSharp/AFlat3 8040 19
-F3 8160 37
-FSharp/GFlat3 8400 37
-B3 8640 37
-A3 8880 37
-GSharp/AFlat3 9120 37
-CSharp/DFlat4 9360 19
-CSharp/DFlat4 9480 19
-CSharp/DFlat4 9600 37
-CSharp/DFlat4 9840 37
-FSharp/GFlat3 10080 73
-A3 10560 19
-CSharp/DFlat4 10680 19
-B3 10800 19
-GSharp/AFlat3 10920 19
-F3 11040 37
-FSharp/GFlat3 11280 37
-FSharp/GFlat3 11520 37
-A3 11760 55
-GSharp/AFlat3 12120 19
-B3 12240 19
-GSharp/AFlat3 12360 19
-F3 12480 37
-FSharp/GFlat3 12720 37
-FSharp/GFlat3 12960 73
-A3 13440 19
-CSharp/DFlat4 13560 19
-B3 13680 19
-GSharp/AFlat3 13800 19
-F3 13920 37
-FSharp/GFlat3 14160 37
-GSharp/AFlat3 14400 37
-B3 14640 37
-D4 14880 37
-CSharp/DFlat4 15120 19
-B3 15240 19
-B3 15360 19
-G3 15480 19
-FSharp/GFlat3 15600 0
-FSharp/GFlat3 15840 37
-G3 16080 37
-A3 16320 37
-B3 16560 19
-ASharp/BFlat3 16680 19
-G3 16800 37
-FSharp/GFlat3 17040 37
-G3 17280 37
-B3 17520 55
-ASharp/BFlat3 17880 19
-CSharp/DFlat4 18000 19
-B3 18120 19
-ASharp/BFlat3 18240 37
-B3 18480 37
-B3 18720 73
-D4 19200 19
-D4 19320 19
-CSharp/DFlat4 19440 19
-E4 19560 19
-E4 19680 37
-D4 19920 37
-B3 20160 109
-CSharp/DFlat4 20880 37
-CSharp/DFlat4 21120 37
-D4 21360 277
-E4 21840 37
-D4 22080 277
-E4 22560 37
-D4 22800 277
-B3 23280 37
-A3 23520 277
-D4 24000 37
-CSharp/DFlat4 24240 0
-CSharp/DFlat4 24480 19
-CSharp/DFlat4 24600 19
-B3 24720 37
-A3 24960 19
-A3 25080 19
-A3 25200 37
-B3 25440 19
-CSharp/DFlat4 25560 19
-D4 25680 19
-D4 25800 19
-FSharp/GFlat3 25920 73
-A3 26400 19
-CSharp/DFlat4 26520 19
-B3 26640 19
-GSharp/AFlat3 26760 19
-F3 26880 37
-FSharp/GFlat3 27120 37
-B3 27360 37
-CSharp/DFlat4 27600 37
-D4 27840 37
-CSharp/DFlat4 28080 19
-CSharp/DFlat4 28200 19
-CSharp/DFlat4 28320 37
-CSharp/DFlat4 28560 37
-FSharp/GFlat3 28800 73
-A3 29280 19
-CSharp/DFlat4 29400 19
-B3 29520 19
-GSharp/AFlat3 29640 19
-F3 29760 37
-FSharp/GFlat3 30000 37
-FSharp/GFlat3 30240 37
-A3 30480 55
-GSharp/AFlat3 30840 19
-B3 30960 19
-GSharp/AFlat3 31080 19
-F3 31200 37
-FSharp/GFlat3 31440 37
-FSharp/GFlat3 31680 73
-A3 32160 19
-CSharp/DFlat4 32280 19
-B3 32400 19
-GSharp/AFlat3 32520 19
-CSharp/DFlat4 32640 37
-CSharp/DFlat4 32880 37
-CSharp/DFlat4 33120 37
-E4 33360 37
-D4 33600 37
-CSharp/DFlat4 33840 19
-B3 33960 19
-CSharp/DFlat4 34080 19
-D4 34200 19
-CSharp/DFlat4 34320 0
-FSharp/GFlat3 34560 37
-FSharp/GFlat3 34800 73
-B3 35280 73
-B3 35760 37
-D4 36000 37
-D4 36240 37
-D4 36480 37
-E4 36720 37
-E4 36960 517
-D4 37680 37
-B3 37920 277
-CSharp/DFlat4 38400 37
-B3 38640 277
-B3 39120 37
-FSharp/GFlat3 39360 277
-CSharp/DFlat4 39840 37
-B3 40080 37
-B3 40320 73
-D4 40800 19
-B3 40920 19
-CSharp/DFlat4 41040 19
-CSharp/DFlat4 41160 19
-D4 41280 37
-D4 41520 37
-E4 41760 37
-B3 42000 37
-B3 42240 37
-CSharp/DFlat4 42480 19
-ASharp/BFlat3 42600 19
-ASharp/BFlat3 42720 37
-ASharp/BFlat3 42960 37
-B3 43200 37
-D4 43440 37
-B3 43680 19
-A3 43800 19
-ASharp/BFlat3 43920 19
-ASharp/BFlat3 44040 19
-ASharp/BFlat3 44160 37
-ASharp/BFlat3 44400 517
-B3 45120 73
-B3 45600 553
-C4 46560 73
-C4 47040 553
-CSharp/DFlat4 48000 73
-CSharp/DFlat4 48480 553
-DSharp/EFlat4 49440 73
-E4 49920 553
-D4 50880 37
-B3 51120 0
-FSharp/GFlat3 0 145
-A3 960 37
-CSharp/DFlat4 1200 37
-B3 1440 73
-B2 1920 553
-E3 2880 145
-D3 3840 37
-B2 4080 37
-CSharp/DFlat3 4320 73
-CSharp/DFlat3 4800 553
-FSharp/GFlat3 5760 19
-FSharp/GFlat3 5880 19
-FSharp/GFlat3 6000 37
-FSharp/GFlat3 6240 37
-CSharp/DFlat3 6480 37
-CSharp/DFlat3 6720 37
-CSharp/DFlat3 6960 37
-FSharp/GFlat2 7200 619
-FSharp/GFlat2 7920 109
-FSharp/GFlat2 8640 109
-FSharp/GFlat2 9360 109
-FSharp/GFlat2 10080 37
-CSharp/DFlat3 10320 37
-A2 10560 37
-GSharp/AFlat2 10800 19
-GSharp/AFlat2 10920 19
-CSharp/DFlat3 11040 37
-CSharp/DFlat3 11280 37
-FSharp/GFlat2 11520 37
-CSharp/DFlat3 11760 37
-A2 12000 37
-B2 12240 19
-B2 12360 19
-CSharp/DFlat3 12480 37
-FSharp/GFlat2 12720 37
-A2 12960 73
-CSharp/DFlat3 13440 19
-FSharp/GFlat3 13560 19
-F3 13680 19
-F3 13800 19
-D3 13920 19
-CSharp/DFlat3 14040 19
-A2 14160 37
-FSharp/GFlat2 14400 37
-FSharp/GFlat2 14640 37
-FSharp/GFlat2 14880 37
-FSharp/GFlat2 15120 19
-FSharp/GFlat2 15240 19
-G2 15360 37
-ASharp/BFlat2 15600 0
-B2 15840 37
-B2 16080 37
-B2 16320 139
-B2 16560 19
-B2 16680 19
-B2 16800 37
-B2 17040 37
-B2 17280 37
-B2 17520 37
-E3 17760 37
-CSharp/DFlat3 18000 19
-CSharp/DFlat3 18120 19
-CSharp/DFlat3 18240 37
-B2 18480 37
-B3 18720 73
-FSharp/GFlat3 19200 19
-FSharp/GFlat3 19320 19
-FSharp/GFlat3 19440 19
-FSharp/GFlat3 19560 19
-FSharp/GFlat3 19680 37
-F3 19920 37
-E3 20160 619
-G3 20880 37
-FSharp/GFlat3 21120 37
-B3 21360 277
-B2 21840 37
-B2 22080 277
-FSharp/GFlat3 22560 37
-B2 22800 277
-B2 23280 37
-B2 23520 277
-GSharp/AFlat2 24000 37
-A2 24240 0
-FSharp/GFlat3 24480 19
-E3 24600 19
-D3 24720 37
-CSharp/DFlat3 24960 19
-CSharp/DFlat3 25080 19
-B2 25200 37
-B2 25440 19
-B2 25560 19
-CSharp/DFlat3 25680 19
-CSharp/DFlat3 25800 19
-FSharp/GFlat3 25920 73
-A3 26400 19
-CSharp/DFlat4 26520 19
-B3 26640 19
-GSharp/AFlat3 26760 19
-F3 26880 37
-FSharp/GFlat3 27120 37
-FSharp/GFlat2 27360 109
-FSharp/GFlat2 28080 109
-FSharp/GFlat2 28800 37
-CSharp/DFlat3 29040 19
-B2 29160 19
-A2 29280 37
-GSharp/AFlat2 29520 37
-CSharp/DFlat3 29760 28
-CSharp/DFlat3 29940 10
-CSharp/DFlat3 30000 37
-FSharp/GFlat3 30240 37
-CSharp/DFlat3 30480 28
-CSharp/DFlat3 30660 10
-CSharp/DFlat3 30720 37
-B2 30960 19
-B2 31080 19
-CSharp/DFlat3 31200 37
-FSharp/GFlat2 31440 37
-FSharp/GFlat3 31680 37
-CSharp/DFlat3 31920 37
-CSharp/DFlat3 32160 37
-GSharp/AFlat3 32400 19
-GSharp/AFlat3 32520 19
-F3 32640 37
-CSharp/DFlat3 32880 37
-FSharp/GFlat3 33120 37
-FSharp/GFlat3 33360 37
-FSharp/GFlat3 33600 37
-FSharp/GFlat3 33840 19
-FSharp/GFlat3 33960 19
-E3 34080 37
-FSharp/GFlat3 34320 0
-B2 34560 73
-ASharp/BFlat2 35040 37
-B2 35280 19
-A2 35400 19
-G2 35520 73
-B2 36000 73
-B2 36480 37
-B2 36720 517
-B2 37440 73
-D3 37920 19
-FSharp/GFlat3 38040 19
-E3 38160 19
-CSharp/DFlat3 38280 19
-ASharp/BFlat2 38400 37
-B2 38640 37
-G2 38880 37
-B2 39120 55
-ASharp/BFlat2 39480 19
-CSharp/DFlat3 39600 19
-B2 39720 19
-ASharp/BFlat2 39840 37
-B2 40080 37
-B2 40320 73
-D3 40800 19
-FSharp/GFlat3 40920 19
-G3 41040 19
-ASharp/BFlat3 41160 19
-B3 41280 37
-B3 41520 37
-B2 41760 37
-FSharp/GFlat3 42000 37
-D3 42240 37
-CSharp/DFlat3 42480 19
-CSharp/DFlat3 42600 19
-FSharp/GFlat2 42720 37
-FSharp/GFlat2 42960 37
-B2 43200 37
-B2 43440 37
-B2 43680 19
-B2 43800 19
-FSharp/GFlat2 43920 19
-FSharp/GFlat2 44040 19
-FSharp/GFlat2 44160 37
-FSharp/GFlat2 44400 37
-B2 44640 217
-B2 46080 217
-B2 47520 217
-B2 48960 73
-FSharp/GFlat2 49440 73
-FSharp/GFlat2 49920 553
-B2 50880 37
-B2 51120 -1
+B5 44640 Duration: 1223 Track: 0
+B5 46080 Duration: 1223 Track: 0
+B5 47520 Duration: 1223 Track: 0
+B5 48960 Duration: 1223 Track: 0
+B5 50880 Duration: 203 Track: 0
+B4 51120 Duration: 203 Track: 0
+FSharp/GFlat4 0 Duration: 815 Track: 1
+A4 960 Duration: 203 Track: 1
+CSharp/DFlat5 1200 Duration: 203 Track: 1
+B4 1440 Duration: 407 Track: 1
+FSharp/GFlat5 1920 Duration: 407 Track: 1
+B4 2880 Duration: 815 Track: 1
+D5 3840 Duration: 203 Track: 1
+FSharp/GFlat5 4080 Duration: 203 Track: 1
+F5 4320 Duration: 407 Track: 1
+F5 4800 Duration: 407 Track: 1
+FSharp/GFlat5 5760 Duration: 101 Track: 1
+FSharp/GFlat5 5880 Duration: 101 Track: 1
+FSharp/GFlat5 6000 Duration: 203 Track: 1
+FSharp/GFlat5 6240 Duration: 203 Track: 1
+FSharp/GFlat5 6480 Duration: 101 Track: 1
+F5 6600 Duration: 101 Track: 1
+D5 6720 Duration: 101 Track: 1
+CSharp/DFlat5 6840 Duration: 101 Track: 1
+D5 6960 Duration: 101 Track: 1
+F5 7080 Duration: 101 Track: 1
+FSharp/GFlat5 7200 Duration: 101 Track: 1
+F5 7320 Duration: 101 Track: 1
+D5 7440 Duration: 203 Track: 1
+CSharp/DFlat5 7680 Duration: 203 Track: 1
+D5 7920 Duration: 101 Track: 1
+CSharp/DFlat5 8040 Duration: 101 Track: 1
+B4 8160 Duration: 203 Track: 1
+A4 8400 Duration: 203 Track: 1
+D5 8640 Duration: 203 Track: 1
+FSharp/GFlat5 8880 Duration: 305 Track: 1
+F5 9240 Duration: 101 Track: 1
+GSharp/AFlat5 9360 Duration: 101 Track: 1
+FSharp/GFlat5 9480 Duration: 101 Track: 1
+F5 9600 Duration: 203 Track: 1
+FSharp/GFlat5 9840 Duration: 203 Track: 1
+CSharp/DFlat5 10320 Duration: 152 Track: 1
+D5 10500 Duration: 50 Track: 1
+CSharp/DFlat5 10560 Duration: 203 Track: 1
+B4 11040 Duration: 152 Track: 1
+D5 11220 Duration: 50 Track: 1
+CSharp/DFlat5 11280 Duration: 203 Track: 1
+A4 11760 Duration: 152 Track: 1
+D5 11940 Duration: 50 Track: 1
+CSharp/DFlat5 12000 Duration: 203 Track: 1
+B4 12240 Duration: 101 Track: 1
+CSharp/DFlat5 12360 Duration: 101 Track: 1
+D5 12480 Duration: 203 Track: 1
+A4 12720 Duration: 203 Track: 1
+FSharp/GFlat5 12960 Duration: 101 Track: 1
+F5 13080 Duration: 101 Track: 1
+D5 13200 Duration: 101 Track: 1
+CSharp/DFlat5 13320 Duration: 101 Track: 1
+B4 13440 Duration: 101 Track: 1
+A4 13560 Duration: 101 Track: 1
+CSharp/DFlat5 13680 Duration: 203 Track: 1
+B4 13920 Duration: 101 Track: 1
+CSharp/DFlat5 14040 Duration: 101 Track: 1
+D5 14160 Duration: 101 Track: 1
+FSharp/GFlat5 14280 Duration: 101 Track: 1
+FSharp/GFlat5 14400 Duration: 203 Track: 1
+A5 14640 Duration: 305 Track: 1
+GSharp/AFlat5 15000 Duration: 101 Track: 1
+FSharp/GFlat5 15120 Duration: 101 Track: 1
+E5 15240 Duration: 101 Track: 1
+D5 15360 Duration: 203 Track: 1
+CSharp/DFlat5 15600 Duration: 203 Track: 1
+B4 15840 Duration: 407 Track: 1
+D5 16320 Duration: 101 Track: 1
+FSharp/GFlat5 16440 Duration: 101 Track: 1
+E5 16560 Duration: 101 Track: 1
+CSharp/DFlat5 16680 Duration: 101 Track: 1
+ASharp/BFlat4 16800 Duration: 203 Track: 1
+B4 17040 Duration: 203 Track: 1
+E4 17280 Duration: 203 Track: 1
+G4 17520 Duration: 203 Track: 1
+B4 17760 Duration: 203 Track: 1
+ASharp/BFlat4 18000 Duration: 101 Track: 1
+B4 18120 Duration: 101 Track: 1
+CSharp/DFlat5 18240 Duration: 101 Track: 1
+E5 18360 Duration: 101 Track: 1
+D5 18480 Duration: 203 Track: 1
+B4 18720 Duration: 407 Track: 1
+D5 19200 Duration: 101 Track: 1
+FSharp/GFlat5 19320 Duration: 101 Track: 1
+E5 19440 Duration: 101 Track: 1
+CSharp/DFlat5 19560 Duration: 101 Track: 1
+ASharp/BFlat4 19680 Duration: 203 Track: 1
+B4 19920 Duration: 203 Track: 1
+B4 20160 Duration: 203 Track: 1
+D5 20400 Duration: 305 Track: 1
+CSharp/DFlat5 20760 Duration: 101 Track: 1
+E5 20880 Duration: 101 Track: 1
+CSharp/DFlat5 21000 Duration: 101 Track: 1
+ASharp/BFlat4 21120 Duration: 203 Track: 1
+B4 21360 Duration: 203 Track: 1
+B4 21600 Duration: 407 Track: 1
+D5 22080 Duration: 101 Track: 1
+FSharp/GFlat5 22200 Duration: 101 Track: 1
+E5 22320 Duration: 101 Track: 1
+CSharp/DFlat5 22440 Duration: 101 Track: 1
+ASharp/BFlat4 22560 Duration: 203 Track: 1
+B4 22800 Duration: 203 Track: 1
+B4 23040 Duration: 203 Track: 1
+D5 23280 Duration: 203 Track: 1
+F5 23520 Duration: 203 Track: 1
+GSharp/AFlat5 23760 Duration: 101 Track: 1
+GSharp/AFlat5 23880 Duration: 101 Track: 1
+E5 24000 Duration: 203 Track: 1
+FSharp/GFlat5 24240 Duration: 203 Track: 1
+CSharp/DFlat5 24480 Duration: 101 Track: 1
+CSharp/DFlat5 24600 Duration: 101 Track: 1
+CSharp/DFlat5 24720 Duration: 203 Track: 1
+CSharp/DFlat5 24960 Duration: 101 Track: 1
+CSharp/DFlat5 25080 Duration: 101 Track: 1
+D5 25200 Duration: 203 Track: 1
+E5 25440 Duration: 101 Track: 1
+E5 25560 Duration: 101 Track: 1
+F5 25680 Duration: 101 Track: 1
+F5 25800 Duration: 101 Track: 1
+D5 27360 Duration: 203 Track: 1
+FSharp/GFlat5 27600 Duration: 305 Track: 1
+F5 27960 Duration: 101 Track: 1
+GSharp/AFlat5 28080 Duration: 101 Track: 1
+FSharp/GFlat5 28200 Duration: 101 Track: 1
+F5 28320 Duration: 203 Track: 1
+FSharp/GFlat5 28560 Duration: 203 Track: 1
+FSharp/GFlat5 29040 Duration: 152 Track: 1
+D5 29220 Duration: 50 Track: 1
+CSharp/DFlat5 29280 Duration: 203 Track: 1
+D5 29760 Duration: 152 Track: 1
+CSharp/DFlat5 29940 Duration: 50 Track: 1
+FSharp/GFlat5 30000 Duration: 203 Track: 1
+FSharp/GFlat5 30480 Duration: 152 Track: 1
+F5 30660 Duration: 50 Track: 1
+FSharp/GFlat5 30720 Duration: 203 Track: 1
+D5 30960 Duration: 101 Track: 1
+D5 31080 Duration: 101 Track: 1
+CSharp/DFlat5 31200 Duration: 101 Track: 1
+B4 31320 Duration: 101 Track: 1
+A4 31440 Duration: 203 Track: 1
+A4 31680 Duration: 101 Track: 1
+GSharp/AFlat4 31800 Duration: 101 Track: 1
+FSharp/GFlat4 31920 Duration: 101 Track: 1
+F4 32040 Duration: 101 Track: 1
+FSharp/GFlat4 32160 Duration: 101 Track: 1
+A4 32280 Duration: 101 Track: 1
+B4 32400 Duration: 101 Track: 1
+CSharp/DFlat5 32520 Duration: 101 Track: 1
+D5 32640 Duration: 203 Track: 1
+F5 32880 Duration: 203 Track: 1
+FSharp/GFlat5 33120 Duration: 203 Track: 1
+A5 33360 Duration: 305 Track: 1
+GSharp/AFlat5 33720 Duration: 101 Track: 1
+FSharp/GFlat5 33840 Duration: 101 Track: 1
+D5 33960 Duration: 101 Track: 1
+B4 34080 Duration: 203 Track: 1
+ASharp/BFlat4 34320 Duration: 203 Track: 1
+B4 34560 Duration: 101 Track: 1
+C5 34680 Duration: 101 Track: 1
+CSharp/DFlat5 34800 Duration: 407 Track: 1
+D5 35280 Duration: 101 Track: 1
+DSharp/EFlat5 35400 Duration: 101 Track: 1
+E5 35520 Duration: 407 Track: 1
+FSharp/GFlat5 36000 Duration: 203 Track: 1
+G5 36240 Duration: 203 Track: 1
+E5 36480 Duration: 203 Track: 1
+G5 36720 Duration: 203 Track: 1
+FSharp/GFlat5 36960 Duration: 203 Track: 1
+FSharp/GFlat5 37680 Duration: 101 Track: 1
+F5 37800 Duration: 101 Track: 1
+E5 37920 Duration: 101 Track: 1
+D5 38040 Duration: 101 Track: 1
+E5 38400 Duration: 101 Track: 1
+D5 38520 Duration: 101 Track: 1
+CSharp/DFlat5 38640 Duration: 101 Track: 1
+B4 38760 Duration: 101 Track: 1
+G4 39120 Duration: 101 Track: 1
+ASharp/BFlat4 39240 Duration: 101 Track: 1
+B4 39360 Duration: 101 Track: 1
+CSharp/DFlat5 39480 Duration: 101 Track: 1
+E5 39840 Duration: 101 Track: 1
+DSharp/EFlat5 39960 Duration: 101 Track: 1
+D5 40080 Duration: 203 Track: 1
+B4 40320 Duration: 407 Track: 1
+D5 40800 Duration: 101 Track: 1
+FSharp/GFlat5 40920 Duration: 101 Track: 1
+E5 41040 Duration: 101 Track: 1
+FSharp/GFlat5 41160 Duration: 101 Track: 1
+G5 41280 Duration: 203 Track: 1
+FSharp/GFlat5 41520 Duration: 203 Track: 1
+CSharp/DFlat5 41760 Duration: 611 Track: 1
+ASharp/BFlat4 42480 Duration: 101 Track: 1
+CSharp/DFlat5 42600 Duration: 101 Track: 1
+E5 42720 Duration: 203 Track: 1
+E5 42960 Duration: 203 Track: 1
+B4 43200 Duration: 407 Track: 1
+D5 43680 Duration: 101 Track: 1
+FSharp/GFlat5 43800 Duration: 101 Track: 1
+E5 43920 Duration: 101 Track: 1
+E5 44040 Duration: 101 Track: 1
+E5 44160 Duration: 203 Track: 1
+E5 44400 Duration: 203 Track: 1
+DSharp/EFlat5 45120 Duration: 407 Track: 1
+DSharp/EFlat5 45600 Duration: 407 Track: 1
+E5 46560 Duration: 407 Track: 1
+E5 47040 Duration: 407 Track: 1
+F5 48000 Duration: 407 Track: 1
+FSharp/GFlat5 48480 Duration: 407 Track: 1
+G5 49440 Duration: 407 Track: 1
+G5 49920 Duration: 407 Track: 1
+FSharp/GFlat5 50880 Duration: 203 Track: 1
+B4 51120 Duration: 203 Track: 1
+FSharp/GFlat4 0 Duration: 815 Track: 2
+A4 960 Duration: 203 Track: 2
+CSharp/DFlat5 1200 Duration: 203 Track: 2
+B4 1440 Duration: 407 Track: 2
+A4 1920 Duration: 407 Track: 2
+GSharp/AFlat4 2880 Duration: 815 Track: 2
+GSharp/AFlat4 3840 Duration: 203 Track: 2
+A4 4080 Duration: 203 Track: 2
+B4 4320 Duration: 407 Track: 2
+B4 4800 Duration: 407 Track: 2
+A4 5760 Duration: 101 Track: 2
+B4 5880 Duration: 101 Track: 2
+CSharp/DFlat5 6000 Duration: 203 Track: 2
+B4 6240 Duration: 203 Track: 2
+A4 6480 Duration: 101 Track: 2
+GSharp/AFlat4 6600 Duration: 101 Track: 2
+FSharp/GFlat4 6720 Duration: 101 Track: 2
+F4 6840 Duration: 101 Track: 2
+FSharp/GFlat4 6960 Duration: 101 Track: 2
+GSharp/AFlat4 7080 Duration: 101 Track: 2
+FSharp/GFlat4 7200 Duration: 203 Track: 2
+GSharp/AFlat4 7440 Duration: 203 Track: 2
+A4 7680 Duration: 101 Track: 2
+FSharp/GFlat4 7800 Duration: 101 Track: 2
+F4 7920 Duration: 203 Track: 2
+D4 8160 Duration: 203 Track: 2
+CSharp/DFlat4 8400 Duration: 203 Track: 2
+B3 8640 Duration: 203 Track: 2
+CSharp/DFlat4 8880 Duration: 203 Track: 2
+F4 9120 Duration: 101 Track: 2
+GSharp/AFlat4 9240 Duration: 101 Track: 2
+B4 9360 Duration: 101 Track: 2
+A4 9480 Duration: 101 Track: 2
+GSharp/AFlat4 9600 Duration: 203 Track: 2
+A4 9840 Duration: 203 Track: 2
+A4 10320 Duration: 152 Track: 2
+F4 10500 Duration: 50 Track: 2
+FSharp/GFlat4 10560 Duration: 203 Track: 2
+GSharp/AFlat4 11040 Duration: 152 Track: 2
+GSharp/AFlat4 11220 Duration: 50 Track: 2
+A4 11280 Duration: 203 Track: 2
+FSharp/GFlat4 11760 Duration: 152 Track: 2
+F4 11940 Duration: 50 Track: 2
+FSharp/GFlat4 12000 Duration: 203 Track: 2
+D4 12240 Duration: 101 Track: 2
+F4 12360 Duration: 101 Track: 2
+GSharp/AFlat4 12480 Duration: 203 Track: 2
+FSharp/GFlat4 12720 Duration: 203 Track: 2
+CSharp/DFlat4 12960 Duration: 101 Track: 2
+F4 13080 Duration: 101 Track: 2
+FSharp/GFlat4 13200 Duration: 101 Track: 2
+A4 13320 Duration: 101 Track: 2
+GSharp/AFlat4 13440 Duration: 101 Track: 2
+FSharp/GFlat4 13560 Duration: 101 Track: 2
+GSharp/AFlat4 13680 Duration: 305 Track: 2
+F4 14040 Duration: 101 Track: 2
+FSharp/GFlat4 14160 Duration: 101 Track: 2
+A4 14280 Duration: 101 Track: 2
+A4 14400 Duration: 203 Track: 2
+FSharp/GFlat4 14640 Duration: 101 Track: 2
+GSharp/AFlat4 14760 Duration: 101 Track: 2
+A4 14880 Duration: 101 Track: 2
+B4 15000 Duration: 101 Track: 2
+A4 15120 Duration: 101 Track: 2
+GSharp/AFlat4 15240 Duration: 101 Track: 2
+FSharp/GFlat4 15360 Duration: 203 Track: 2
+E4 15600 Duration: 203 Track: 2
+FSharp/GFlat4 15840 Duration: 203 Track: 2
+G4 16080 Duration: 203 Track: 2
+A4 16320 Duration: 203 Track: 2
+B4 16560 Duration: 101 Track: 2
+ASharp/BFlat4 16680 Duration: 101 Track: 2
+G4 16800 Duration: 203 Track: 2
+FSharp/GFlat4 17040 Duration: 203 Track: 2
+E4 17280 Duration: 203 Track: 2
+E4 17520 Duration: 203 Track: 2
+G4 17760 Duration: 203 Track: 2
+FSharp/GFlat4 18000 Duration: 101 Track: 2
+FSharp/GFlat4 18120 Duration: 101 Track: 2
+FSharp/GFlat4 18240 Duration: 203 Track: 2
+FSharp/GFlat4 18480 Duration: 203 Track: 2
+B4 18720 Duration: 407 Track: 2
+B4 19200 Duration: 101 Track: 2
+B4 19320 Duration: 101 Track: 2
+ASharp/BFlat4 19440 Duration: 101 Track: 2
+G4 19560 Duration: 101 Track: 2
+FSharp/GFlat4 19680 Duration: 203 Track: 2
+G4 19920 Duration: 203 Track: 2
+G4 20160 Duration: 203 Track: 2
+FSharp/GFlat4 20400 Duration: 101 Track: 2
+G4 20520 Duration: 101 Track: 2
+GSharp/AFlat4 20640 Duration: 101 Track: 2
+ASharp/BFlat4 20760 Duration: 101 Track: 2
+ASharp/BFlat4 20880 Duration: 101 Track: 2
+G4 21000 Duration: 101 Track: 2
+G4 21120 Duration: 203 Track: 2
+FSharp/GFlat4 21360 Duration: 203 Track: 2
+G4 21840 Duration: 203 Track: 2
+FSharp/GFlat4 22080 Duration: 203 Track: 2
+G4 22560 Duration: 203 Track: 2
+FSharp/GFlat4 22800 Duration: 203 Track: 2
+G4 23280 Duration: 203 Track: 2
+FSharp/GFlat4 23520 Duration: 203 Track: 2
+B4 24000 Duration: 203 Track: 2
+A4 24240 Duration: 203 Track: 2
+A4 24480 Duration: 101 Track: 2
+A4 24600 Duration: 101 Track: 2
+A4 24720 Duration: 203 Track: 2
+FSharp/GFlat4 24960 Duration: 101 Track: 2
+FSharp/GFlat4 25080 Duration: 101 Track: 2
+FSharp/GFlat4 25200 Duration: 203 Track: 2
+GSharp/AFlat4 25440 Duration: 101 Track: 2
+A4 25560 Duration: 101 Track: 2
+B4 25680 Duration: 101 Track: 2
+B4 25800 Duration: 101 Track: 2
+FSharp/GFlat4 27360 Duration: 203 Track: 2
+A4 27600 Duration: 203 Track: 2
+GSharp/AFlat4 27840 Duration: 203 Track: 2
+B4 28080 Duration: 101 Track: 2
+A4 28200 Duration: 101 Track: 2
+B4 28320 Duration: 203 Track: 2
+A4 28560 Duration: 203 Track: 2
+A4 29040 Duration: 152 Track: 2
+F4 29220 Duration: 50 Track: 2
+FSharp/GFlat4 29280 Duration: 203 Track: 2
+B4 29760 Duration: 152 Track: 2
+B4 29940 Duration: 50 Track: 2
+A4 30000 Duration: 203 Track: 2
+FSharp/GFlat4 30480 Duration: 152 Track: 2
+GSharp/AFlat4 30660 Duration: 50 Track: 2
+A4 30720 Duration: 203 Track: 2
+FSharp/GFlat4 30960 Duration: 101 Track: 2
+FSharp/GFlat4 31080 Duration: 101 Track: 2
+GSharp/AFlat4 31200 Duration: 203 Track: 2
+FSharp/GFlat4 31440 Duration: 203 Track: 2
+FSharp/GFlat4 31680 Duration: 101 Track: 2
+F4 31800 Duration: 101 Track: 2
+D4 31920 Duration: 101 Track: 2
+CSharp/DFlat4 32040 Duration: 101 Track: 2
+D4 32160 Duration: 101 Track: 2
+FSharp/GFlat4 32280 Duration: 101 Track: 2
+F4 32400 Duration: 101 Track: 2
+FSharp/GFlat4 32520 Duration: 101 Track: 2
+GSharp/AFlat4 32640 Duration: 101 Track: 2
+A4 32760 Duration: 101 Track: 2
+B4 32880 Duration: 203 Track: 2
+A4 33120 Duration: 203 Track: 2
+CSharp/DFlat5 33360 Duration: 203 Track: 2
+B4 33600 Duration: 203 Track: 2
+A4 33840 Duration: 101 Track: 2
+A4 33960 Duration: 101 Track: 2
+GSharp/AFlat4 34080 Duration: 101 Track: 2
+G4 34200 Duration: 101 Track: 2
+FSharp/GFlat4 34320 Duration: 203 Track: 2
+D4 34560 Duration: 101 Track: 2
+DSharp/EFlat4 34680 Duration: 101 Track: 2
+E4 34800 Duration: 407 Track: 2
+FSharp/GFlat4 35280 Duration: 203 Track: 2
+G4 35520 Duration: 407 Track: 2
+B4 36000 Duration: 203 Track: 2
+B4 36240 Duration: 203 Track: 2
+G4 36480 Duration: 203 Track: 2
+G4 36720 Duration: 203 Track: 2
+ASharp/BFlat4 36960 Duration: 203 Track: 2
+B4 37680 Duration: 203 Track: 2
+ASharp/BFlat4 37920 Duration: 101 Track: 2
+FSharp/GFlat4 38040 Duration: 101 Track: 2
+FSharp/GFlat4 38400 Duration: 203 Track: 2
+E4 38640 Duration: 101 Track: 2
+D4 38760 Duration: 101 Track: 2
+D4 39120 Duration: 101 Track: 2
+FSharp/GFlat4 39240 Duration: 101 Track: 2
+G4 39360 Duration: 101 Track: 2
+E4 39480 Duration: 101 Track: 2
+FSharp/GFlat4 39840 Duration: 203 Track: 2
+FSharp/GFlat4 40080 Duration: 203 Track: 2
+B4 40320 Duration: 407 Track: 2
+D5 40800 Duration: 101 Track: 2
+D5 40920 Duration: 101 Track: 2
+ASharp/BFlat4 41040 Duration: 101 Track: 2
+CSharp/DFlat5 41160 Duration: 101 Track: 2
+B4 41280 Duration: 203 Track: 2
+B4 41520 Duration: 203 Track: 2
+B4 41760 Duration: 203 Track: 2
+A4 42000 Duration: 203 Track: 2
+G4 42240 Duration: 203 Track: 2
+G4 42480 Duration: 101 Track: 2
+G4 42600 Duration: 101 Track: 2
+G4 42720 Duration: 203 Track: 2
+G4 42960 Duration: 203 Track: 2
+B4 43200 Duration: 203 Track: 2
+A4 43440 Duration: 203 Track: 2
+G4 43680 Duration: 101 Track: 2
+FSharp/GFlat4 43800 Duration: 101 Track: 2
+G4 43920 Duration: 101 Track: 2
+G4 44040 Duration: 101 Track: 2
+G4 44160 Duration: 203 Track: 2
+G4 44400 Duration: 203 Track: 2
+DSharp/EFlat4 45120 Duration: 407 Track: 2
+FSharp/GFlat4 45600 Duration: 407 Track: 2
+FSharp/GFlat4 46560 Duration: 407 Track: 2
+G4 47040 Duration: 407 Track: 2
+GSharp/AFlat4 48000 Duration: 407 Track: 2
+A4 48480 Duration: 407 Track: 2
+ASharp/BFlat4 49440 Duration: 407 Track: 2
+ASharp/BFlat4 49920 Duration: 407 Track: 2
+B4 50880 Duration: 203 Track: 2
+B4 51120 Duration: 203 Track: 2
+FSharp/GFlat3 0 Duration: 815 Track: 3
+A3 960 Duration: 203 Track: 3
+CSharp/DFlat4 1200 Duration: 203 Track: 3
+B3 1440 Duration: 407 Track: 3
+D4 1920 Duration: 407 Track: 3
+E4 2880 Duration: 815 Track: 3
+E4 3840 Duration: 203 Track: 3
+D4 4080 Duration: 203 Track: 3
+D4 4320 Duration: 407 Track: 3
+CSharp/DFlat4 4800 Duration: 407 Track: 3
+CSharp/DFlat4 5760 Duration: 101 Track: 3
+CSharp/DFlat4 5880 Duration: 101 Track: 3
+CSharp/DFlat4 6000 Duration: 203 Track: 3
+CSharp/DFlat4 6240 Duration: 203 Track: 3
+CSharp/DFlat4 6480 Duration: 101 Track: 3
+B3 6600 Duration: 101 Track: 3
+A3 6720 Duration: 101 Track: 3
+GSharp/AFlat3 6840 Duration: 101 Track: 3
+A3 6960 Duration: 101 Track: 3
+B3 7080 Duration: 101 Track: 3
+FSharp/GFlat3 7200 Duration: 407 Track: 3
+A3 7680 Duration: 101 Track: 3
+CSharp/DFlat4 7800 Duration: 101 Track: 3
+B3 7920 Duration: 101 Track: 3
+GSharp/AFlat3 8040 Duration: 101 Track: 3
+F3 8160 Duration: 203 Track: 3
+FSharp/GFlat3 8400 Duration: 203 Track: 3
+B3 8640 Duration: 203 Track: 3
+A3 8880 Duration: 203 Track: 3
+GSharp/AFlat3 9120 Duration: 203 Track: 3
+CSharp/DFlat4 9360 Duration: 101 Track: 3
+CSharp/DFlat4 9480 Duration: 101 Track: 3
+CSharp/DFlat4 9600 Duration: 203 Track: 3
+CSharp/DFlat4 9840 Duration: 203 Track: 3
+FSharp/GFlat3 10080 Duration: 407 Track: 3
+A3 10560 Duration: 101 Track: 3
+CSharp/DFlat4 10680 Duration: 101 Track: 3
+B3 10800 Duration: 101 Track: 3
+GSharp/AFlat3 10920 Duration: 101 Track: 3
+F3 11040 Duration: 203 Track: 3
+FSharp/GFlat3 11280 Duration: 203 Track: 3
+FSharp/GFlat3 11520 Duration: 203 Track: 3
+A3 11760 Duration: 305 Track: 3
+GSharp/AFlat3 12120 Duration: 101 Track: 3
+B3 12240 Duration: 101 Track: 3
+GSharp/AFlat3 12360 Duration: 101 Track: 3
+F3 12480 Duration: 203 Track: 3
+FSharp/GFlat3 12720 Duration: 203 Track: 3
+FSharp/GFlat3 12960 Duration: 407 Track: 3
+A3 13440 Duration: 101 Track: 3
+CSharp/DFlat4 13560 Duration: 101 Track: 3
+B3 13680 Duration: 101 Track: 3
+GSharp/AFlat3 13800 Duration: 101 Track: 3
+F3 13920 Duration: 203 Track: 3
+FSharp/GFlat3 14160 Duration: 203 Track: 3
+GSharp/AFlat3 14400 Duration: 203 Track: 3
+B3 14640 Duration: 203 Track: 3
+D4 14880 Duration: 203 Track: 3
+CSharp/DFlat4 15120 Duration: 101 Track: 3
+B3 15240 Duration: 101 Track: 3
+B3 15360 Duration: 101 Track: 3
+G3 15480 Duration: 101 Track: 3
+FSharp/GFlat3 15600 Duration: 203 Track: 3
+FSharp/GFlat3 15840 Duration: 203 Track: 3
+G3 16080 Duration: 203 Track: 3
+A3 16320 Duration: 203 Track: 3
+B3 16560 Duration: 101 Track: 3
+ASharp/BFlat3 16680 Duration: 101 Track: 3
+G3 16800 Duration: 203 Track: 3
+FSharp/GFlat3 17040 Duration: 203 Track: 3
+G3 17280 Duration: 203 Track: 3
+B3 17520 Duration: 305 Track: 3
+ASharp/BFlat3 17880 Duration: 101 Track: 3
+CSharp/DFlat4 18000 Duration: 101 Track: 3
+B3 18120 Duration: 101 Track: 3
+ASharp/BFlat3 18240 Duration: 203 Track: 3
+B3 18480 Duration: 203 Track: 3
+B3 18720 Duration: 407 Track: 3
+D4 19200 Duration: 101 Track: 3
+D4 19320 Duration: 101 Track: 3
+CSharp/DFlat4 19440 Duration: 101 Track: 3
+E4 19560 Duration: 101 Track: 3
+E4 19680 Duration: 203 Track: 3
+D4 19920 Duration: 203 Track: 3
+B3 20160 Duration: 611 Track: 3
+CSharp/DFlat4 20880 Duration: 203 Track: 3
+CSharp/DFlat4 21120 Duration: 203 Track: 3
+D4 21360 Duration: 203 Track: 3
+E4 21840 Duration: 203 Track: 3
+D4 22080 Duration: 203 Track: 3
+E4 22560 Duration: 203 Track: 3
+D4 22800 Duration: 203 Track: 3
+B3 23280 Duration: 203 Track: 3
+A3 23520 Duration: 203 Track: 3
+D4 24000 Duration: 203 Track: 3
+CSharp/DFlat4 24240 Duration: 203 Track: 3
+CSharp/DFlat4 24480 Duration: 101 Track: 3
+CSharp/DFlat4 24600 Duration: 101 Track: 3
+B3 24720 Duration: 203 Track: 3
+A3 24960 Duration: 101 Track: 3
+A3 25080 Duration: 101 Track: 3
+A3 25200 Duration: 203 Track: 3
+B3 25440 Duration: 101 Track: 3
+CSharp/DFlat4 25560 Duration: 101 Track: 3
+D4 25680 Duration: 101 Track: 3
+D4 25800 Duration: 101 Track: 3
+FSharp/GFlat3 25920 Duration: 407 Track: 3
+A3 26400 Duration: 101 Track: 3
+CSharp/DFlat4 26520 Duration: 101 Track: 3
+B3 26640 Duration: 101 Track: 3
+GSharp/AFlat3 26760 Duration: 101 Track: 3
+F3 26880 Duration: 203 Track: 3
+FSharp/GFlat3 27120 Duration: 203 Track: 3
+B3 27360 Duration: 203 Track: 3
+CSharp/DFlat4 27600 Duration: 203 Track: 3
+D4 27840 Duration: 203 Track: 3
+CSharp/DFlat4 28080 Duration: 101 Track: 3
+CSharp/DFlat4 28200 Duration: 101 Track: 3
+CSharp/DFlat4 28320 Duration: 203 Track: 3
+CSharp/DFlat4 28560 Duration: 203 Track: 3
+FSharp/GFlat3 28800 Duration: 407 Track: 3
+A3 29280 Duration: 101 Track: 3
+CSharp/DFlat4 29400 Duration: 101 Track: 3
+B3 29520 Duration: 101 Track: 3
+GSharp/AFlat3 29640 Duration: 101 Track: 3
+F3 29760 Duration: 203 Track: 3
+FSharp/GFlat3 30000 Duration: 203 Track: 3
+FSharp/GFlat3 30240 Duration: 203 Track: 3
+A3 30480 Duration: 305 Track: 3
+GSharp/AFlat3 30840 Duration: 101 Track: 3
+B3 30960 Duration: 101 Track: 3
+GSharp/AFlat3 31080 Duration: 101 Track: 3
+F3 31200 Duration: 203 Track: 3
+FSharp/GFlat3 31440 Duration: 203 Track: 3
+FSharp/GFlat3 31680 Duration: 407 Track: 3
+A3 32160 Duration: 101 Track: 3
+CSharp/DFlat4 32280 Duration: 101 Track: 3
+B3 32400 Duration: 101 Track: 3
+GSharp/AFlat3 32520 Duration: 101 Track: 3
+CSharp/DFlat4 32640 Duration: 203 Track: 3
+CSharp/DFlat4 32880 Duration: 203 Track: 3
+CSharp/DFlat4 33120 Duration: 203 Track: 3
+E4 33360 Duration: 203 Track: 3
+D4 33600 Duration: 203 Track: 3
+CSharp/DFlat4 33840 Duration: 101 Track: 3
+B3 33960 Duration: 101 Track: 3
+CSharp/DFlat4 34080 Duration: 101 Track: 3
+D4 34200 Duration: 101 Track: 3
+CSharp/DFlat4 34320 Duration: 203 Track: 3
+FSharp/GFlat3 34560 Duration: 203 Track: 3
+FSharp/GFlat3 34800 Duration: 407 Track: 3
+B3 35280 Duration: 407 Track: 3
+B3 35760 Duration: 203 Track: 3
+D4 36000 Duration: 203 Track: 3
+D4 36240 Duration: 203 Track: 3
+D4 36480 Duration: 203 Track: 3
+E4 36720 Duration: 203 Track: 3
+E4 36960 Duration: 203 Track: 3
+D4 37680 Duration: 203 Track: 3
+B3 37920 Duration: 203 Track: 3
+CSharp/DFlat4 38400 Duration: 203 Track: 3
+B3 38640 Duration: 203 Track: 3
+B3 39120 Duration: 203 Track: 3
+FSharp/GFlat3 39360 Duration: 203 Track: 3
+CSharp/DFlat4 39840 Duration: 203 Track: 3
+B3 40080 Duration: 203 Track: 3
+B3 40320 Duration: 407 Track: 3
+D4 40800 Duration: 101 Track: 3
+B3 40920 Duration: 101 Track: 3
+CSharp/DFlat4 41040 Duration: 101 Track: 3
+CSharp/DFlat4 41160 Duration: 101 Track: 3
+D4 41280 Duration: 203 Track: 3
+D4 41520 Duration: 203 Track: 3
+E4 41760 Duration: 203 Track: 3
+B3 42000 Duration: 203 Track: 3
+B3 42240 Duration: 203 Track: 3
+CSharp/DFlat4 42480 Duration: 101 Track: 3
+ASharp/BFlat3 42600 Duration: 101 Track: 3
+ASharp/BFlat3 42720 Duration: 203 Track: 3
+ASharp/BFlat3 42960 Duration: 203 Track: 3
+B3 43200 Duration: 203 Track: 3
+D4 43440 Duration: 203 Track: 3
+B3 43680 Duration: 101 Track: 3
+A3 43800 Duration: 101 Track: 3
+ASharp/BFlat3 43920 Duration: 101 Track: 3
+ASharp/BFlat3 44040 Duration: 101 Track: 3
+ASharp/BFlat3 44160 Duration: 203 Track: 3
+ASharp/BFlat3 44400 Duration: 203 Track: 3
+B3 45120 Duration: 407 Track: 3
+B3 45600 Duration: 407 Track: 3
+C4 46560 Duration: 407 Track: 3
+C4 47040 Duration: 407 Track: 3
+CSharp/DFlat4 48000 Duration: 407 Track: 3
+CSharp/DFlat4 48480 Duration: 407 Track: 3
+DSharp/EFlat4 49440 Duration: 407 Track: 3
+E4 49920 Duration: 407 Track: 3
+D4 50880 Duration: 203 Track: 3
+B3 51120 Duration: 203 Track: 3
+FSharp/GFlat3 0 Duration: 815 Track: 4
+A3 960 Duration: 203 Track: 4
+CSharp/DFlat4 1200 Duration: 203 Track: 4
+B3 1440 Duration: 407 Track: 4
+B2 1920 Duration: 407 Track: 4
+E3 2880 Duration: 815 Track: 4
+D3 3840 Duration: 203 Track: 4
+B2 4080 Duration: 203 Track: 4
+CSharp/DFlat3 4320 Duration: 407 Track: 4
+CSharp/DFlat3 4800 Duration: 407 Track: 4
+FSharp/GFlat3 5760 Duration: 101 Track: 4
+FSharp/GFlat3 5880 Duration: 101 Track: 4
+FSharp/GFlat3 6000 Duration: 203 Track: 4
+FSharp/GFlat3 6240 Duration: 203 Track: 4
+CSharp/DFlat3 6480 Duration: 203 Track: 4
+CSharp/DFlat3 6720 Duration: 203 Track: 4
+CSharp/DFlat3 6960 Duration: 203 Track: 4
+FSharp/GFlat2 7200 Duration: 101 Track: 4
+FSharp/GFlat2 7920 Duration: 611 Track: 4
+FSharp/GFlat2 8640 Duration: 611 Track: 4
+FSharp/GFlat2 9360 Duration: 611 Track: 4
+FSharp/GFlat2 10080 Duration: 203 Track: 4
+CSharp/DFlat3 10320 Duration: 203 Track: 4
+A2 10560 Duration: 203 Track: 4
+GSharp/AFlat2 10800 Duration: 101 Track: 4
+GSharp/AFlat2 10920 Duration: 101 Track: 4
+CSharp/DFlat3 11040 Duration: 203 Track: 4
+CSharp/DFlat3 11280 Duration: 203 Track: 4
+FSharp/GFlat2 11520 Duration: 203 Track: 4
+CSharp/DFlat3 11760 Duration: 203 Track: 4
+A2 12000 Duration: 203 Track: 4
+B2 12240 Duration: 101 Track: 4
+B2 12360 Duration: 101 Track: 4
+CSharp/DFlat3 12480 Duration: 203 Track: 4
+FSharp/GFlat2 12720 Duration: 203 Track: 4
+A2 12960 Duration: 407 Track: 4
+CSharp/DFlat3 13440 Duration: 101 Track: 4
+FSharp/GFlat3 13560 Duration: 101 Track: 4
+F3 13680 Duration: 101 Track: 4
+F3 13800 Duration: 101 Track: 4
+D3 13920 Duration: 101 Track: 4
+CSharp/DFlat3 14040 Duration: 101 Track: 4
+A2 14160 Duration: 203 Track: 4
+FSharp/GFlat2 14400 Duration: 203 Track: 4
+FSharp/GFlat2 14640 Duration: 203 Track: 4
+FSharp/GFlat2 14880 Duration: 203 Track: 4
+FSharp/GFlat2 15120 Duration: 101 Track: 4
+FSharp/GFlat2 15240 Duration: 101 Track: 4
+G2 15360 Duration: 203 Track: 4
+ASharp/BFlat2 15600 Duration: 203 Track: 4
+B2 15840 Duration: 203 Track: 4
+B2 16080 Duration: 203 Track: 4
+B2 16320 Duration: 101 Track: 4
+B2 16560 Duration: 101 Track: 4
+B2 16680 Duration: 101 Track: 4
+B2 16800 Duration: 203 Track: 4
+B2 17040 Duration: 203 Track: 4
+B2 17280 Duration: 203 Track: 4
+B2 17520 Duration: 203 Track: 4
+E3 17760 Duration: 203 Track: 4
+CSharp/DFlat3 18000 Duration: 101 Track: 4
+CSharp/DFlat3 18120 Duration: 101 Track: 4
+CSharp/DFlat3 18240 Duration: 203 Track: 4
+B2 18480 Duration: 203 Track: 4
+B3 18720 Duration: 407 Track: 4
+FSharp/GFlat3 19200 Duration: 101 Track: 4
+FSharp/GFlat3 19320 Duration: 101 Track: 4
+FSharp/GFlat3 19440 Duration: 101 Track: 4
+FSharp/GFlat3 19560 Duration: 101 Track: 4
+FSharp/GFlat3 19680 Duration: 203 Track: 4
+F3 19920 Duration: 203 Track: 4
+E3 20160 Duration: 101 Track: 4
+G3 20880 Duration: 203 Track: 4
+FSharp/GFlat3 21120 Duration: 203 Track: 4
+B3 21360 Duration: 203 Track: 4
+B2 21840 Duration: 203 Track: 4
+B2 22080 Duration: 203 Track: 4
+FSharp/GFlat3 22560 Duration: 203 Track: 4
+B2 22800 Duration: 203 Track: 4
+B2 23280 Duration: 203 Track: 4
+B2 23520 Duration: 203 Track: 4
+GSharp/AFlat2 24000 Duration: 203 Track: 4
+A2 24240 Duration: 203 Track: 4
+FSharp/GFlat3 24480 Duration: 101 Track: 4
+E3 24600 Duration: 101 Track: 4
+D3 24720 Duration: 203 Track: 4
+CSharp/DFlat3 24960 Duration: 101 Track: 4
+CSharp/DFlat3 25080 Duration: 101 Track: 4
+B2 25200 Duration: 203 Track: 4
+B2 25440 Duration: 101 Track: 4
+B2 25560 Duration: 101 Track: 4
+CSharp/DFlat3 25680 Duration: 101 Track: 4
+CSharp/DFlat3 25800 Duration: 101 Track: 4
+FSharp/GFlat3 25920 Duration: 407 Track: 4
+A3 26400 Duration: 101 Track: 4
+CSharp/DFlat4 26520 Duration: 101 Track: 4
+B3 26640 Duration: 101 Track: 4
+GSharp/AFlat3 26760 Duration: 101 Track: 4
+F3 26880 Duration: 203 Track: 4
+FSharp/GFlat3 27120 Duration: 203 Track: 4
+FSharp/GFlat2 27360 Duration: 611 Track: 4
+FSharp/GFlat2 28080 Duration: 611 Track: 4
+FSharp/GFlat2 28800 Duration: 203 Track: 4
+CSharp/DFlat3 29040 Duration: 101 Track: 4
+B2 29160 Duration: 101 Track: 4
+A2 29280 Duration: 203 Track: 4
+GSharp/AFlat2 29520 Duration: 203 Track: 4
+CSharp/DFlat3 29760 Duration: 152 Track: 4
+CSharp/DFlat3 29940 Duration: 50 Track: 4
+CSharp/DFlat3 30000 Duration: 203 Track: 4
+FSharp/GFlat3 30240 Duration: 203 Track: 4
+CSharp/DFlat3 30480 Duration: 152 Track: 4
+CSharp/DFlat3 30660 Duration: 50 Track: 4
+CSharp/DFlat3 30720 Duration: 203 Track: 4
+B2 30960 Duration: 101 Track: 4
+B2 31080 Duration: 101 Track: 4
+CSharp/DFlat3 31200 Duration: 203 Track: 4
+FSharp/GFlat2 31440 Duration: 203 Track: 4
+FSharp/GFlat3 31680 Duration: 203 Track: 4
+CSharp/DFlat3 31920 Duration: 203 Track: 4
+CSharp/DFlat3 32160 Duration: 203 Track: 4
+GSharp/AFlat3 32400 Duration: 101 Track: 4
+GSharp/AFlat3 32520 Duration: 101 Track: 4
+F3 32640 Duration: 203 Track: 4
+CSharp/DFlat3 32880 Duration: 203 Track: 4
+FSharp/GFlat3 33120 Duration: 203 Track: 4
+FSharp/GFlat3 33360 Duration: 203 Track: 4
+FSharp/GFlat3 33600 Duration: 203 Track: 4
+FSharp/GFlat3 33840 Duration: 101 Track: 4
+FSharp/GFlat3 33960 Duration: 101 Track: 4
+E3 34080 Duration: 203 Track: 4
+FSharp/GFlat3 34320 Duration: 203 Track: 4
+B2 34560 Duration: 407 Track: 4
+ASharp/BFlat2 35040 Duration: 203 Track: 4
+B2 35280 Duration: 101 Track: 4
+A2 35400 Duration: 101 Track: 4
+G2 35520 Duration: 407 Track: 4
+B2 36000 Duration: 407 Track: 4
+B2 36480 Duration: 203 Track: 4
+B2 36720 Duration: 203 Track: 4
+B2 37440 Duration: 407 Track: 4
+D3 37920 Duration: 101 Track: 4
+FSharp/GFlat3 38040 Duration: 101 Track: 4
+E3 38160 Duration: 101 Track: 4
+CSharp/DFlat3 38280 Duration: 101 Track: 4
+ASharp/BFlat2 38400 Duration: 203 Track: 4
+B2 38640 Duration: 203 Track: 4
+G2 38880 Duration: 203 Track: 4
+B2 39120 Duration: 305 Track: 4
+ASharp/BFlat2 39480 Duration: 101 Track: 4
+CSharp/DFlat3 39600 Duration: 101 Track: 4
+B2 39720 Duration: 101 Track: 4
+ASharp/BFlat2 39840 Duration: 203 Track: 4
+B2 40080 Duration: 203 Track: 4
+B2 40320 Duration: 407 Track: 4
+D3 40800 Duration: 101 Track: 4
+FSharp/GFlat3 40920 Duration: 101 Track: 4
+G3 41040 Duration: 101 Track: 4
+ASharp/BFlat3 41160 Duration: 101 Track: 4
+B3 41280 Duration: 203 Track: 4
+B3 41520 Duration: 203 Track: 4
+B2 41760 Duration: 203 Track: 4
+FSharp/GFlat3 42000 Duration: 203 Track: 4
+D3 42240 Duration: 203 Track: 4
+CSharp/DFlat3 42480 Duration: 101 Track: 4
+CSharp/DFlat3 42600 Duration: 101 Track: 4
+FSharp/GFlat2 42720 Duration: 203 Track: 4
+FSharp/GFlat2 42960 Duration: 203 Track: 4
+B2 43200 Duration: 203 Track: 4
+B2 43440 Duration: 203 Track: 4
+B2 43680 Duration: 101 Track: 4
+B2 43800 Duration: 101 Track: 4
+FSharp/GFlat2 43920 Duration: 101 Track: 4
+FSharp/GFlat2 44040 Duration: 101 Track: 4
+FSharp/GFlat2 44160 Duration: 203 Track: 4
+FSharp/GFlat2 44400 Duration: 203 Track: 4
+B2 44640 Duration: 1223 Track: 4
+B2 46080 Duration: 1223 Track: 4
+B2 47520 Duration: 1223 Track: 4
+B2 48960 Duration: 407 Track: 4
+FSharp/GFlat2 49440 Duration: 407 Track: 4
+FSharp/GFlat2 49920 Duration: 407 Track: 4
+B2 50880 Duration: 203 Track: 4
+B2 51120 Duration: 203 Track: 4

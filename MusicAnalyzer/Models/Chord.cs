@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicAnalyzer.Analyzer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,30 +28,12 @@ namespace MusicAnalyzer.Models
                 this.priority = 1;
         }
 
-        public Chord(Note n, Tonation tonation) // creates a specified chord based on a given note
+        public Chord(Note n, Tonation tonation, MusicIntelligence musicAI) // creates a specified chord based on a given note
         {
             if (tonation == null)
                 return;
             int noteIndex = tonation.getNoteIndexInScale(n);
-            switch (noteIndex)
-            {
-                case 0:
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Tonic;
-                    break;
-                case 5:
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Subdominant;
-                    break;
-                case 7:
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Dominant;
-                    break;
-                default:
-                    this.isScaleBasic = false;
-                    this.scaleChordType = ChordType.Other;
-                    break;
-            }
+            setChordType(tonation, musicAI);
             this.chordNotes = tonation.getChordNotesOnIndex(noteIndex);
             this.turnover = 0;
             setChordMode();
@@ -68,14 +51,6 @@ namespace MusicAnalyzer.Models
         {
             if (chordNotes.Count < 3)
                 mode = ChordMode.Other;
-            else if ((chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Quart) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.Quart && chordNotes[2] - chordNotes[1] == (int)Interval.Terce))
-                mode = ChordMode.Major;
-            else if ((chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Terce) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.Quart) ||
-                (chordNotes[1] - chordNotes[0] == (int)Interval.Quart && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow))
-                mode = ChordMode.Minor;
             else if ((chordNotes.Count > 3) &&
                 ((chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.Second) ||
@@ -85,6 +60,14 @@ namespace MusicAnalyzer.Models
             else if ((chordNotes.Count > 3) &&
                 (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow && chordNotes[3] - chordNotes[2] == (int)Interval.TerceLow))
                 mode = ChordMode.SeventhDim;
+            else if ((chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Quart) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.Quart && chordNotes[2] - chordNotes[1] == (int)Interval.Terce))
+                mode = ChordMode.Major;
+            else if ((chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Terce) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.Terce && chordNotes[2] - chordNotes[1] == (int)Interval.Quart) ||
+                (chordNotes[1] - chordNotes[0] == (int)Interval.Quart && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow))
+                mode = ChordMode.Minor;
             else if ((chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.TerceLow && chordNotes[2] - chordNotes[1] == (int)Interval.Triton) ||
                 (chordNotes[1] - chordNotes[0] == (int)Interval.Triton && chordNotes[2] - chordNotes[1] == (int)Interval.TerceLow))
@@ -98,9 +81,33 @@ namespace MusicAnalyzer.Models
         {
             int noteIndex = n.noteID % 12;
             if (!chordNotes.Contains(noteIndex))
+            {
                 this.chordNotes.Add(noteIndex);
-            chordNotes.Sort();
-            setChordMode();
+                chordNotes.Sort();
+                setChordMode();
+            }
+        }
+
+        public void setChordType(Tonation t, MusicIntelligence musicAI)
+        {
+            if ((int)musicAI.matchChords(this, t.tonic) > (int)Match.Medium)
+            {
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Tonic;
+            }
+            else if ((int)musicAI.matchChords(this, t.subdominant) > (int)Match.Medium)
+            {
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Subdominant;
+            }
+            else if ((int)musicAI.matchChords(this, t.dominant) > (int)Match.Medium)
+            {
+                    this.isScaleBasic = true;
+                    this.scaleChordType = ChordType.Dominant;
+            } else {
+                this.isScaleBasic = false;
+                this.scaleChordType = ChordType.Other;
+            }
         }
 
         public override string ToString()
@@ -111,6 +118,7 @@ namespace MusicAnalyzer.Models
                 ret += i.ToString() + ", ";
             }
             ret += "Mode: " + mode.ToString();
+            ret += " Scale chord: " + scaleChordType.ToString();
             return ret;
         }
     }
