@@ -114,29 +114,29 @@ namespace MusicAnalyzer.Tools
                 return minorScaleSeq;
         }
 
-        public List<Chord> setMainChords(ChordMode mode)
+        public List<TonationChord> setMainChords(ChordMode mode)
         {
             String chordsFile;
-            List<Chord> chords = new List<Chord>();
+            List<TonationChord> chords = new List<TonationChord>();
             if (mode == ChordMode.Major)
                 chordsFile = majorChordsFile;
             else
                 chordsFile = minorChordsFile;
             IEnumerable<String> lines = IOTools.ReadFrom(chordsFile);
 
-            Chord chord = new Chord(mode, true, 0);
+            TonationChord chord = new TonationChord(mode, true, 0);
             chord.chordNotes = new List<int>();
             int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new Chord(mode, true, 0);
+            chord = new TonationChord(mode, true, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new Chord(mode, true, 0);
+            chord = new TonationChord(mode, true, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);

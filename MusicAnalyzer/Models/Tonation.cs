@@ -12,7 +12,7 @@ namespace MusicAnalyzer.Models
     public class Tonation
     {
         // dodać pozostałe charakterystyczne akordy : od 2., od 6.
-        public Chord tonic, subdominant, dominant;
+        public TonationChord tonic, subdominant, dominant;
         List<int> mainScaleNotes;
         public Offset offset;
         public ChordMode mode;
@@ -25,7 +25,7 @@ namespace MusicAnalyzer.Models
             noteTools = new NoteTools();
             this.mode  = mode;
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
-            List<Chord> chords = noteTools.setMainChords(mode);
+            List<TonationChord> chords = noteTools.setMainChords(mode);
             if (chords.Count == 3)
             {
                 tonic = chords[0];
@@ -51,7 +51,7 @@ namespace MusicAnalyzer.Models
             this.noteTools = tools;
             this.offset = noteTools.setOffset(key);
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
-            List<Chord> chords = noteTools.setMainChords(mode);
+            List<TonationChord> chords = noteTools.setMainChords(mode);
             if (chords.Count == 3)
             {
                 tonic = chords[0];
@@ -73,7 +73,7 @@ namespace MusicAnalyzer.Models
             this.startTick = starter;
             this.endTick = int.MaxValue - 1;
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
-            List<Chord> chords = noteTools.setMainChords(mode);
+            List<TonationChord> chords = noteTools.setMainChords(mode);
             if (chords.Count == 3)
             {
                 tonic = chords[0];

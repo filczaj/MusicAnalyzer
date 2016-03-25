@@ -102,8 +102,8 @@ namespace MusicAnalyzer.Tools
                 }
             }
             var sortedTonations = from t in tonations
-                          orderby t.startTick
-                          select t;
+                                  orderby t.startTick
+                                  select t;
             tonations = sortedTonations.ToList<Tonation>();
             for (int i = 0; i < tonations.Count; i++)
                 tonations[i].endTick = tonations[(i + 1) % tonations.Count].startTick;
@@ -144,7 +144,12 @@ namespace MusicAnalyzer.Tools
 
         public Tonation getCurrentTonation(List<Tonation> tonations, int timeIndex)
         {
-            return tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
+            Tonation outTonation = tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
+            if (outTonation == null)
+            {
+                throw new NullReferenceException("Tonation not found on the list.");
+            }
+            return outTonation;
         }
 
         public void serialize(IEnumerable<Note> allNotes)

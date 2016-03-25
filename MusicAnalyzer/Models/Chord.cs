@@ -10,40 +10,26 @@ namespace MusicAnalyzer.Models
     public class Chord
     {
         public List<int> chordNotes;
-        public bool isScaleBasic;
         public int turnover;
         public ChordMode mode;
-        public ChordType scaleChordType;
-        public int priority;
 
-        public Chord(ChordMode mode, bool isBasic, int turn)
+        public Chord(ChordMode mode, int turn)
         {
             this.mode = mode;
-            isScaleBasic = isBasic;
             turnover = turn;
             this.chordNotes = new List<int>();
-            if (isBasic)
-                this.priority = 2;
-            else
-                this.priority = 1;
-        }
-
-        public Chord(Note n, Tonation tonation, MusicIntelligence musicAI) // creates a specified chord based on a given note
-        {
-            if (tonation == null)
-                return;
-            int noteIndex = tonation.getNoteIndexInScale(n);
-            setChordType(tonation, musicAI);
-            this.chordNotes = tonation.getChordNotesOnIndex(noteIndex);
-            this.turnover = 0;
-            setChordMode();
         }
 
         public Chord(Note n)
         {
             this.chordNotes = new List<int>();
-            chordNotes.Add(n.noteID % 12);
-            isScaleBasic = false;
+            chordNotes.Add((n.noteID - 3) % 12);
+            setChordMode();
+        }
+
+        public Chord(List<int> notesList)
+        {
+            this.chordNotes = notesList;
             setChordMode();
         }
 
@@ -79,34 +65,12 @@ namespace MusicAnalyzer.Models
 
         public void addNote(Note n)
         {
-            int noteIndex = n.noteID % 12;
+            int noteIndex = (n.noteID - 3) % 12;
             if (!chordNotes.Contains(noteIndex))
             {
                 this.chordNotes.Add(noteIndex);
                 chordNotes.Sort();
                 setChordMode();
-            }
-        }
-
-        public void setChordType(Tonation t, MusicIntelligence musicAI)
-        {
-            if ((int)musicAI.matchChords(this, t.tonic) > (int)Match.Medium)
-            {
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Tonic;
-            }
-            else if ((int)musicAI.matchChords(this, t.subdominant) > (int)Match.Medium)
-            {
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Subdominant;
-            }
-            else if ((int)musicAI.matchChords(this, t.dominant) > (int)Match.Medium)
-            {
-                    this.isScaleBasic = true;
-                    this.scaleChordType = ChordType.Dominant;
-            } else {
-                this.isScaleBasic = false;
-                this.scaleChordType = ChordType.Other;
             }
         }
 
@@ -118,7 +82,6 @@ namespace MusicAnalyzer.Models
                 ret += i.ToString() + ", ";
             }
             ret += "Mode: " + mode.ToString();
-            ret += " Scale chord: " + scaleChordType.ToString();
             return ret;
         }
     }

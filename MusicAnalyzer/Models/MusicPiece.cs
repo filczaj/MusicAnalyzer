@@ -17,11 +17,11 @@ namespace MusicAnalyzer.Models
         NotesList notesList;
         MidiTools midiTools;
         int trackCount;
-        SortedList<int, Chord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
+        SortedList<int, TonationChord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
         List<MeterChange> meterChanges;
         int composedTrack;
 
-        public MusicPiece(Sequence seq, string configDir)
+        public MusicPiece(Sequence seq, string configDir) // to do! - wrzucić to do oddzielnego wątku!
         {
             this.sequence = seq;
             this.midiTools = new MidiTools(configDir);
@@ -30,12 +30,12 @@ namespace MusicAnalyzer.Models
             this.trackCount = this.sequence.Count;
             this.meterChanges = midiTools.findMeter(seq);
             this.musicIntelligence = new MusicIntelligence();
+            this.tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
         }
 
         public void completeNotesInfo()
         {
-            tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
-            orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools);
+            orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
             musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
         }
 
