@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -12,10 +13,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.ComponentModel;
 using MusicAnalyzer.Tools;
 using MusicAnalyzer.GUI;
 using Sanford.Multimedia.Midi;
+using MusicAnalyzer.Models;
 
 namespace MusicAnalyzer
 {
@@ -27,11 +28,17 @@ namespace MusicAnalyzer
         string configDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
         string midisDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Midis";
         Sequence reader;
+        private readonly BackgroundWorker midiAnalyzer = new BackgroundWorker();
+        private MusicPiece musicPiece;
 
         public StartWindow()
         {
             InitializeComponent();
             configDirTextBox.Text = configDirectory;
+            midiAnalyzer.DoWork += midiAnalyzer_DoWork;
+            midiAnalyzer.RunWorkerCompleted += midiAnalyzer_RunWorkerCompleted;
+            midiAnalyzer.ProgressChanged += midiAnalyzer_ReportProgress;
+            midiAnalyzer.WorkerReportsProgress = true;
         }
 
         private void openMidButton_Click(object sender, RoutedEventArgs e)
@@ -83,31 +90,51 @@ namespace MusicAnalyzer
 
         private void HandleLoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            readProgressBar.Value = e.ProgressPercentage;
+            readProgressBar.Value = e.ProgressPercentage / 2;
         }
 
         private void HandleLoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            readProgressBar.Value = 0;
             if (e.Error == null)
             {
-                readProgressBar.Visibility = Visibility.Hidden;
-                readProgressBar.Visibility = Visibility.Visible;
-                if (Directory.Exists(configDirectory))
-                {
-                    var window = new PlayerWindow(configDirectory, reader, midFileTextBox.Text);
-                    window.Owner = this;
-                    window.Show();
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
-                }
+                musicPiece = new MusicPiece(reader, configDirectory);
+                midiAnalyzer.RunWorkerAsync();
             }
             else
             {
                 MessageBox.Show("Reading the file failed.\n " + e.Error.Message, "Error", MessageBoxButton.OK);
             }
+        }
+
+        private void midiAnalyzer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (Directory.Exists(configDirectory))
+            {
+                var window = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
+                window.Owner = this;
+                window.Show();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
+            }
+        }
+
+        private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            musicPiece.initTools();
+            midiAnalyzer.ReportProgress(25);
+            musicPiece.initNotes();
+            midiAnalyzer.ReportProgress(50);
+            musicPiece.initTonations();
+            midiAnalyzer.ReportProgress(75);
+            musicPiece.initMetrum();
+            midiAnalyzer.ReportProgress(100);
+        }
+
+        private void midiAnalyzer_ReportProgress(object sender, ProgressChangedEventArgs e)
+        {
+            readProgressBar.Value = 50 + e.ProgressPercentage / 2;
         }
     }
 }

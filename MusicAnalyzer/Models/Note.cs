@@ -43,6 +43,23 @@ namespace MusicAnalyzer.Models
             this.trackID = channel;
         }
 
+        public override bool Equals(object obj)
+        {
+            Note other = null;
+            try {
+                other = (Note)obj;
+            }
+            catch(InvalidCastException exc){
+
+            }
+            if (other == null)
+                return false;
+            if (this.note == other.note && this.startTime == other.startTime && this.trackID == other.trackID)
+                return true;
+            else
+                return false;
+        }
+
         public override string ToString()
         {
             return note + " " + startTime.ToString() + " Duration: " + duration.ToString() + " Track: " + trackID.ToString();

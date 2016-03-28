@@ -9,7 +9,7 @@ using Sanford.Multimedia.Midi;
 
 namespace MusicAnalyzer.Models
 {
-    public class Tonation
+    public class Tonation : TimeSpanEvent
     {
         // dodać pozostałe charakterystyczne akordy : od 2., od 6.
         public TonationChord tonic, subdominant, dominant;
@@ -17,26 +17,7 @@ namespace MusicAnalyzer.Models
         public Offset offset;
         public ChordMode mode;
         NoteTools noteTools;
-        public int startTick, endTick;
         public Key key;
-
-        public Tonation(String key, ChordMode mode)
-        {
-            noteTools = new NoteTools();
-            this.mode  = mode;
-            this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
-            List<TonationChord> chords = noteTools.setMainChords(mode);
-            if (chords.Count == 3)
-            {
-                tonic = chords[0];
-                tonic.scaleChordType = ChordType.Tonic;
-                tonic.priority = 3;
-                subdominant = chords[1];
-                subdominant.scaleChordType = ChordType.Dominant;
-                dominant = chords[2];
-                dominant.scaleChordType = ChordType.Subdominant;
-            }
-        }
 
         public Tonation(MetaMessage metaM, int ticks, NoteTools tools)
         {
@@ -55,34 +36,32 @@ namespace MusicAnalyzer.Models
             if (chords.Count == 3)
             {
                 tonic = chords[0];
-                tonic.scaleChordType = ChordType.Tonic;
-                tonic.priority = 3;
+                tonic.initMainChord(ChordType.Tonic, offset);
                 subdominant = chords[1];
-                subdominant.scaleChordType = ChordType.Dominant;
+                subdominant.initMainChord(ChordType.Subdominant, offset);
                 dominant = chords[2];
-                dominant.scaleChordType = ChordType.Subdominant;
+                dominant.initMainChord(ChordType.Dominant, offset);
             }
         }
 
-        public Tonation(int intOffset, ChordMode tonationMode, int starter, NoteTools tools)
+        public Tonation(int intOffset, ChordMode tonationMode, int starter, NoteTools tools, int ender)
         {
             this.noteTools = tools;
             this.key = noteTools.setKeyOnOffsetAndMode(intOffset, tonationMode);
             this.offset = noteTools.setOffset(key);
             this.mode = tonationMode;
             this.startTick = starter;
-            this.endTick = int.MaxValue - 1;
+            this.endTick = ender;
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
             List<TonationChord> chords = noteTools.setMainChords(mode);
             if (chords.Count == 3)
             {
                 tonic = chords[0];
-                tonic.scaleChordType = ChordType.Tonic;
-                tonic.priority = 3;
+                tonic.initMainChord(ChordType.Tonic, offset);
                 subdominant = chords[1];
-                subdominant.scaleChordType = ChordType.Dominant;
+                subdominant.initMainChord(ChordType.Subdominant, offset);
                 dominant = chords[2];
-                dominant.scaleChordType = ChordType.Subdominant;
+                dominant.initMainChord(ChordType.Dominant, offset);
             }
         }
 

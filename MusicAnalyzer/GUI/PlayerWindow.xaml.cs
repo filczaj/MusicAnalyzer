@@ -43,14 +43,19 @@ namespace MusicAnalyzer.GUI
             InitializeComponent();
         }
 
-        public PlayerWindow(string configDir, Sequence reader, string fullFileName)
+        public PlayerWindow(MusicPiece musicPieceIn, string configDir, string fullFileName)
         {
             InitializeComponent();
+            this.musicPiece = musicPieceIn;
             this.configDirectory = configDir;
-            this.sequence = reader;
+            this.sequence = musicPiece.sequence;
             initPlayer();
-            this.musicPiece = new MusicPiece(reader, configDirectory);
             this.fileNameBox.Text = fileName = fullFileName;
+            if (!musicPiece.isInputFileCorrect())
+            {
+                System.Windows.MessageBox.Show("There is some missing information in the input file. Composing music is unavailable.", "Inpute file error", MessageBoxButton.OK);
+                composeButton.IsEnabled = false;
+            }
         }
 
         private void initPlayer()

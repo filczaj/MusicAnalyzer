@@ -11,7 +11,6 @@ namespace MusicAnalyzer.Tools
     public class MidiTools : NoteTools
     {
         public MidiTools(string configDir) : base(configDir){
-            initTools();
         }
 
         private void findAndSaveMetaTypes(Sequence seq)
@@ -101,21 +100,13 @@ namespace MusicAnalyzer.Tools
                             tonations.Add(new Tonation(metaM, e.AbsoluteTicks, this));
                 }
             }
-            var sortedTonations = from t in tonations
-                                  orderby t.startTick
-                                  select t;
-            tonations = sortedTonations.ToList<Tonation>();
-            for (int i = 0; i < tonations.Count; i++)
-                tonations[i].endTick = tonations[(i + 1) % tonations.Count].startTick;
-            if (tonations.Count > 0)
-                tonations[tonations.Count - 1].endTick = int.MaxValue - 1;
-            return tonations;
+            return fillLastingInfo(tonations);
         }
 
-        public List<MeterChange> findMeter(Sequence sequence)
+        public List<Metrum> findMeter(Sequence sequence)
         {
             MetaMessage metaM;
-            List<MeterChange> meters = new List<MeterChange>();
+            List<Metrum> meters = new List<Metrum>();
             foreach (Track track in sequence)
             {
                 foreach (MidiEvent e in track.Iterator())
@@ -131,13 +122,13 @@ namespace MusicAnalyzer.Tools
                     if (metaM != null && metaM.MetaType == MetaType.TimeSignature)
                     {
                         TimeSignatureBuilder builder = new TimeSignatureBuilder(metaM);
-                        meters.Add(new MeterChange((int)builder.Numerator, (int)builder.Denominator, e.AbsoluteTicks));
+                        meters.Add(new Metrum((int)builder.Numerator, (int)builder.Denominator, e.AbsoluteTicks));
                     }
                 }
             }
-            
+            meters = fillLastingInfo(meters);
 #if DEBUG
-            genericListSerizliator<MeterChange>(meters, configDirectory + "\\MeterChanges.txt");
+            genericListSerizliator<Metrum>(meters, configDirectory + "\\MeterChanges.txt");
 #endif
             return meters;
         }
@@ -199,7 +190,33 @@ namespace MusicAnalyzer.Tools
                 outTonationMode = ChordMode.Major;
                 newOffset = ((int)t.offset + 3) % 12;
             }
-            return new Tonation(newOffset, outTonationMode, t.startTick, new NoteTools(configDirectory));
+            return new Tonation(newOffset, outTonationMode, t.startTick, this, t.endTick);
+        }
+
+        public List<Tonation> fillLastingInfo(List<Tonation> timeSpanEventCollection)
+        {
+            var sortedEvents = from t in timeSpanEventCollection
+                                  orderby t.startTick
+                                  select t;
+            timeSpanEventCollection = sortedEvents.ToList<Tonation>();
+            for (int i = 0; i < timeSpanEventCollection.Count; i++)
+                timeSpanEventCollection[i].endTick = timeSpanEventCollection[(i + 1) % timeSpanEventCollection.Count].startTick;
+            if (timeSpanEventCollection.Count > 0)
+                timeSpanEventCollection[timeSpanEventCollection.Count - 1].endTick = int.MaxValue - 1;
+            return timeSpanEventCollection;
+        }
+
+        public List<Metrum> fillLastingInfo(List<Metrum> timeSpanEventCollection)
+        {
+            var sortedEvents = from t in timeSpanEventCollection
+                               orderby t.startTick
+                               select t;
+            timeSpanEventCollection = sortedEvents.ToList<Metrum>();
+            for (int i = 0; i < timeSpanEventCollection.Count; i++)
+                timeSpanEventCollection[i].endTick = timeSpanEventCollection[(i + 1) % timeSpanEventCollection.Count].startTick;
+            if (timeSpanEventCollection.Count > 0)
+                timeSpanEventCollection[timeSpanEventCollection.Count - 1].endTick = int.MaxValue - 1;
+            return timeSpanEventCollection;
         }
     }
 }

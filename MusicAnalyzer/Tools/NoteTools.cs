@@ -21,7 +21,7 @@ namespace MusicAnalyzer.Tools
         public readonly int lowNoteID = 21; // A0
         public readonly int highNoteID = 109; // C8
 
-        protected void initTools()
+        public void initTools()
         {
             readNotesSequences();
             setScaleSequences();

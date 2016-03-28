@@ -49,17 +49,17 @@ namespace MusicAnalyzer.Models
 
         public void setChordType(MusicIntelligence musicAI)
         {
-            if ((int)musicAI.matchChords(this, musicAI.turnIntoPureChord(tonation.tonic)) > (int)Match.Medium)
+            if ((int)musicAI.matchChords(this, tonation.tonic) > (int)Match.Medium)
             {
                 this.isScaleBasic = true;
                 this.scaleChordType = ChordType.Tonic;
             }
-            else if ((int)musicAI.matchChords(this, musicAI.turnIntoPureChord(tonation.subdominant)) > (int)Match.Medium)
+            else if ((int)musicAI.matchChords(this, tonation.subdominant) > (int)Match.Medium)
             {
                 this.isScaleBasic = true;
                 this.scaleChordType = ChordType.Subdominant;
             }
-            else if ((int)musicAI.matchChords(this, musicAI.turnIntoPureChord(tonation.dominant)) > (int)Match.Medium)
+            else if ((int)musicAI.matchChords(this, tonation.dominant) > (int)Match.Medium)
             {
                 this.isScaleBasic = true;
                 this.scaleChordType = ChordType.Dominant;
@@ -69,6 +69,22 @@ namespace MusicAnalyzer.Models
                 this.isScaleBasic = false;
                 this.scaleChordType = ChordType.Other;
             }
+        }
+
+        public void initMainChord(ChordType type, Offset off)
+        {
+            scaleChordType = type;
+            if (type == ChordType.Tonic)
+                priority = 3;
+            else if (type == ChordType.Other)
+                priority = 1;
+            else
+                priority = 2;
+            offset = off;
+            isScaleBasic = true;
+            turnover = 0;
+            for (int i = 0; i < chordNotes.Count; i++)
+                chordNotes[i] = (chordNotes[i] + (int)off) % 12;
         }
 
         public override string ToString()
