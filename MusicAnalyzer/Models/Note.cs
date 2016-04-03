@@ -18,6 +18,7 @@ namespace MusicAnalyzer.Models
         public int endTime { get; set; }
         public bool strongMetric { get; set; }
         public int trackID { get; set; }
+        public int octave { get; set; }
 
         public Note() {
             startTime = -1;

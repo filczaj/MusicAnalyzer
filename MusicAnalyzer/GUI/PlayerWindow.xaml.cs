@@ -11,11 +11,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PSAMWPFControlLibrary;
 using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
 using NAudio.Midi;
 using MusicAnalyzer.Models;
 using MusicAnalyzer.Analyzer;
+using PSAMControlLibrary;
 
 namespace MusicAnalyzer.GUI
 {
@@ -24,6 +26,7 @@ namespace MusicAnalyzer.GUI
     /// </summary>
     public partial class PlayerWindow : Window
     {
+        List<IncipitViewerWPF> scoreViewers;
         string configDirectory;
         string fileName;
         Sequence sequence;
@@ -52,10 +55,12 @@ namespace MusicAnalyzer.GUI
             initPlayer();
             this.fileNameBox.Text = fileName = fullFileName;
             if (!musicPiece.isInputFileCorrect())
-            {
+           { 
                 System.Windows.MessageBox.Show("There is some missing information in the input file. Composing music is unavailable.", "Inpute file error", MessageBoxButton.OK);
                 composeButton.IsEnabled = false;
             }
+            initScoreViewer();
+            fillScoreViewer();
         }
 
         private void initPlayer()
@@ -71,6 +76,28 @@ namespace MusicAnalyzer.GUI
             this.player.Position = 0;
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+        }
+        private void initScoreViewer()
+        {
+            scoreViewers = new List<IncipitViewerWPF>();
+            int counter = 0;
+            foreach(Track t in sequence){
+                IncipitViewerWPF scv = new IncipitViewerWPF();
+                scv.Width = scoreGrid.Width;
+                scv.Height = 80;
+                scoreViewers.Add(scv);
+                RowDefinition rd = new RowDefinition();
+                rd.Height = new GridLength(100.0, GridUnitType.Pixel);
+                scoreGrid.RowDefinitions.Add(rd);
+                scoreGrid.Children.Add(scv);
+                Grid.SetRow(scv, counter);
+                counter++;
+            }
+        }
+
+        private void fillScoreViewer()
+        {
+            musicPiece.fillScoreViewer(scoreViewers);
         }
 
         private void HandleChannelMessagePlayed(object sender, ChannelMessageEventArgs e)
@@ -255,6 +282,11 @@ namespace MusicAnalyzer.GUI
         private void volUpButton_Click(object sender, RoutedEventArgs e)
         {
             SystemTools.VolUp(Window.GetWindow(this));
+        }
+
+        private void scoreGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -74,11 +74,12 @@ namespace MusicAnalyzer.Tools
             return diff;
         }
 
-        public int getNoteOctave(Note note){
-            return Convert.ToInt32(note.note[note.note.Length - 1]);
-        }
-
 #endregion
+
+        public int getNoteOctave(Note note)
+        {
+            return Convert.ToInt32(note.note[note.note.Length - 1]) - 48;
+        }
 
         private void readNotesSequences()
         {
@@ -149,6 +150,7 @@ namespace MusicAnalyzer.Tools
         {
             n.note = getNoteById(n.noteID);
             n.basicNote = getBasicNoteById(n.noteID);
+            n.octave = getNoteOctave(n);
             if (n.startTime >= 0 && n.duration >= 0 && n.endTime < 0)
                 n.endTime = n.startTime + n.duration;
             if (n.startTime >= 0 && n.endTime >= 0)
@@ -172,6 +174,15 @@ namespace MusicAnalyzer.Tools
                 return basicNotesSequence[key];
             else
                 return "";
+        }
+
+        public int getSharpOrFlat(Note n)
+        {
+            if (n.basicNote.Contains("Sharp"))
+                return 1;
+            if (n.basicNote.Contains("Flat"))
+                return -1;
+            return 0;
         }
 
         public Note setNoteOff(int noteID, int endTime, NotesList allNotes, int channel)

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PSAMWPFControlLibrary="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
         xmlns:PSAMControlLibrary="clr-namespace:PSAMControlLibrary;assembly=PSAMControlLibrary"
-        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer - player" Height="650" Width="859.043" Closing="Window_Closing" Loaded="Window_Loaded">
+        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer - player" Height="720" Width="1024" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Menu>
             <MenuItem Header="_File">
@@ -15,7 +15,20 @@
                 <MenuItem Header="_Exit" Click="MenuItem_Click_3" />
             </MenuItem>
         </Menu>
-        <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Height="86" Width="831">
+        <GroupBox x:Name="headerBox" Header="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="1000">
+            <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="811" Margin="10,0,-2,0">
+                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="129" Height="32" Click="backButton_Click_1"/>
+                <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0" IsEnabled="False"/>
+                <Image HorizontalAlignment="Left" Height="32" Margin="9,0,0,0" VerticalAlignment="Top" Width="32" Source="/MusicAnalyzer;component/Icons/note.png"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="visualBox" Header="Melody tracks" HorizontalAlignment="Left" Height="460" Margin="10,71,0,0" VerticalAlignment="Top" Width="1000">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" CanContentScroll="True">
+                <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="435"  VerticalAlignment="Top" Width="990" Margin="0,0,-2,-3" Background="White" SizeChanged="scoreGrid_SizeChanged">
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,532,0,0" VerticalAlignment="Top" Height="70" Width="1000">
             <Grid HorizontalAlignment="Left" Height="62" Margin="10,0,-2,0" VerticalAlignment="Top" Width="811">
                 <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="playButton_Click"/>
                 <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="106" Height="42" Click="pauseButton_Click"/>
@@ -33,20 +46,7 @@
                 </Button>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="headerBox" Header="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="831">
-            <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="811" Margin="10,0,-2,0">
-                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="129" Height="32" Click="backButton_Click_1"/>
-                <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0" IsEnabled="False"/>
-                <Image HorizontalAlignment="Left" Height="32" Margin="9,0,0,0" VerticalAlignment="Top" Width="32" Source="/MusicAnalyzer;component/Icons/note.png"/>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox x:Name="visualBox" Header="MIDI Tracks" HorizontalAlignment="Left" Height="363" Margin="10,71,0,0" VerticalAlignment="Top" Width="831">
-            <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="344" VerticalAlignment="Top" Width="821" Margin="0,0,-2,-3">
-
-            </Grid>
-        </GroupBox>
-        <GroupBox x:Name="createGroup" Header="Create track" HorizontalAlignment="Left" Height="86" Margin="10,525,0,0" VerticalAlignment="Top" Width="831">
+        <GroupBox x:Name="createGroup" Header="Create track" HorizontalAlignment="Left" Height="70" Margin="10,605,0,0" VerticalAlignment="Top" Width="1000">
             <Grid x:Name="createGrid">
                 <Label Content="Choose instrument" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <ComboBox HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="151">

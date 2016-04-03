@@ -98,37 +98,39 @@ namespace MusicAnalyzer
             if (e.Error == null)
             {
                 musicPiece = new MusicPiece(reader, configDirectory);
-                midiAnalyzer.RunWorkerAsync();
+                if (Directory.Exists(configDirectory))
+                {
+                    midiAnalyzer.RunWorkerAsync();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
+                }
             }
             else
             {
-                MessageBox.Show("Reading the file failed.\n " + e.Error.Message, "Error", MessageBoxButton.OK);
+                MessageBox.Show("Reading input file failed.\n " + e.Error.Message, "Error", MessageBoxButton.OK);
             }
         }
 
         private void midiAnalyzer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            if (Directory.Exists(configDirectory))
-            {
-                var window = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
-                window.Owner = this;
-                window.Show();
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
-            }
+            var window = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
+            window.Owner = this;
+            window.Show();
         }
 
         private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             musicPiece.initTools();
-            midiAnalyzer.ReportProgress(25);
+            midiAnalyzer.ReportProgress(20);
             musicPiece.initNotes();
-            midiAnalyzer.ReportProgress(50);
+            midiAnalyzer.ReportProgress(40);
             musicPiece.initTonations();
-            midiAnalyzer.ReportProgress(75);
+            midiAnalyzer.ReportProgress(60);
             musicPiece.initMetrum();
+            midiAnalyzer.ReportProgress(80);
+            musicPiece.setRightNotesAndTonations();
             midiAnalyzer.ReportProgress(100);
         }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MusicAnalyzer.Analyzer;
+using PSAMControlLibrary;
 
 namespace MusicAnalyzer.Models
 {
@@ -45,11 +46,43 @@ namespace MusicAnalyzer.Models
             this.meterChanges = midiTools.findMeter(sequence);
         }
 
+        public void setRightNotesAndTonations()
+        {
+            tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
+            musicIntelligence.setRightNoteSigns(tonations, ref notesList, midiTools);
+        }
+
         public void completeNotesInfo()
         {
-            this.tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
             musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
+        }
+
+        public void fillScoreViewer(List<PSAMWPFControlLibrary.IncipitViewerWPF> views)
+        {
+            PSAMControlLibrary.Key key;
+            if (isInputFileCorrect())
+                key = new PSAMControlLibrary.Key(midiTools.getTonationFifths(midiTools.getCurrentTonation(tonations, 0)));
+            else
+                key = new PSAMControlLibrary.Key(0);
+            for (int i = 0; i < views.Count; i++)
+            {
+                views[i].ClearMusicalIncipit();
+                Clef c = new Clef(ClefType.GClef, 2); // which clef : bass or violin????
+                views[i].AddMusicalSymbol(c);
+                views[i].AddMusicalSymbol(key);
+                TimeSignature ts = new TimeSignature(TimeSignatureType.Numbers, Convert.ToUInt32(meterChanges[0].Numerator), Convert.ToUInt32(meterChanges[0].Denominator));
+                views[i].AddMusicalSymbol(ts);
+            }
+            foreach (Note n in notesList)
+            {
+                PSAMControlLibrary.Note nView = new PSAMControlLibrary.Note(n.basicNote[0].ToString(), 
+                    midiTools.getSharpOrFlat(n), midiTools.getNoteOctave(n), 
+                    MusicalSymbolDuration.Quarter, NoteStemDirection.Down, NoteTieType.None, 
+                    new List<NoteBeamType>() { NoteBeamType.Single });
+                if (views.Count > n.trackID && n.trackID >= 0)
+                    views[n.trackID].AddMusicalSymbol(nView);
+            }
         }
 
         public void findChordChanges() // at composedTrack

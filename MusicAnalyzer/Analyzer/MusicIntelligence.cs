@@ -56,6 +56,26 @@ namespace MusicAnalyzer.Analyzer
             return tonations;
         }
 
+        public void setRightNoteSigns(List<Tonation> tonations, ref NotesList notesList, MidiTools midiTools){
+            foreach (Note n in notesList)
+            {
+                if (midiTools.getSharpOrFlat(n) != 0)
+                {
+                    int fifths = midiTools.getTonationFifths(midiTools.getCurrentTonation(tonations, n.startTime));
+                    if (fifths > 0){
+                        n.basicNote = n.basicNote.Split('/')[0];
+                        n.note = n.basicNote + n.octave;
+                    }
+                        
+                    else{
+                        n.basicNote = n.basicNote.Split('/')[1];
+                        n.note = n.basicNote + n.octave;
+                    }
+                        
+                }
+            }
+        }
+
         public SortedList<int, TonationChord> createOrderedChords(IEnumerable<Note> notesList, MidiTools midiTools, List<Tonation> tonations)
         {
             SortedList<int, TonationChord> orderedNoteChords = new SortedList<int, TonationChord>();

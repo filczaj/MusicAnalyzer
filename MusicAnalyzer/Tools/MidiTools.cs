@@ -193,6 +193,22 @@ namespace MusicAnalyzer.Tools
             return new Tonation(newOffset, outTonationMode, t.startTick, this, t.endTick);
         }
 
+        public int getTonationFifths(Tonation t) // number of tonation key flat or sharps signs; if flats - negative value
+        {
+            if (t.mode == ChordMode.Minor)
+                t = getSiblingTonation(t);
+            int sharpFifths = 0;
+            int flatFifths = 0;
+            while (((int)t.offset + ((int)Interval.Fith * sharpFifths) % 12 != 0) && (sharpFifths > -7))
+                sharpFifths--;
+            while (((int)t.offset + ((int)Interval.Fith * flatFifths) % 12 != 0) && (flatFifths < 7))
+                flatFifths++;
+            if (Math.Abs(sharpFifths) < flatFifths)
+                return sharpFifths * -1;
+            else
+                return flatFifths * -1;
+        }
+
         public List<Tonation> fillLastingInfo(List<Tonation> timeSpanEventCollection)
         {
             var sortedEvents = from t in timeSpanEventCollection
