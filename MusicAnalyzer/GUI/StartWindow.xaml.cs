@@ -90,7 +90,7 @@ namespace MusicAnalyzer
 
         private void HandleLoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            readProgressBar.Value = e.ProgressPercentage / 2;
+            readProgressBar.Value = e.ProgressPercentage / 5;
         }
 
         private void HandleLoadCompleted(object sender, AsyncCompletedEventArgs e)
@@ -123,20 +123,22 @@ namespace MusicAnalyzer
         private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             musicPiece.initTools();
-            midiAnalyzer.ReportProgress(20);
+            midiAnalyzer.ReportProgress(30);
             musicPiece.initNotes();
-            midiAnalyzer.ReportProgress(40);
+            midiAnalyzer.ReportProgress(42);
             musicPiece.initTonations();
-            midiAnalyzer.ReportProgress(60);
+            midiAnalyzer.ReportProgress(55);
             musicPiece.initMetrum();
-            midiAnalyzer.ReportProgress(80);
+            midiAnalyzer.ReportProgress(67);
             musicPiece.setRightNotesAndTonations();
+            midiAnalyzer.ReportProgress(80);
+            musicPiece.setNotesRythmicValues();
             midiAnalyzer.ReportProgress(100);
         }
 
         private void midiAnalyzer_ReportProgress(object sender, ProgressChangedEventArgs e)
         {
-            readProgressBar.Value = 50 + e.ProgressPercentage / 2;
+            readProgressBar.Value = e.ProgressPercentage;
         }
     }
 }

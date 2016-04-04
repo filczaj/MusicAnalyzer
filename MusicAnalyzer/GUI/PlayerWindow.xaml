@@ -23,8 +23,8 @@
             </Grid>
         </GroupBox>
         <GroupBox x:Name="visualBox" Header="Melody tracks" HorizontalAlignment="Left" Height="460" Margin="10,71,0,0" VerticalAlignment="Top" Width="1000">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" CanContentScroll="True">
-                <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="435"  VerticalAlignment="Top" Width="990" Margin="0,0,-2,-3" Background="White" SizeChanged="scoreGrid_SizeChanged">
+            <ScrollViewer x:Name="scroller" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="435"  VerticalAlignment="Top" Width="990" Margin="0,0,-2,-3" Background="White">
                 </Grid>
             </ScrollViewer>
         </GroupBox>

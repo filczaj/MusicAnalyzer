@@ -20,6 +20,10 @@ namespace MusicAnalyzer.Models
         public int trackID { get; set; }
         public int octave { get; set; }
 
+        public PSAMControlLibrary.MusicalSymbolDuration rythmicValue { get; set; }
+
+        public double noteExtension { get; set; }
+
         public Note() {
             startTime = -1;
             endTime = -1;

@@ -223,6 +223,16 @@ namespace MusicAnalyzer.Tools
             else
                 return Sanford.Multimedia.Key.CMajor;
         }
+
+        public double ProperDurationScale(Note n, int division)
+        {
+            if (n.duration < 1)
+                return 0;
+            double p = Math.Log(n.duration / (double)(division * 4), 2);
+            p = Math.Ceiling(p);
+            p = Math.Pow(2, (-1 * p));
+            return p;
+        }
     }
 }
 

@@ -20,11 +20,13 @@ namespace MusicAnalyzer.Models
         int trackCount;
         SortedList<int, TonationChord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
         List<Metrum> meterChanges;
+        public int Division { get; set; }
         int composedTrack;
 
         public MusicPiece(Sequence seq, string configDir)
         {
             this.sequence = seq;
+            this.Division = seq.Division;
             this.midiTools = new MidiTools(configDir);
             this.trackCount = this.sequence.Count;
             this.musicIntelligence = new MusicIntelligence();
@@ -52,6 +54,11 @@ namespace MusicAnalyzer.Models
             musicIntelligence.setRightNoteSigns(tonations, ref notesList, midiTools);
         }
 
+        public void setNotesRythmicValues()
+        {
+            musicIntelligence.setNotesRythm(ref notesList, midiTools, Division);
+        }
+
         public void completeNotesInfo()
         {
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
@@ -68,20 +75,30 @@ namespace MusicAnalyzer.Models
             for (int i = 0; i < views.Count; i++)
             {
                 views[i].ClearMusicalIncipit();
-                Clef c = new Clef(ClefType.GClef, 2); // which clef : bass or violin????
+                Clef c = musicIntelligence.setTrackClef(notesList.Where(x => x.trackID == i).ToList());
                 views[i].AddMusicalSymbol(c);
                 views[i].AddMusicalSymbol(key);
                 TimeSignature ts = new TimeSignature(TimeSignatureType.Numbers, Convert.ToUInt32(meterChanges[0].Numerator), Convert.ToUInt32(meterChanges[0].Denominator));
                 views[i].AddMusicalSymbol(ts);
             }
+            Note last = null;
             foreach (Note n in notesList)
             {
                 PSAMControlLibrary.Note nView = new PSAMControlLibrary.Note(n.basicNote[0].ToString(), 
                     midiTools.getSharpOrFlat(n), midiTools.getNoteOctave(n), 
-                    MusicalSymbolDuration.Quarter, NoteStemDirection.Down, NoteTieType.None, 
+                    n.rythmicValue, NoteStemDirection.Down, NoteTieType.None, 
                     new List<NoteBeamType>() { NoteBeamType.Single });
                 if (views.Count > n.trackID && n.trackID >= 0)
+                {
+                    Rest rest = musicIntelligence.isRestNow(last, n, Division, midiTools);
+                    if (rest != null)
+                        views[n.trackID].AddMusicalSymbol(rest);
+                    if (musicIntelligence.isBairlineNow(n.startTime, meterChanges, Division))
+                        views[n.trackID].AddMusicalSymbol(new Barline());
                     views[n.trackID].AddMusicalSymbol(nView);
+                    last = n;
+                }
+                    
             }
         }
 

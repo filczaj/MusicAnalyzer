@@ -38,6 +38,7 @@ namespace MusicAnalyzer.GUI
 
         private OutputDevice outDevice;
         private int outDeviceID = 0;
+        private int scoreViewHeight = 80;
         
         MusicPiece musicPiece;
 
@@ -83,11 +84,12 @@ namespace MusicAnalyzer.GUI
             int counter = 0;
             foreach(Track t in sequence){
                 IncipitViewerWPF scv = new IncipitViewerWPF();
-                scv.Width = scoreGrid.Width;
-                scv.Height = 80;
+                scv.MaxWidth = 5000;
+                scv.Width = 3000;
+                scv.Height = scoreViewHeight;
                 scoreViewers.Add(scv);
                 RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(100.0, GridUnitType.Pixel);
+                rd.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
                 scoreGrid.RowDefinitions.Add(rd);
                 scoreGrid.Children.Add(scv);
                 Grid.SetRow(scv, counter);
@@ -98,6 +100,8 @@ namespace MusicAnalyzer.GUI
         private void fillScoreViewer()
         {
             musicPiece.fillScoreViewer(scoreViewers);
+            scoreGrid.Width = 3000;
+            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
         }
 
         private void HandleChannelMessagePlayed(object sender, ChannelMessageEventArgs e)
@@ -282,11 +286,6 @@ namespace MusicAnalyzer.GUI
         private void volUpButton_Click(object sender, RoutedEventArgs e)
         {
             SystemTools.VolUp(Window.GetWindow(this));
-        }
-
-        private void scoreGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
         }
     }
 }

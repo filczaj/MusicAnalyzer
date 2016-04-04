@@ -76,6 +76,27 @@ namespace MusicAnalyzer.Analyzer
             }
         }
 
+        public void setNotesRythm(ref NotesList notesList, MidiTools midiTools, int division){
+            foreach (Note n in notesList)
+            {
+                double p = midiTools.ProperDurationScale(n, division);
+                string[] rythmicValues = Enum.GetNames(typeof(PSAMControlLibrary.MusicalSymbolDuration)).Where(x => (int)(PSAMControlLibrary.MusicalSymbolDuration)(Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), x)) == p).ToArray();
+                if (rythmicValues.Length > 0)
+                    n.rythmicValue = (PSAMControlLibrary.MusicalSymbolDuration)Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), rythmicValues[0]);
+                else
+                    n.rythmicValue = PSAMControlLibrary.MusicalSymbolDuration.Quarter;
+            }
+        }
+
+        public PSAMControlLibrary.Clef setTrackClef(List<Note> notesList)
+        {
+            int bassCounter = notesList.Where(x => x.octave < 4).Count();
+            if (bassCounter > notesList.Count / 2)
+                return new PSAMControlLibrary.Clef(PSAMControlLibrary.ClefType.FClef, 4);
+            else
+                return new PSAMControlLibrary.Clef(PSAMControlLibrary.ClefType.GClef, 2);
+        }
+
         public SortedList<int, TonationChord> createOrderedChords(IEnumerable<Note> notesList, MidiTools midiTools, List<Tonation> tonations)
         {
             SortedList<int, TonationChord> orderedNoteChords = new SortedList<int, TonationChord>();
@@ -131,6 +152,40 @@ namespace MusicAnalyzer.Analyzer
             else if (counter == 2) return Match.Medium;
             else if (counter == 3) return Match.Poor;
             else return Match.None;
+        }
+
+        public bool isBairlineNow(int now, List<Metrum> meterChanges, int division)
+        {
+            Metrum m = meterChanges.FirstOrDefault(x => x.startTick <= now && x.endTick >= now);
+            if (m == null)
+                return false;
+            else
+                return (now % (m.Numerator * (division * 4 / m.Denominator)) == 0);
+        }
+
+        public PSAMControlLibrary.Rest isRestNow(Note last, Note now, int division, MidiTools midiTools)
+        {
+            if (last == null)
+                return null;
+            int p = (int)(4 * division / midiTools.ProperDurationScale(last, division));
+            int gap = now.startTime - (last.startTime + p);
+            if (gap <= 0)
+                return null;
+            if (gap / (double)division == 1)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Quarter);
+            if (gap / (double)division == 2)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Half);
+            if (gap / (double)division == 4)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Whole);
+            if (gap / (double)division == 0.5)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Eighth);
+            if (gap / (double)division == 0.25)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Sixteenth);
+            if (gap / (double)division == 0.125)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.d32nd);
+            if (gap / (double)division == 0.0625)
+                return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.d64th);
+            return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Unknown);
         }
 
         public Chord turnIntoPureChord(TonationChord inChord)
