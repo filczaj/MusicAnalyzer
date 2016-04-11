@@ -59,10 +59,8 @@ namespace MusicAnalyzer.Tools
                     {
                         if (message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 > 0)
                         {
-                            //allNotes.setLastTrackNoteDuration(message.MidiChannel, e.AbsoluteTicks);
                             Note n = new Note(message.Data1 - lowNoteID, e.AbsoluteTicks, message.MidiChannel);
                             allNotes.Add(n);
-                            //fillNoteData(n);
                         }
                         else if ((message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 == 0) ||
                             (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID))
@@ -77,6 +75,21 @@ namespace MusicAnalyzer.Tools
             genericListSerizliator<Note>(allNotes.ToList<Note>(), configDirectory + "\\allNotes.txt");
 #endif
             return allNotes;
+        }
+
+        public Dictionary<int, int> projectTracks(NotesList notesList)
+        {
+            Dictionary<int, int> tracksProjection = new Dictionary<int, int>();
+            List<int> trackIDs = new List<int>();
+            foreach (Note n in notesList)
+            {
+                if (!trackIDs.Contains(n.trackID))
+                    trackIDs.Add(n.trackID);
+            }
+            trackIDs.Sort();
+            for (int i = 0; i < trackIDs.Count; i++)
+                tracksProjection.Add(trackIDs[i], i);
+            return tracksProjection;
         }
 
         public List<Tonation> grabTonations(Sequence sequence)
@@ -207,6 +220,11 @@ namespace MusicAnalyzer.Tools
                 return sharpFifths * -1;
             else
                 return flatFifths * -1;
+        }
+
+        public Metrum getCurrentMetrum(int now, List<Metrum> meterChanges)
+        {
+            return meterChanges.FirstOrDefault(x => x.startTick <= now && x.endTick > now);
         }
 
         public List<Tonation> fillLastingInfo(List<Tonation> timeSpanEventCollection)

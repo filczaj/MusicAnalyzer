@@ -124,22 +124,43 @@ namespace MusicAnalyzer.Tools
             else
                 chordsFile = minorChordsFile;
             IEnumerable<String> lines = IOTools.ReadFrom(chordsFile);
+            
+            if (lines.ToList().Count < 6)
+                return chords;
 
-            TonationChord chord = new TonationChord(mode, true, 0);
+            TonationChord chord = new TonationChord(mode, ChordPriority.Tonic, 0);
             chord.chordNotes = new List<int>();
             int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new TonationChord(mode, true, 0);
+            chord = new TonationChord(mode, ChordPriority.Subdominant, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
-            chord = new TonationChord(mode, true, 0);
+            chord = new TonationChord(mode, ChordPriority.Dominant, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            chord = new TonationChord(mode, ChordPriority.SecondStep, 0);
+            chord.chordNotes = new List<int>();
+            asIntegers = lines.ElementAt(3).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            chord = new TonationChord(mode, ChordPriority.SixthStep, 0);
+            chord.chordNotes = new List<int>();
+            asIntegers = lines.ElementAt(4).Split(' ').Select(s => int.Parse(s)).ToArray();
+            chord.chordNotes.AddRange(asIntegers);
+            chords.Add(chord);
+
+            chord = new TonationChord(mode, ChordPriority.ThirdStep, 0);
+            chord.chordNotes = new List<int>();
+            asIntegers = lines.ElementAt(5).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 

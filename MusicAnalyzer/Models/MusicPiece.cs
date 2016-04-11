@@ -20,6 +20,7 @@ namespace MusicAnalyzer.Models
         int trackCount;
         SortedList<int, TonationChord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
         List<Metrum> meterChanges;
+        Dictionary<int, int> tracksProjection; // sorted trackID -> viewID
         public int Division { get; set; }
         int composedTrack;
 
@@ -38,6 +39,7 @@ namespace MusicAnalyzer.Models
         }
         public void initNotes(){
             this.notesList = midiTools.decodeNotes(sequence) as NotesList;
+            this.tracksProjection = midiTools.projectTracks(notesList);
         }
 
         public void initTonations(){
@@ -51,7 +53,8 @@ namespace MusicAnalyzer.Models
         public void setRightNotesAndTonations()
         {
             tonations = musicIntelligence.setRightTonation(tonations, notesList, midiTools);
-            musicIntelligence.setRightNoteSigns(tonations, ref notesList, midiTools);
+            if (tonations.Count > 0)
+                musicIntelligence.setRightNoteSigns(tonations, ref notesList, midiTools);
         }
 
         public void setNotesRythmicValues()
@@ -63,6 +66,8 @@ namespace MusicAnalyzer.Models
         {
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
             musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
+            musicIntelligence.initMeasureBeats(meterChanges);
+            musicIntelligence.setBeatStrength(ref orderedNoteChords, meterChanges, midiTools, Division);
         }
 
         public void fillScoreViewer(List<PSAMWPFControlLibrary.IncipitViewerWPF> views)
@@ -75,30 +80,44 @@ namespace MusicAnalyzer.Models
             for (int i = 0; i < views.Count; i++)
             {
                 views[i].ClearMusicalIncipit();
-                Clef c = musicIntelligence.setTrackClef(notesList.Where(x => x.trackID == i).ToList());
+                Clef c = musicIntelligence.setTrackClef(notesList.Where(x => tracksProjection[x.trackID] == i).ToList());
                 views[i].AddMusicalSymbol(c);
-                views[i].AddMusicalSymbol(key);
-                TimeSignature ts = new TimeSignature(TimeSignatureType.Numbers, Convert.ToUInt32(meterChanges[0].Numerator), Convert.ToUInt32(meterChanges[0].Denominator));
-                views[i].AddMusicalSymbol(ts);
             }
             Note last = null;
+            bool barAdded = false;
             foreach (Note n in notesList)
             {
                 PSAMControlLibrary.Note nView = new PSAMControlLibrary.Note(n.basicNote[0].ToString(), 
                     midiTools.getSharpOrFlat(n), midiTools.getNoteOctave(n), 
                     n.rythmicValue, NoteStemDirection.Down, NoteTieType.None, 
                     new List<NoteBeamType>() { NoteBeamType.Single });
-                if (views.Count > n.trackID && n.trackID >= 0)
+                if (last != null && musicIntelligence.isBairlineNow(last.startTime + (int)(4 * Division / midiTools.ProperDurationScale(last, Division)), meterChanges, Division, midiTools))
                 {
-                    Rest rest = musicIntelligence.isRestNow(last, n, Division, midiTools);
-                    if (rest != null)
-                        views[n.trackID].AddMusicalSymbol(rest);
-                    if (musicIntelligence.isBairlineNow(n.startTime, meterChanges, Division))
-                        views[n.trackID].AddMusicalSymbol(new Barline());
-                    views[n.trackID].AddMusicalSymbol(nView);
-                    last = n;
+                    views[tracksProjection[n.trackID]].AddMusicalSymbol(new Barline());
+                    barAdded = true;
+                    TimeSignature ts = musicIntelligence.isTimeSignatureNow(n.startTime, meterChanges);
+                    if (ts != null)
+                        views[tracksProjection[n.trackID]].AddMusicalSymbol(ts);
+                    Key tonationKey = musicIntelligence.isTonationChangeNow(n.startTime, tonations, midiTools);
+                    if (tonationKey != null)
+                        views[tracksProjection[n.trackID]].AddMusicalSymbol(tonationKey);
                 }
-                    
+                Rest rest = musicIntelligence.isRestNow(last, n, Division, midiTools);
+                if (rest != null)
+                    views[tracksProjection[n.trackID]].AddMusicalSymbol(rest);
+                if (!barAdded && musicIntelligence.isBairlineNow(n.startTime, meterChanges, Division, midiTools))
+                {
+                    views[tracksProjection[n.trackID]].AddMusicalSymbol(new Barline());
+                    TimeSignature ts = musicIntelligence.isTimeSignatureNow(n.startTime, meterChanges);
+                    if (ts != null)
+                        views[tracksProjection[n.trackID]].AddMusicalSymbol(ts);
+                    Key tonationKey = musicIntelligence.isTonationChangeNow(n.startTime, tonations, midiTools);
+                    if (tonationKey != null)
+                        views[tracksProjection[n.trackID]].AddMusicalSymbol(tonationKey);
+                }
+                views[tracksProjection[n.trackID]].AddMusicalSymbol(nView);
+                last = n;
+                barAdded = false;
             }
         }
 

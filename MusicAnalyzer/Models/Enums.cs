@@ -14,11 +14,15 @@ namespace MusicAnalyzer.Models
         Good = 3,
         Perfect = 4
     };
+
     public enum ChordType
     {
         Tonic,
         Subdominant,
         Dominant,
+        SecondStep,
+        SixthStep,
+        ThirdStep,
         Other
     };
 
@@ -31,6 +35,33 @@ namespace MusicAnalyzer.Models
         Dominant,
         SeventhDim,
         Other
+    };
+
+    public enum ChordPriority
+    {
+        Tonic = 8,
+        Subdominant = 4,
+        Dominant = 4,
+        SecondStep = 2,
+        SixthStep = 2,
+        ThirdStep = 1,
+        SeventhStem = 0,
+        Default = 0
+    };
+
+    public static class ChordAlternative
+    {
+        public static string Tonic {get { return "SixthStep"; }}
+        public static string Subdominant { get { return "SecondStep"; } }
+        public static string Dominant { get { return "ThirdStep"; } }
+        public static string Other { get { return ""; } }
+    };
+
+    public enum MeasureBeats
+    {
+        Begin = 4,
+        Strong = 2,
+        Weak = 1
     };
 
     public enum Interval

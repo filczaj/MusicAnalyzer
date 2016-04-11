@@ -10,6 +10,8 @@ namespace MusicAnalyzer.Analyzer
 {
     public class MusicIntelligence
     {
+        Dictionary<Metrum, List<MeasureBeats>> measureBeats;
+
         public List<Tonation> setRightTonation(List<Tonation> tonations, IEnumerable<Note> notesList, MidiTools midiTools) // differentatie Cdur from Amoll
         {
             int starter;
@@ -131,10 +133,77 @@ namespace MusicAnalyzer.Analyzer
         {
             foreach (int chordsIndex in chordsList.Keys)
             {
-                chordsList[chordsIndex].setChordType(this);
+                chordsList[chordsIndex].setChordTypesAndPriority(this);
+            }
+        }
+
+        public void initMeasureBeats(List<Metrum> meterChanges)
+        {
+            measureBeats = new Dictionary<Metrum, List<MeasureBeats>>();
+            foreach (Metrum m in meterChanges)
+            {
+                List<MeasureBeats> beats = new List<MeasureBeats>();
+                switch (m.Denominator * m.Numerator)
+                {
+                    case 4:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong };
+                        break;
+                    case 6:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
+                        break;
+                    case 8:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong};
+                        break;
+                    case 12:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
+                        break;
+                    case 16:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };
+                        break;
+                    case 24:
+                        if (m.Numerator == 3)
+                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
+                        else
+                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };
+                        break;
+                    case 32:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };
+                        break;
+                    case 48:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Strong, MeasureBeats.Strong, MeasureBeats.Weak };
+                        break;
+                    case 72:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak, MeasureBeats.Weak };
+                        break;
+                    default:
+                        beats = new List<MeasureBeats>() { MeasureBeats.Begin };
+                        for (int i = 1; i < m.Numerator; i++)
+                            beats.Add(MeasureBeats.Weak);
+                        break;
+                }
+                measureBeats[m] = beats;
+            }
+        }
+
+        public void setBeatStrength(ref SortedList<int, TonationChord> orderedNoteChords, List<Metrum> meterChanges, MidiTools midiTools, int division)
+        {
+            foreach(int timeIndex in orderedNoteChords.Keys)
+            {
+                Metrum m = midiTools.getCurrentMetrum(timeIndex, meterChanges);
+                List<MeasureBeats> beatMeasure = measureBeats[m];
+                int measureBeat = (timeIndex - m.startTick) % (m.Numerator * (division * 4 / m.Denominator)); 
+                if (measureBeat % (division * 4 / m.Denominator) != 0)
+                    orderedNoteChords[timeIndex].beatStrength = MeasureBeats.Weak;
+                else{
+                    measureBeat = measureBeat / (division * 4 / m.Denominator);
+                    if (measureBeat < beatMeasure.Count)
+                        orderedNoteChords[timeIndex].beatStrength = beatMeasure[measureBeat];
+                    else
+                        orderedNoteChords[timeIndex].beatStrength = MeasureBeats.Weak;
+                }   
             }
 #if DEBUG
-            MidiTools.genericListSerizliator<Chord>(chordsList.Values.ToList<Chord>(), midiTools.configDirectory + "\\sortedNotes.txt");
+            MidiTools.genericListSerizliator<Chord>(orderedNoteChords.Values.ToList<Chord>(), midiTools.configDirectory + "\\sortedNotes.txt");
 #endif
         }
 
@@ -154,13 +223,13 @@ namespace MusicAnalyzer.Analyzer
             else return Match.None;
         }
 
-        public bool isBairlineNow(int now, List<Metrum> meterChanges, int division)
+        public bool isBairlineNow(int now, List<Metrum> meterChanges, int division, MidiTools midiTools)
         {
-            Metrum m = meterChanges.FirstOrDefault(x => x.startTick <= now && x.endTick >= now);
+            Metrum m = midiTools.getCurrentMetrum(now, meterChanges);
             if (m == null)
                 return false;
             else
-                return (now % (m.Numerator * (division * 4 / m.Denominator)) == 0);
+                return ((now - m.startTick) % (m.Numerator * (division * 4 / m.Denominator)) == 0);
         }
 
         public PSAMControlLibrary.Rest isRestNow(Note last, Note now, int division, MidiTools midiTools)
@@ -186,6 +255,24 @@ namespace MusicAnalyzer.Analyzer
             if (gap / (double)division == 0.0625)
                 return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.d64th);
             return new PSAMControlLibrary.Rest(PSAMControlLibrary.MusicalSymbolDuration.Unknown);
+        }
+
+        public PSAMControlLibrary.TimeSignature isTimeSignatureNow(int now, List<Metrum> meterChanges)
+        {
+            Metrum meter = meterChanges.FirstOrDefault(x => x.startTick == now);
+            if (meter != null)
+                return new PSAMControlLibrary.TimeSignature(PSAMControlLibrary.TimeSignatureType.Numbers, Convert.ToUInt32(meter.Numerator), Convert.ToUInt32(meter.Denominator));
+            else
+                return null;
+        }
+
+        public PSAMControlLibrary.Key isTonationChangeNow(int now, List<Tonation> tonations, MidiTools midiTools)
+        {
+            Tonation t = tonations.FirstOrDefault(x => x.startTick == now);
+            if (t != null)
+                return new PSAMControlLibrary.Key(midiTools.getTonationFifths(t));
+            else
+                return null;
         }
 
         public Chord turnIntoPureChord(TonationChord inChord)

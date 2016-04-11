@@ -12,7 +12,7 @@ namespace MusicAnalyzer.Models
     public class Tonation : TimeSpanEvent
     {
         // dodać pozostałe charakterystyczne akordy : od 2., od 6.
-        public TonationChord tonic, subdominant, dominant;
+        public TonationChord tonic, subdominant, dominant, secondStep, sixthStep, thirdStep;
         List<int> mainScaleNotes;
         public Offset offset;
         public ChordMode mode;
@@ -33,14 +33,20 @@ namespace MusicAnalyzer.Models
             this.offset = noteTools.setOffset(key);
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
             List<TonationChord> chords = noteTools.setMainChords(mode);
-            if (chords.Count == 3)
+            if (chords.Count >= 6)
             {
                 tonic = chords[0];
-                tonic.initMainChord(ChordType.Tonic, offset);
+                tonic.initMainChord(ChordType.Tonic, offset, ChordPriority.Tonic);
                 subdominant = chords[1];
-                subdominant.initMainChord(ChordType.Subdominant, offset);
+                subdominant.initMainChord(ChordType.Subdominant, offset, ChordPriority.Subdominant);
                 dominant = chords[2];
-                dominant.initMainChord(ChordType.Dominant, offset);
+                dominant.initMainChord(ChordType.Dominant, offset, ChordPriority.Dominant);
+                secondStep = chords[3];
+                secondStep.initMainChord(ChordType.SecondStep, offset, ChordPriority.SecondStep);
+                sixthStep = chords[4];
+                sixthStep.initMainChord(ChordType.SixthStep, offset, ChordPriority.SixthStep);
+                thirdStep = chords[5];
+                thirdStep.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
             }
         }
 
@@ -54,14 +60,20 @@ namespace MusicAnalyzer.Models
             this.endTick = ender;
             this.mainScaleNotes = noteTools.setMainScaleNotes(mode);
             List<TonationChord> chords = noteTools.setMainChords(mode);
-            if (chords.Count == 3)
+            if (chords.Count >= 6)
             {
                 tonic = chords[0];
-                tonic.initMainChord(ChordType.Tonic, offset);
+                tonic.initMainChord(ChordType.Tonic, offset, ChordPriority.Tonic);
                 subdominant = chords[1];
-                subdominant.initMainChord(ChordType.Subdominant, offset);
+                subdominant.initMainChord(ChordType.Subdominant, offset, ChordPriority.Subdominant);
                 dominant = chords[2];
-                dominant.initMainChord(ChordType.Dominant, offset);
+                dominant.initMainChord(ChordType.Dominant, offset, ChordPriority.Dominant);
+                secondStep = chords[3];
+                secondStep.initMainChord(ChordType.SecondStep, offset, ChordPriority.SecondStep);
+                sixthStep = chords[4];
+                sixthStep.initMainChord(ChordType.SixthStep, offset, ChordPriority.SixthStep);
+                thirdStep = chords[5];
+                thirdStep.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
             }
         }
 
