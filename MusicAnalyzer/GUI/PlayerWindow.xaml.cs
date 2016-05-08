@@ -41,11 +41,7 @@ namespace MusicAnalyzer.GUI
         private int scoreViewHeight = 80;
         
         MusicPiece musicPiece;
-
-        public PlayerWindow()
-        {
-            InitializeComponent();
-        }
+        Track newTrack;
 
         public PlayerWindow(MusicPiece musicPieceIn, string configDir, string fullFileName)
         {
@@ -53,15 +49,20 @@ namespace MusicAnalyzer.GUI
             this.musicPiece = musicPieceIn;
             this.configDirectory = configDir;
             this.sequence = musicPiece.sequence;
-            initPlayer();
             this.fileNameBox.Text = fileName = fullFileName;
+            initWindow();
+        }
+
+        public void initWindow()
+        {
+            initPlayer();
+            initScoreViewer();
+            fillScoreViewer();
             if (!musicPiece.isInputFileCorrect())
-           { 
+            {
                 System.Windows.MessageBox.Show("There is some missing information in the input file. Composing music is unavailable.", "Inpute file error", MessageBoxButton.OK);
                 composeButton.IsEnabled = false;
             }
-            initScoreViewer();
-            fillScoreViewer();
         }
 
         private void initPlayer()
@@ -78,30 +79,34 @@ namespace MusicAnalyzer.GUI
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
         }
+
         private void initScoreViewer()
         {
             scoreViewers = new List<IncipitViewerWPF>();
-            int counter = 0;
-            foreach(Track t in sequence){
-                IncipitViewerWPF scv = new IncipitViewerWPF();
-                scv.MaxWidth = 5000;
-                scv.Width = 3000;
-                scv.Height = scoreViewHeight;
-                scoreViewers.Add(scv);
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
-                scoreGrid.RowDefinitions.Add(rd);
-                scoreGrid.Children.Add(scv);
-                Grid.SetRow(scv, counter);
-                counter++;
-            }
+            for (int i = 0; i < sequence.Count; i++)            
+                addTrackWPFView(i);
         }
 
         private void fillScoreViewer()
         {
-            musicPiece.fillScoreViewer(scoreViewers);
+            for (int i = 0; i < sequence.Count; i++)
+                musicPiece.fillScoreViewer(scoreViewers[i], sequence[i], i);
             scoreGrid.Width = 3000;
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+        }
+
+        private void addTrackWPFView(int index)
+        {
+            IncipitViewerWPF scv = new IncipitViewerWPF();
+            scv.MaxWidth = 5000;
+            scv.Width = 3000;
+            scv.Height = scoreViewHeight;
+            scoreViewers.Add(scv);
+            RowDefinition rd = new RowDefinition();
+            rd.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
+            scoreGrid.RowDefinitions.Add(rd);
+            scoreGrid.Children.Add(scv);
+            Grid.SetRow(scv, index);
         }
 
         private void HandleChannelMessagePlayed(object sender, ChannelMessageEventArgs e)
@@ -232,8 +237,12 @@ namespace MusicAnalyzer.GUI
 
         private void addTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            Track newTrack = new Track();
+            newTrack = new Track();
             sequence.Add(newTrack);
+            addTrackWPFView(sequence.Count - 1);
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], newTrack, sequence.Count - 1);
+            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+            musicPiece.initTrack(scoreViewers.Count - 1, sequence.Count - 1);
         }
 
         private void deleteTrackButton_Click(object sender, RoutedEventArgs e)
@@ -245,7 +254,9 @@ namespace MusicAnalyzer.GUI
         private void composeButton_Click(object sender, RoutedEventArgs e)
         {
             musicPiece.completeNotesInfo();
-            musicPiece.findChordChanges();
+            musicPiece.findBestChords();
+            musicPiece.fillTrackNotes(ref newTrack);
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], newTrack, sequence.Count - 1);
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

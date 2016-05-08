@@ -16,6 +16,10 @@ namespace MusicAnalyzer.Models
         public Offset offset;
         public MeasureBeats beatStrength;
 
+        public TonationChord() : base()
+        {
+
+        }
         public TonationChord(ChordMode mode, ChordPriority priority, int turn) : base(mode, turn)
         {
             if ((int)priority >= (int)ChordPriority.Dominant)
@@ -122,6 +126,28 @@ namespace MusicAnalyzer.Models
             ret += " Priority: " + (int)priority;
             ret += " Beat: " + beatStrength.ToString();
             return ret;
+        }
+
+        public override bool Equals(object obj)
+        {
+            TonationChord other = null;
+            try {
+                other = (TonationChord)obj;
+            }
+            catch(InvalidCastException exc){
+                return false;
+            }
+            if (other == null)
+                return false;
+
+            if (chordNotes.Count != other.chordNotes.Count)
+                return false;
+            for (int i = 0; i < chordNotes.Count; i++)
+            {
+                if (chordNotes[i] != other.chordNotes[i])
+                    return false;
+            }
+            return true;
         }
     }
 }

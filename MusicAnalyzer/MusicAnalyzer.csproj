@@ -139,6 +139,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Analyzer\MusicIntelligence.cs" />
+    <Compile Include="Models\ComposedTrack.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Metrum.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\Offset.cs" />
     <Compile Include="Models\TimeSpanEvent.cs" />
     <Compile Include="Models\TonationChord.cs" />
+    <Compile Include="Tools\HarmonySearch.cs" />
     <Compile Include="Tools\MidiTools.cs" />
     <Compile Include="GUI\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>

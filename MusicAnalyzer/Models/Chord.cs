@@ -13,6 +13,10 @@ namespace MusicAnalyzer.Models
         public int turnover;
         public ChordMode mode;
 
+        public Chord()
+        {
+
+        }
         public Chord(ChordMode mode, int turn)
         {
             this.mode = mode;

@@ -30,6 +30,7 @@ namespace MusicAnalyzer
         Sequence reader;
         private readonly BackgroundWorker midiAnalyzer = new BackgroundWorker();
         private MusicPiece musicPiece;
+        private PlayerWindow playerWindow;
 
         public StartWindow()
         {
@@ -115,9 +116,9 @@ namespace MusicAnalyzer
 
         private void midiAnalyzer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            var window = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
-            window.Owner = this;
-            window.Show();
+            playerWindow = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
+            playerWindow.Owner = this;
+            playerWindow.Show();
         }
 
         private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -133,7 +134,7 @@ namespace MusicAnalyzer
             musicPiece.setRightNotesAndTonations();
             midiAnalyzer.ReportProgress(80);
             musicPiece.setNotesRythmicValues();
-            midiAnalyzer.ReportProgress(100);
+            midiAnalyzer.ReportProgress(90);
         }
 
         private void midiAnalyzer_ReportProgress(object sender, ProgressChangedEventArgs e)

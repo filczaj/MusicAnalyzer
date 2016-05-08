@@ -92,6 +92,8 @@ namespace MusicAnalyzer.Analyzer
 
         public PSAMControlLibrary.Clef setTrackClef(List<Note> notesList)
         {
+            if (notesList == null || notesList.Count == 0)
+                return new PSAMControlLibrary.Clef(PSAMControlLibrary.ClefType.GClef, 2);
             int bassCounter = notesList.Where(x => x.octave < 4).Count();
             if (bassCounter > notesList.Count / 2)
                 return new PSAMControlLibrary.Clef(PSAMControlLibrary.ClefType.FClef, 4);
@@ -205,6 +207,51 @@ namespace MusicAnalyzer.Analyzer
 #if DEBUG
             MidiTools.genericListSerizliator<Chord>(orderedNoteChords.Values.ToList<Chord>(), midiTools.configDirectory + "\\sortedNotes.txt");
 #endif
+        }
+
+        public void setCoreChords(ref ComposedTrack composedTrack, ComposedTrack inputTrack)
+        {
+            foreach (int timeIndex in inputTrack.noteChords.Keys)
+            {
+                if ((int)inputTrack.noteChords[timeIndex].beatStrength > (int)MeasureBeats.Weak)
+                {
+                    composedTrack.noteChords.Add(timeIndex, createMatchingChord(inputTrack.noteChords[timeIndex]));
+                }
+            }
+        }
+
+        public ComposedTrack createTrackFromScratch(ComposedTrack inputTrack)
+        {
+            ComposedTrack newTrack = new ComposedTrack();
+            setCoreChords(ref newTrack, inputTrack);
+            return newTrack;
+        }
+
+        public void changeRandomChords(ref ComposedTrack track, ComposedTrack inputTrack, int count)
+        {
+            Random random = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                int timeId = random.Next(track.noteChords.Keys.Count);
+                TonationChord tchInitial = track.noteChords[timeId];
+                TonationChord newChord = tchInitial;
+                while (tchInitial.Equals(newChord))
+                    newChord = createMatchingChord(inputTrack.noteChords[timeId]);
+            }
+        }
+
+        TonationChord createMatchingChord(TonationChord inputChord)
+        {
+            // main function - to do !!!!!!!!!
+            // use chord alternatives with their wages!
+            // tworzy tonikę na dźwięku - new Chord(n, getCurrentTonation(n.startTime);
+            return new TonationChord();
+        }
+
+        public int penaltyMatchChords(Chord a, Chord b)
+        {
+            // to do !!!!!!!!!!!!
+            return 0;
         }
 
         public Match matchChords(Chord a, Chord b)
