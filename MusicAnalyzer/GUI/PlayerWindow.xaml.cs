@@ -16,7 +16,6 @@ using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
 using NAudio.Midi;
 using MusicAnalyzer.Models;
-using MusicAnalyzer.Analyzer;
 using PSAMControlLibrary;
 
 namespace MusicAnalyzer.GUI
@@ -220,8 +219,6 @@ namespace MusicAnalyzer.GUI
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                //sequence = new Sequence();
-                //player.Sequence = sequence;
                 fileName = dlg.FileName;
                 fileNameBox.Text = fileName;
                 sequence.SaveAsync(fileName);

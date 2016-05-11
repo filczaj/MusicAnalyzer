@@ -38,7 +38,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,21 +50,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>piano.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord">
-      <HintPath>..\packages\Accord.2.14.0\lib\net40\Accord.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Audio">
-      <HintPath>..\packages\Accord.Audio.2.14.0\lib\net40\Accord.Audio.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Audio.Formats">
-      <HintPath>..\packages\Accord.Audio.2.14.0\lib\net40\Accord.Audio.Formats.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math">
-      <HintPath>..\packages\Accord.Math.2.14.0\lib\net40\Accord.Math.dll</HintPath>
-    </Reference>
     <Reference Include="AForge">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
     </Reference>
@@ -114,9 +103,6 @@
     <Reference Include="Sanford.Threading">
       <HintPath>..\Library\Sanford.Threading.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -138,10 +124,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analyzer\MusicIntelligence.cs" />
+    <Compile Include="Tools\MusicIntelligence.cs" />
     <Compile Include="Models\ComposedTrack.cs" />
     <Compile Include="Models\Enums.cs" />
-    <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Metrum.cs" />
     <Compile Include="Models\MusicPiece.cs" />
     <Compile Include="Models\Offset.cs" />
@@ -157,33 +142,14 @@
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\NotesList.cs" />
-    <Compile Include="Tools\FreqMapper.cs" />
     <Compile Include="Tools\IOTools.cs" />
     <Compile Include="Tools\NoteTools.cs" />
-    <Compile Include="Tools\SoundAnalysis.cs" />
     <Compile Include="Tools\SystemTools.cs" />
-    <Page Include="GUI\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Analyzer\AudioPlayer.cs" />
-    <Compile Include="Analyzer\ComplexImage.cs" />
-    <Compile Include="Tools\FourierTransform.cs" />
-    <Compile Include="Analyzer\Harmonics.cs" />
-    <Compile Include="Analyzer\NotesPicker.cs" />
-    <Compile Include="Analyzer\TonationFinder.cs" />
-    <Compile Include="Models\WAVReader.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tools\Date2AxisConverter.cs" />
     <Compile Include="Models\Chord.cs" />
-    <Compile Include="Models\MyFrame.cs" />
-    <Compile Include="GUI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="GUI\PlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +178,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -255,9 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\volume_up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="piano.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\piano.ico" />

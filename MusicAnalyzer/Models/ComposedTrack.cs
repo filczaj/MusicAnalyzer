@@ -1,9 +1,9 @@
-﻿using MusicAnalyzer.Analyzer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicAnalyzer.Tools;
 
 namespace MusicAnalyzer.Models
 {
@@ -34,11 +34,13 @@ namespace MusicAnalyzer.Models
         public void setHarmonyMatch(ComposedTrack inputTrack, MusicIntelligence musicAI)
         {
             this.harmonyMatch = 0;
+            IEnumerable<int> timeIndices;
             for (int i = 0; i < this.noteChords.Keys.Count; i++)
             {
-                foreach (int inputIndex in inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i] && x < this.noteChords.Keys[i + 1]))
+                timeIndices = inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i] && x < this.noteChords.Keys[i + 1]).ToArray();
+                foreach (int inputIndex in timeIndices)
                 {
-                    harmonyMatch += musicAI.penaltyMatchChords(this.noteChords[i], inputTrack.noteChords[inputIndex]);
+                    harmonyMatch += (musicAI.penaltyMatchChords(this.noteChords[i], inputTrack.noteChords[inputIndex]) * inputTrack.noteChords[inputIndex].duration / 100);
                 }
             }
         }

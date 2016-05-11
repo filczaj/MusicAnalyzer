@@ -13,7 +13,7 @@ namespace MusicAnalyzer.Models
     {
         // dodać pozostałe charakterystyczne akordy : od 2., od 6.
         public TonationChord tonic, subdominant, dominant, secondStep, sixthStep, thirdStep;
-        List<int> mainScaleNotes;
+        public List<int> mainScaleNotes;
         public Offset offset;
         public ChordMode mode;
         NoteTools noteTools;

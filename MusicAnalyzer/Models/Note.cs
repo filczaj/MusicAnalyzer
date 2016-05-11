@@ -24,21 +24,6 @@ namespace MusicAnalyzer.Models
 
         public double noteExtension { get; set; }
 
-        public Note() {
-            startTime = -1;
-            endTime = -1;
-        }
-
-        public Note(double freq, int startTime, int endTime, String note, String basicNote)
-        {
-            this.freq = freq;
-            this.startTime = startTime;
-            this.endTime = endTime;
-            this.duration = endTime - startTime;
-            this.note = note;
-            this.basicNote = basicNote;
-        }
-
         public Note(int note_id, int starter, int channel)
         {
             this.noteID = note_id;

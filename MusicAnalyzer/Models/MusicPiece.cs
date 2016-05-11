@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MusicAnalyzer.Analyzer;
 using PSAMControlLibrary;
 
 namespace MusicAnalyzer.Models
@@ -71,6 +70,7 @@ namespace MusicAnalyzer.Models
         public void completeNotesInfo()
         {
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
+            musicIntelligence.setChordsDuration(ref orderedNoteChords);
             musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
             musicIntelligence.initMeasureBeats(meterChanges);
             musicIntelligence.setBeatStrength(ref orderedNoteChords, meterChanges, midiTools, Division);

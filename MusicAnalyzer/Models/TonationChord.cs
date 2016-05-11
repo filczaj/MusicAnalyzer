@@ -1,9 +1,9 @@
-﻿using MusicAnalyzer.Analyzer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicAnalyzer.Tools;
 
 namespace MusicAnalyzer.Models
 {
@@ -15,6 +15,7 @@ namespace MusicAnalyzer.Models
         public ChordPriority priority;
         public Offset offset;
         public MeasureBeats beatStrength;
+        public int duration;
 
         public TonationChord() : base()
         {
@@ -122,13 +123,14 @@ namespace MusicAnalyzer.Models
             }
             ret += "T.Offset: " + offset.ToString();
             ret += " Mode: " + mode.ToString();
+            ret += " Duration: " + duration.ToString();
             ret += " Scale chord: " + scaleChordType.ToString();
             ret += " Priority: " + (int)priority;
             ret += " Beat: " + beatStrength.ToString();
             return ret;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object obj) // porównanie niesymetryczne!!!
         {
             TonationChord other = null;
             try {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicAnalyzer.Models;
 using System.Diagnostics;
-using MusicAnalyzer.Analyzer;
+using MusicAnalyzer.Tools;
 
 namespace MusicAnalyzer.Tools
 {

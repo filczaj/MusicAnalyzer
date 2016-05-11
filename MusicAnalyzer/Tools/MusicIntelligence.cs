@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MusicAnalyzer.Models;
 using MusicAnalyzer.Tools;
 
-namespace MusicAnalyzer.Analyzer
+namespace MusicAnalyzer.Tools
 {
     public class MusicIntelligence
     {
@@ -131,6 +131,18 @@ namespace MusicAnalyzer.Analyzer
             return orderedNoteChords;
         }
 
+        public void setChordsDuration(ref SortedList<int, TonationChord> chordsList)
+        {
+            if (chordsList.Count == 1)
+                chordsList.First().Value.duration = 0;
+            List<int> timeIndices = chordsList.Keys.ToList();
+            for (int i = timeIndices.Count - 2; i >= 0; i--)
+            {
+                chordsList[timeIndices[i]].duration = timeIndices[i + 1] - timeIndices[i];
+            }
+            chordsList[timeIndices[timeIndices.Count - 1]].duration = 2000;
+        }
+
         public void setChordTypes(SortedList<int, TonationChord> chordsList, List<Tonation> tonations, MidiTools midiTools)
         {
             foreach (int chordsIndex in chordsList.Keys)
@@ -222,7 +234,7 @@ namespace MusicAnalyzer.Analyzer
 
         public ComposedTrack createTrackFromScratch(ComposedTrack inputTrack)
         {
-            ComposedTrack newTrack = new ComposedTrack();
+            ComposedTrack newTrack = new ComposedTrack(); // to do !!!!!!!!!!!!!!
             setCoreChords(ref newTrack, inputTrack);
             return newTrack;
         }
@@ -248,10 +260,49 @@ namespace MusicAnalyzer.Analyzer
             return new TonationChord();
         }
 
-        public int penaltyMatchChords(Chord a, Chord b)
+        public int penaltyMatchChords(TonationChord composed, TonationChord input)
         {
-            // to do !!!!!!!!!!!!
-            return 0;
+            int penalty = 0;
+            if (input.Equals(composed))
+                return penalty;
+            foreach(int noteIndex in composed.chordNotes)
+                if (!input.tonation.mainScaleNotes.Contains(noteIndex))
+                    penalty += 10;
+            foreach (int noteIndex in input.chordNotes)
+            {
+                switch (composed.scaleChordType)
+                {
+                    case ChordType.Tonic:
+                        if (!composed.tonation.tonic.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    case ChordType.Dominant:
+                        if (!composed.tonation.dominant.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    case ChordType.Subdominant:
+                        if (!composed.tonation.subdominant.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    case ChordType.SixthStep:
+                        if (!composed.tonation.sixthStep.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    case ChordType.SecondStep:
+                        if (!composed.tonation.secondStep.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    case ChordType.ThirdStep:
+                        if (!composed.tonation.thirdStep.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                    default:
+                        if (!composed.chordNotes.Contains(noteIndex))
+                            penalty += 1;
+                        break;
+                }
+            }
+            return penalty;
         }
 
         public Match matchChords(Chord a, Chord b)
