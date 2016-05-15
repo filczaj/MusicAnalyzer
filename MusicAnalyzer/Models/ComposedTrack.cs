@@ -28,7 +28,7 @@ namespace MusicAnalyzer.Models
 
         public ComposedTrack()
         {
-
+            this.noteChords = new SortedList<int, TonationChord>();
         }
 
         public void setHarmonyMatch(ComposedTrack inputTrack, MusicIntelligence musicAI)

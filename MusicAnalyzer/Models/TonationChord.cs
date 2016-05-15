@@ -114,6 +114,13 @@ namespace MusicAnalyzer.Models
                 chordNotes[i] = (chordNotes[i] + (int)off) % 12;
         }
 
+        public void fillTonationChordData(TonationChord inputChord)
+        {
+            this.offset = inputChord.offset;
+            this.beatStrength = inputChord.beatStrength;
+            this.tonation = inputChord.tonation;
+        }
+
         public override string ToString()
         {
             string ret = "Chord notes count = " + this.chordNotes.Count.ToString() + "; " ;
@@ -132,6 +139,8 @@ namespace MusicAnalyzer.Models
 
         public override bool Equals(object obj) // porównanie niesymetryczne!!!
         {
+            if (obj == null)
+                return false;
             TonationChord other = null;
             try {
                 other = (TonationChord)obj;

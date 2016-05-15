@@ -79,12 +79,14 @@ namespace MusicAnalyzer.Models
 
         public int getNoteIndexInScale(Note n)
         {
-            int basicId = (n.noteID - 3) % 12 + (int)offset;
+            int basicId = (n.noteID - 3) % 12 ;
             return basicId;
         }
 
         public List<int> getChordNotesOnIndex(int index)
         {
+            if (!mainScaleNotes.Contains(index))
+                return new List<int>() { index };
             List<int> chordNoteIndexes = new List<int>();
             chordNoteIndexes.Add((mainScaleNotes[index] + (int)offset) % 12);
             chordNoteIndexes.Add((mainScaleNotes[(index+2) % 7] + (int)offset) % 12);

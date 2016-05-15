@@ -223,19 +223,22 @@ namespace MusicAnalyzer.Tools
 
         public void setCoreChords(ref ComposedTrack composedTrack, ComposedTrack inputTrack)
         {
+            TonationChord lastChord = null;
             foreach (int timeIndex in inputTrack.noteChords.Keys)
             {
                 if ((int)inputTrack.noteChords[timeIndex].beatStrength > (int)MeasureBeats.Weak)
                 {
-                    composedTrack.noteChords.Add(timeIndex, createMatchingChord(inputTrack.noteChords[timeIndex]));
+                    composedTrack.noteChords.Add(timeIndex, createMatchingChord(inputTrack.noteChords[timeIndex], lastChord));
                 }
+                lastChord = inputTrack.noteChords[timeIndex];
             }
         }
 
         public ComposedTrack createTrackFromScratch(ComposedTrack inputTrack)
         {
-            ComposedTrack newTrack = new ComposedTrack(); // to do !!!!!!!!!!!!!!
+            ComposedTrack newTrack = new ComposedTrack();
             setCoreChords(ref newTrack, inputTrack);
+            setChordsDuration(ref newTrack.noteChords);
             return newTrack;
         }
 
@@ -246,18 +249,70 @@ namespace MusicAnalyzer.Tools
             {
                 int timeId = random.Next(track.noteChords.Keys.Count);
                 TonationChord tchInitial = track.noteChords[timeId];
-                TonationChord newChord = tchInitial;
-                while (tchInitial.Equals(newChord))
-                    newChord = createMatchingChord(inputTrack.noteChords[timeId]);
+                if (tchInitial.scaleChordType == ChordType.Other)
+                    break;
+                else
+                    track.noteChords[timeId] = getRandomAlternativeChord(inputTrack.noteChords[timeId]);
             }
         }
 
-        TonationChord createMatchingChord(TonationChord inputChord)
+        public TonationChord getRandomAlternativeChord(TonationChord inputChord)
         {
-            // main function - to do !!!!!!!!!
-            // use chord alternatives with their wages!
+            List<TonationChord> chordsToChoose = getAlternativeChords(inputChord);
+            if (chordsToChoose.Count == 0)
+                return new TonationChord();
+            Random r = new Random();
+            if (chordsToChoose.Count > 1 && r.Next(1000) % 3 == 0)
+                return chordsToChoose[1];
+            else
+                return chordsToChoose[0];
+        }
+
+        public List<TonationChord> getAlternativeChords(TonationChord inputChord)
+        {
+            List<TonationChord> alternativeChords = new List<TonationChord>();
+            switch (inputChord.scaleChordType)
+            {
+                case ChordType.Tonic:
+                    alternativeChords.Add(inputChord.tonation.sixthStep);
+                    alternativeChords.Add(inputChord.tonation.thirdStep);
+                    break;
+                case ChordType.Subdominant:
+                    alternativeChords.Add(inputChord.tonation.secondStep);
+                    alternativeChords.Add(inputChord.tonation.sixthStep);
+                    break;
+                case ChordType.Dominant:
+                    alternativeChords.Add(inputChord.tonation.thirdStep);
+                    break;
+                case ChordType.SixthStep:
+                    alternativeChords.Add(inputChord.tonation.tonic);
+                    alternativeChords.Add(inputChord.tonation.subdominant);
+                    break;
+                case ChordType.SecondStep:
+                    alternativeChords.Add(inputChord.tonation.subdominant);
+                    break;
+                case ChordType.ThirdStep:
+                    alternativeChords.Add(inputChord.tonation.dominant);
+                    alternativeChords.Add(inputChord.tonation.tonic);
+                    break;
+                default:
+                    break;
+            }
+            return alternativeChords;
+        }
+
+        TonationChord createMatchingChord(TonationChord inputChord, TonationChord lastChord)
+        {
+            List<TonationChord> possibleChords = getPossibleChords(inputChord);
+            TonationChord resultChord = getRandomlyWeightedChord(possibleChords, lastChord);
+            if (resultChord == null)
+                return new TonationChord(new Note(inputChord.chordNotes[0], 0, 1), inputChord.tonation, this);
+            else
+            {
+                resultChord.fillTonationChordData(inputChord);
+                return resultChord;
+            }                
             // tworzy tonikę na dźwięku - new Chord(n, getCurrentTonation(n.startTime);
-            return new TonationChord();
         }
 
         public int penaltyMatchChords(TonationChord composed, TonationChord input)
@@ -382,6 +437,35 @@ namespace MusicAnalyzer.Tools
             }
             pureNotes.Sort();
             return new Chord(pureNotes);
+        }
+
+        List<TonationChord> getPossibleChords(TonationChord inputChord)
+        {
+            List<TonationChord> possibleChords = new List<TonationChord>() { inputChord.tonation.tonic, inputChord.tonation.subdominant, 
+                inputChord.tonation.dominant, inputChord.tonation.secondStep, inputChord.tonation.sixthStep, inputChord.tonation.thirdStep };
+            foreach (int noteId in inputChord.chordNotes)
+                possibleChords.RemoveAll(x => !x.chordNotes.Contains(noteId));
+            return possibleChords;
+        }
+
+        TonationChord getRandomlyWeightedChord(List<TonationChord> possibleChords, TonationChord lastChord)
+        {
+            if (possibleChords.Count == 0)
+                return null;
+            
+            Random random = new Random();
+            if (possibleChords.Exists(x => x.Equals(lastChord)))
+                if (random.Next() % 3 == 0)
+                    return lastChord;
+
+            List<int> chordsPriorities = new List<int>();
+            chordsPriorities.Add((int)possibleChords[0].priority);
+            for (int i = 1; i < possibleChords.Count; i++)
+                chordsPriorities.Add(chordsPriorities[i - 1] + (int)possibleChords[i].priority);
+            int index = random.Next(chordsPriorities.Last());
+            index = chordsPriorities.First(x => x >= index);
+            index = chordsPriorities.IndexOf(index);
+            return possibleChords[index];
         }
 
         public Match notesMatch(Chord chord, Note note, Tonation tonation)

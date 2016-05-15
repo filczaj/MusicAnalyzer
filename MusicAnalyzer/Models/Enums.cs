@@ -39,22 +39,14 @@ namespace MusicAnalyzer.Models
 
     public enum ChordPriority
     {
-        Tonic = 8,
+        Tonic = 6,
         Subdominant = 4,
         Dominant = 4,
         SecondStep = 2,
-        SixthStep = 2,
-        ThirdStep = 1,
+        SixthStep = 3,
+        ThirdStep = 2,
         SeventhStem = 0,
         Default = 0
-    };
-
-    public static class ChordAlternative
-    {
-        public static string Tonic {get { return "SixthStep"; }}
-        public static string Subdominant { get { return "SecondStep"; } }
-        public static string Dominant { get { return "ThirdStep"; } }
-        public static string Other { get { return ""; } }
     };
 
     public enum MeasureBeats
