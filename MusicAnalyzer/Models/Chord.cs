@@ -36,6 +36,14 @@ namespace MusicAnalyzer.Models
             setChordMode();
         }
 
+        public Chord(List<int> notesList, ChordMode modee)
+        {
+            this.chordNotes = new List<int>();
+            foreach (int n in notesList)
+                this.chordNotes.Add(n);
+            this.mode = modee;
+        }
+
         public void setChordMode()
         {
             if (chordNotes.Count < 3)

@@ -89,7 +89,7 @@ namespace MusicAnalyzer.GUI
         private void fillScoreViewer()
         {
             for (int i = 0; i < sequence.Count; i++)
-                musicPiece.fillScoreViewer(scoreViewers[i], sequence[i], i);
+                musicPiece.fillScoreViewer(scoreViewers[i], i);
             scoreGrid.Width = 3000;
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
         }
@@ -237,7 +237,7 @@ namespace MusicAnalyzer.GUI
             newTrack = new Track();
             sequence.Add(newTrack);
             addTrackWPFView(sequence.Count - 1);
-            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], newTrack, sequence.Count - 1);
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], sequence.Count - 1);
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
             musicPiece.initTrack(scoreViewers.Count - 1, sequence.Count - 1);
         }
@@ -252,8 +252,8 @@ namespace MusicAnalyzer.GUI
         {
             musicPiece.completeNotesInfo();
             musicPiece.findBestChords();
-            musicPiece.fillTrackNotes(ref newTrack);
-            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], newTrack, sequence.Count - 1);
+            musicPiece.fillNewTrackNotes();
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

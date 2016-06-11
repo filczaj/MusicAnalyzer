@@ -164,6 +164,21 @@ namespace MusicAnalyzer.Tools
             chord.chordNotes.AddRange(asIntegers);
             chords.Add(chord);
 
+            if (lines.ToList().Count > 7)
+            {
+                chord = new TonationChord(mode, ChordPriority.Dominant, 0);
+                chord.chordNotes = new List<int>();
+                asIntegers = lines.ElementAt(6).Split(' ').Select(s => int.Parse(s)).ToArray();
+                chord.chordNotes.AddRange(asIntegers);
+                chords.Add(chord);
+
+                chord = new TonationChord(mode, ChordPriority.ThirdStep, 0);
+                chord.chordNotes = new List<int>();
+                asIntegers = lines.ElementAt(7).Split(' ').Select(s => int.Parse(s)).ToArray();
+                chord.chordNotes.AddRange(asIntegers);
+                chords.Add(chord);
+            }
+
             return chords;
         }
 

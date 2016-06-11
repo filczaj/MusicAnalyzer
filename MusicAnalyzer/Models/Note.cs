@@ -33,6 +33,17 @@ namespace MusicAnalyzer.Models
             this.trackID = channel;
         }
 
+        public Note(int note_id, int starter, int duration, int trackID, bool metric)
+        {
+            this.noteID = note_id;
+            this.startTime = starter;
+            this.duration = duration;
+            this.endTime = starter + duration;
+            this.trackID = trackID;
+            this.strongMetric = metric;
+            this.octave = (note_id + 9) / 12;
+        }
+
         public override bool Equals(object obj)
         {
             Note other = null;

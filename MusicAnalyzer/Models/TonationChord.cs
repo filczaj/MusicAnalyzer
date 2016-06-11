@@ -54,6 +54,16 @@ namespace MusicAnalyzer.Models
             setChordTypesAndPriority(musicAI);
         }
 
+        public TonationChord(TonationChord inputeChord)
+            : base(inputeChord.chordNotes, inputeChord.mode)
+        {
+            this.scaleChordType = inputeChord.scaleChordType;
+            this.priority = inputeChord.priority;
+            this.offset = inputeChord.offset;
+            this.isScaleBasic = inputeChord.isScaleBasic;
+            this.tonation = inputeChord.tonation;
+        }
+
         public void setChordTypesAndPriority(MusicIntelligence musicAI)
         {
             if ((int)musicAI.matchChords(this, tonation.tonic) > (int)Match.Medium)
@@ -74,6 +84,12 @@ namespace MusicAnalyzer.Models
                 this.scaleChordType = ChordType.Dominant;
                 this.priority = ChordPriority.Dominant;
             }
+            else if ((tonation.mode == ChordMode.Minor) && ((int)musicAI.matchChords(this, tonation.minorDominant) > (int)Match.Medium))
+            {
+                this.isScaleBasic = true;
+                this.scaleChordType = ChordType.Dominant;
+                this.priority = ChordPriority.Dominant;
+            }
             else if ((int)musicAI.matchChords(this, tonation.sixthStep) > (int)Match.Medium)
             {
                 this.isScaleBasic = false;
@@ -87,6 +103,12 @@ namespace MusicAnalyzer.Models
                 this.priority = ChordPriority.SecondStep;
             }
             else if ((int)musicAI.matchChords(this, tonation.thirdStep) > (int)Match.Medium)
+            {
+                this.isScaleBasic = false;
+                this.scaleChordType = ChordType.ThirdStep;
+                this.priority = ChordPriority.ThirdStep;
+            }
+            else if (((tonation.mode == ChordMode.Minor) && (int)musicAI.matchChords(this, tonation.majorThird) > (int)Match.Medium))
             {
                 this.isScaleBasic = false;
                 this.scaleChordType = ChordType.ThirdStep;
@@ -137,7 +159,7 @@ namespace MusicAnalyzer.Models
             return ret;
         }
 
-        public override bool Equals(object obj) // porównanie niesymetryczne!!!
+        public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;

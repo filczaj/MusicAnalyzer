@@ -70,14 +70,14 @@ namespace MusicAnalyzer.Models
         public void completeNotesInfo()
         {
             orderedNoteChords = musicIntelligence.createOrderedChords(notesList, midiTools, tonations);
-            musicIntelligence.setChordsDuration(ref orderedNoteChords);
+            musicIntelligence.setChordsDuration(orderedNoteChords);
             musicIntelligence.setChordTypes(orderedNoteChords, tonations, midiTools);
             musicIntelligence.initMeasureBeats(meterChanges);
             musicIntelligence.setBeatStrength(ref orderedNoteChords, meterChanges, midiTools, Division);
             inputTrack = new ComposedTrack(orderedNoteChords);
         }
 
-        public void fillScoreViewer(PSAMWPFControlLibrary.IncipitViewerWPF view, Track track, int index)
+        public void fillScoreViewer(PSAMWPFControlLibrary.IncipitViewerWPF view, int index)
         {
             view.ClearMusicalIncipit();
             PSAMControlLibrary.Key key;
@@ -97,6 +97,8 @@ namespace MusicAnalyzer.Models
                     midiTools.getSharpOrFlat(n), midiTools.getNoteOctave(n), 
                     n.rythmicValue, NoteStemDirection.Down, NoteTieType.None, 
                     new List<NoteBeamType>() { NoteBeamType.Single });
+                if (last != null && last.startTime == n.startTime)
+                    nView.IsChordElement = true;
                 if (last != null && musicIntelligence.isBairlineNow(last.startTime + (int)(4 * Division / midiTools.ProperDurationScale(last, Division)), meterChanges, Division, midiTools))
                 {
                     view.AddMusicalSymbol(new Barline());
@@ -127,7 +129,7 @@ namespace MusicAnalyzer.Models
             }
         }
 
-        public void findBestChords() // at composedTrack
+        public void findBestChords()
         {
             HarmonySearch harmonySearch = new HarmonySearch(inputTrack, musicIntelligence);
             harmonySearch.generateInitialMemorySet();
@@ -135,10 +137,19 @@ namespace MusicAnalyzer.Models
             composedTrack = harmonySearch.getBestTrack();
         }
 
-        public void fillTrackNotes(ref Track addedTrack)
+        public void fillNewTrackNotes()
         {
+            composedTrack.trackID = this.tracksProjection.Keys.Max() + 1;
+            composedTrack.viewID = this.tracksProjection.Values.Max() + 1;
+            this.tracksProjection.Add(composedTrack.trackID, composedTrack.viewID);
             // create MidiTrack from ChordsList - to do !!!!!!!!!
-            // create Notes and add to notesList with trackID
+            foreach (int timeIndex in composedTrack.noteChords.Keys)
+            {
+                foreach (int noteIndex in composedTrack.noteChords[timeIndex].chordNotes)
+                {
+                    notesList.Add(new Note(noteIndex + 51, timeIndex, composedTrack.noteChords[timeIndex].duration, composedTrack.trackID, true));
+                }
+            }
         }
 
         public bool isInputFileCorrect()

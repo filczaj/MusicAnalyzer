@@ -11,14 +11,17 @@ namespace MusicAnalyzer.Tools
 {
     public class HarmonySearch
     {
-        readonly int hms = 30;
-        readonly double hmcr = 0.9; // harmony memory considering rate
+        string configDirectory = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
+        List<string> bestTrackHistory;
+
+        readonly int hms = 70;
+        readonly double hmcr = 0.7; // harmony memory considering rate
         readonly double par = 0.3; // pitch adjusting rate
         readonly int delta = 1; // the amount between two neighboring values in discrete candidate set
 
-        readonly int maxIterations = 1000000;
+        readonly int maxIterations = 30000;
         readonly int bestTrackUnchanged = 10000;
-        readonly int maxExecutionTimeInSeconds = 300;
+        readonly int maxExecutionTimeInSeconds = 120;
 
         int it = 0;
         int bestTrackChangeCounter = 0;
@@ -26,7 +29,7 @@ namespace MusicAnalyzer.Tools
         Stopwatch stopwatch;
         Random random = new Random();
 
-        SortedList<int, ComposedTrack> harmonyMemory; // memory of compositions with harmony match value as a key
+        List<ComposedTrack> harmonyMemory; // memory of compositions with harmony match value as a key
         ComposedTrack inputTrack;
         MusicIntelligence musicAI;
 
@@ -34,6 +37,8 @@ namespace MusicAnalyzer.Tools
         {
             this.inputTrack = input;
             this.musicAI = musicIntelligence;
+            this.harmonyMemory = new List<ComposedTrack>();
+            this.bestTrackHistory = new List<string>();
         }
 
         public void runHarmonySearchLoop()
@@ -45,14 +50,19 @@ namespace MusicAnalyzer.Tools
                 ComposedTrack newTrack = getNewTrack();
                 improviseOnTrack(ref newTrack, inputTrack);
                 updateMemoryWithTrack(newTrack);
+                if (it % 10 == 1)
+                {
+                    bestTrackHistory.Add("Epoch: " + it.ToString() + "; match = " + getBestTrack().harmonyMatch.ToString());
+                }
             }
+            genericListSerizliator<string>(bestTrackHistory, configDirectory + "\\bestTrackHistory.txt");
             stopwatch.Stop();
         }
 
         ComposedTrack getNewTrack()
         {
             ComposedTrack newTrack;
-            if (random.NextDouble() <= hmcr)
+            if (random.NextDouble() > hmcr)
             {
                 newTrack = musicAI.createTrackFromScratch(inputTrack);
                 newTrack.setHarmonyMatch(inputTrack, musicAI);
@@ -60,7 +70,10 @@ namespace MusicAnalyzer.Tools
             }
             else
             {
-                newTrack = harmonyMemory[random.Next(hms)];
+                int newTrackId = 0;
+                while (newTrackId == 0)
+                    newTrackId = random.Next(hms);
+                newTrack = harmonyMemory[newTrackId];
                 isFromMemory = true;
             }
             return newTrack;
@@ -72,7 +85,6 @@ namespace MusicAnalyzer.Tools
             {
                 musicAI.changeRandomChords(ref track, inputTrack, delta);
                 track.setHarmonyMatch(inputTrack, musicAI);
-                isFromMemory = false;
             }
         }
         void updateMemoryWithTrack(ComposedTrack track)
@@ -81,11 +93,13 @@ namespace MusicAnalyzer.Tools
                 bestTrackChangeCounter = 0;
             else
                 bestTrackChangeCounter++;
-            if (track.harmonyMatch < harmonyMemory[hms - 1].harmonyMatch)
-            {
-                harmonyMemory.RemoveAt(hms - 1);
-                harmonyMemory.Add(track.harmonyMatch, track);
-            }
+            if (!isFromMemory)
+                if (track.harmonyMatch < harmonyMemory[hms - 1].harmonyMatch)
+                {
+                    harmonyMemory.RemoveAt(hms - 1);
+                    harmonyMemory.Add(track);
+                }
+            harmonyMemory.Sort((x, y) => x.harmonyMatch.CompareTo(y.harmonyMatch));
         }
 
         bool isStopCriteriaReached()
@@ -98,20 +112,34 @@ namespace MusicAnalyzer.Tools
 
         public void generateInitialMemorySet()
         {
+            ComposedTrack newTrack;
             for (int i = 0; i < hms; i++)
             {
-                ComposedTrack newTrack = musicAI.createTrackFromScratch(inputTrack);
+                newTrack = musicAI.createTrackFromScratch(inputTrack);
                 newTrack.setHarmonyMatch(inputTrack, musicAI);
-                harmonyMemory.Add(newTrack.harmonyMatch, newTrack);
+                harmonyMemory.Add(newTrack);
             }
+            harmonyMemory.Sort((x, y) => x.harmonyMatch.CompareTo(y.harmonyMatch));
         }
 
         public ComposedTrack getBestTrack()
         {
-            if (harmonyMemory != null && harmonyMemory.Count > 0)
+            if (harmonyMemory != null && harmonyMemory.Count > 0){
+                harmonyMemory.Sort((x, y) => x.harmonyMatch.CompareTo(y.harmonyMatch));
                 return harmonyMemory[0];
+            }                
             else
                 return null;
+        }
+
+        public static void genericListSerizliator<T>(List<T> elements, string fileName)
+        {
+            List<string> allLines = new List<string>();
+            foreach (T element in elements)
+            {
+                allLines.Add(element.ToString());
+            }
+            IOTools.saveTo(allLines, fileName);
         }
     }
 }

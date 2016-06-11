@@ -37,10 +37,13 @@ namespace MusicAnalyzer.Models
             IEnumerable<int> timeIndices;
             for (int i = 0; i < this.noteChords.Keys.Count; i++)
             {
-                timeIndices = inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i] && x < this.noteChords.Keys[i + 1]).ToArray();
+                if (i < this.noteChords.Keys.Count -1)
+                    timeIndices = inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i] && x < this.noteChords.Keys[i + 1]).ToArray();
+                else
+                    timeIndices = inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i]).ToArray();
                 foreach (int inputIndex in timeIndices)
                 {
-                    harmonyMatch += (musicAI.penaltyMatchChords(this.noteChords[i], inputTrack.noteChords[inputIndex]) * inputTrack.noteChords[inputIndex].duration / 100);
+                    harmonyMatch += (musicAI.penaltyMatchChords(this.noteChords[noteChords.Keys[i]], inputTrack.noteChords[inputIndex], i > 0 ? this.noteChords[noteChords.Keys[i-1]] : null) * inputTrack.noteChords[inputIndex].duration) / 100;
                 }
             }
         }

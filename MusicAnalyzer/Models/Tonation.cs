@@ -11,8 +11,7 @@ namespace MusicAnalyzer.Models
 {
     public class Tonation : TimeSpanEvent
     {
-        // dodać pozostałe charakterystyczne akordy : od 2., od 6.
-        public TonationChord tonic, subdominant, dominant, secondStep, sixthStep, thirdStep;
+        public TonationChord tonic, subdominant, dominant, secondStep, sixthStep, thirdStep, minorDominant, majorThird;
         public List<int> mainScaleNotes;
         public Offset offset;
         public ChordMode mode;
@@ -48,6 +47,13 @@ namespace MusicAnalyzer.Models
                 thirdStep = chords[5];
                 thirdStep.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
             }
+            if (chords.Count > 7)
+            {
+                minorDominant = chords[6];
+                minorDominant.initMainChord(ChordType.Dominant, offset, ChordPriority.Dominant);
+                majorThird = chords[7];
+                majorThird.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
+            }
         }
 
         public Tonation(int intOffset, ChordMode tonationMode, int starter, NoteTools tools, int ender)
@@ -75,6 +81,13 @@ namespace MusicAnalyzer.Models
                 thirdStep = chords[5];
                 thirdStep.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
             }
+            if (chords.Count > 7)
+            {
+                minorDominant = chords[6];
+                minorDominant.initMainChord(ChordType.Dominant, offset, ChordPriority.Dominant);
+                majorThird = chords[7];
+                majorThird.initMainChord(ChordType.ThirdStep, offset, ChordPriority.ThirdStep);
+            }
         }
 
         public int getNoteIndexInScale(Note n)
@@ -88,9 +101,9 @@ namespace MusicAnalyzer.Models
             if (!mainScaleNotes.Contains(index))
                 return new List<int>() { index };
             List<int> chordNoteIndexes = new List<int>();
-            chordNoteIndexes.Add((mainScaleNotes[index] + (int)offset) % 12);
-            chordNoteIndexes.Add((mainScaleNotes[(index+2) % 7] + (int)offset) % 12);
-            chordNoteIndexes.Add((mainScaleNotes[(index + 4) % 7] + (int)offset) % 12);
+            chordNoteIndexes.Add((mainScaleNotes.IndexOf(index) + (int)offset) % 12);
+            chordNoteIndexes.Add((mainScaleNotes.IndexOf((index+2) % 7) + (int)offset) % 12);
+            chordNoteIndexes.Add((mainScaleNotes.IndexOf((index + 4) % 7) + (int)offset) % 12);
             return chordNoteIndexes;
         }
 
