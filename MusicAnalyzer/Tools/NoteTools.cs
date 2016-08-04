@@ -189,7 +189,7 @@ namespace MusicAnalyzer.Tools
             n.octave = getNoteOctave(n);
             if (n.startTime >= 0 && n.duration >= 0 && n.endTime < 0)
                 n.endTime = n.startTime + n.duration;
-            if (n.startTime >= 0 && n.endTime >= 0)
+            if (n.startTime >= 0 && n.endTime >= 0 && n.duration < 0)
                 n.duration = n.endTime - n.startTime;
         }
 
@@ -260,15 +260,40 @@ namespace MusicAnalyzer.Tools
                 return Sanford.Multimedia.Key.CMajor;
         }
 
-        public double ProperDurationScale(Note n, int division)
+        public double ProperDurationAndExtension(Note n, int division)
         {
             if (n.duration < 1)
                 return 0;
-            double p = Math.Log(n.duration / (double)(division * 4), 2);
-            p = Math.Ceiling(p);
+            double scaleDuration = n.duration / (double)(division * 4);
+            double p = Math.Log(scaleDuration, 2);
+            p = Math.Floor(p);
             p = Math.Pow(2, (-1 * p));
-            return p;
+            if (scaleDuration > 1.75 / (double)p)
+                return p / 2.0;
+            else if (scaleDuration > 1.5 / (double)p)
+                n.noteExtension = 1.75;
+                else if (scaleDuration > 1.0 / (double)p)
+                    n.noteExtension = 1.5;
+                return p;
+        }
+
+        public PSAMControlLibrary.NoteStemDirection getNoteStemDirection(Note n, Note last, PSAMControlLibrary.ClefType clef)
+        {
+            if (last != null && n.startTime == last.startTime)
+                return last.noteStemDirection;
+            switch (clef)
+            {
+                case PSAMControlLibrary.ClefType.GClef:
+                    if (n.noteID > 49) return PSAMControlLibrary.NoteStemDirection.Down;
+                    else
+                        return PSAMControlLibrary.NoteStemDirection.Up;
+                case PSAMControlLibrary.ClefType.FClef:
+                    if (n.noteID > 28) return PSAMControlLibrary.NoteStemDirection.Down;
+                    else
+                        return PSAMControlLibrary.NoteStemDirection.Up;
+                default:
+                    return PSAMControlLibrary.NoteStemDirection.Up;
+            }
         }
     }
 }
-

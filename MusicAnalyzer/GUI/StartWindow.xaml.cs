@@ -131,9 +131,9 @@ namespace MusicAnalyzer
             midiAnalyzer.ReportProgress(55);
             musicPiece.initMetrum();
             midiAnalyzer.ReportProgress(67);
-            musicPiece.setRightNotesAndTonations();
+            musicPiece.setRightNotesAndTonations(null);
             midiAnalyzer.ReportProgress(80);
-            musicPiece.setNotesRythmicValues();
+            musicPiece.setNotesRythmicValues(-1);
             midiAnalyzer.ReportProgress(90);
         }
 

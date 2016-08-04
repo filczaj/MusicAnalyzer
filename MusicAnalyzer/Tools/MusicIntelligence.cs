@@ -58,7 +58,7 @@ namespace MusicAnalyzer.Tools
             return tonations;
         }
 
-        public void setRightNoteSigns(List<Tonation> tonations, ref NotesList notesList, MidiTools midiTools){
+        public void setRightNoteSigns(List<Tonation> tonations, ref IEnumerable<Note> notesList, MidiTools midiTools){
             foreach (Note n in notesList)
             {
                 if (midiTools.getSharpOrFlat(n) != 0)
@@ -68,25 +68,26 @@ namespace MusicAnalyzer.Tools
                         n.basicNote = n.basicNote.Split('/')[0];
                         n.note = n.basicNote + n.octave;
                     }
-                        
                     else{
                         n.basicNote = n.basicNote.Split('/')[1];
                         n.note = n.basicNote + n.octave;
-                    }
-                        
+                    }                        
                 }
             }
         }
 
-        public void setNotesRythm(ref NotesList notesList, MidiTools midiTools, int division){
+        public void setNotesRythm(ref NotesList notesList, MidiTools midiTools, int division, int TrackID) {
             foreach (Note n in notesList)
             {
-                double p = midiTools.ProperDurationScale(n, division);
-                string[] rythmicValues = Enum.GetNames(typeof(PSAMControlLibrary.MusicalSymbolDuration)).Where(x => (int)(PSAMControlLibrary.MusicalSymbolDuration)(Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), x)) == p).ToArray();
-                if (rythmicValues.Length > 0)
-                    n.rythmicValue = (PSAMControlLibrary.MusicalSymbolDuration)Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), rythmicValues[0]);
-                else
-                    n.rythmicValue = PSAMControlLibrary.MusicalSymbolDuration.Quarter;
+                if (TrackID == -1 || TrackID == n.trackID)
+                {
+                    double p = midiTools.ProperDurationAndExtension(n, division);
+                    string[] rythmicValues = Enum.GetNames(typeof(PSAMControlLibrary.MusicalSymbolDuration)).Where(x => (int)(PSAMControlLibrary.MusicalSymbolDuration)(Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), x)) == p).ToArray();
+                    if (rythmicValues.Length > 0)
+                        n.rythmicValue = (PSAMControlLibrary.MusicalSymbolDuration)Enum.Parse(typeof(PSAMControlLibrary.MusicalSymbolDuration), rythmicValues[0]);
+                    else
+                        n.rythmicValue = PSAMControlLibrary.MusicalSymbolDuration.Quarter;
+                }
             }
         }
 
@@ -131,14 +132,15 @@ namespace MusicAnalyzer.Tools
             return orderedNoteChords;
         }
 
-        public void setChordsDuration(SortedList<int, TonationChord> chordsList)
+        public void setChordsDuration(SortedList<int, TonationChord> chordsList, int division, List<Metrum> meterChanges)
         {
             if (chordsList.Count == 1)
                 chordsList.First().Value.duration = 0;
             List<int> timeIndices = chordsList.Keys.ToList();
             for (int i = timeIndices.Count - 2; i >= 0; i--)
                 chordsList[timeIndices[i]].duration = timeIndices[i + 1] - timeIndices[i];
-            chordsList[timeIndices[timeIndices.Count - 1]].duration = 2000;
+            Metrum m = MidiTools.getCurrentMetrum(timeIndices[timeIndices.Count - 1], meterChanges);
+            chordsList[timeIndices[timeIndices.Count - 1]].duration = (m.Numerator * 4 * division) / m.Denominator;
         }
 
         public void setChordTypes(SortedList<int, TonationChord> chordsList, List<Tonation> tonations, MidiTools midiTools)
@@ -201,7 +203,7 @@ namespace MusicAnalyzer.Tools
         {
             foreach(int timeIndex in orderedNoteChords.Keys)
             {
-                Metrum m = midiTools.getCurrentMetrum(timeIndex, meterChanges);
+                Metrum m = MidiTools.getCurrentMetrum(timeIndex, meterChanges);
                 List<MeasureBeats> beatMeasure = measureBeats[m];
                 int measureBeat = (timeIndex - m.startTick) % (m.Numerator * (division * 4 / m.Denominator)); 
                 if (measureBeat % (division * 4 / m.Denominator) != 0)
@@ -233,11 +235,11 @@ namespace MusicAnalyzer.Tools
             }
         }
 
-        public ComposedTrack createTrackFromScratch(ComposedTrack inputTrack)
+        public ComposedTrack createTrackFromScratch(ComposedTrack inputTrack, MusicPiece musicPiece)
         {
             ComposedTrack newTrack = new ComposedTrack();
             setCoreChords(newTrack, inputTrack);
-            setChordsDuration(newTrack.noteChords);
+            setChordsDuration(newTrack.noteChords, musicPiece.Division, musicPiece.meterChanges);
             return newTrack;
         }
 
@@ -403,9 +405,9 @@ namespace MusicAnalyzer.Tools
             else return Match.None;
         }
 
-        public bool isBairlineNow(int now, List<Metrum> meterChanges, int division, MidiTools midiTools)
+        public bool isBarlineNow(int now, List<Metrum> meterChanges, int division, MidiTools midiTools)
         {
-            Metrum m = midiTools.getCurrentMetrum(now, meterChanges);
+            Metrum m = MidiTools.getCurrentMetrum(now, meterChanges);
             if (m == null)
                 return false;
             else
@@ -416,7 +418,7 @@ namespace MusicAnalyzer.Tools
         {
             if (last == null)
                 return null;
-            int p = (int)(4 * division / midiTools.ProperDurationScale(last, division));
+            int p = (int)(4 * division / midiTools.ProperDurationAndExtension(last, division));
             int gap = now.startTime - (last.startTime + p);
             if (gap <= 0)
                 return null;

@@ -22,6 +22,8 @@ namespace MusicAnalyzer.Models
 
         public PSAMControlLibrary.MusicalSymbolDuration rythmicValue { get; set; }
 
+        public PSAMControlLibrary.NoteStemDirection noteStemDirection;
+
         public double noteExtension { get; set; }
 
         public Note(int note_id, int starter, int channel)
@@ -31,6 +33,7 @@ namespace MusicAnalyzer.Models
             this.duration = -1;
             this.endTime = -1;
             this.trackID = channel;
+            noteExtension = 1.0;
         }
 
         public Note(int note_id, int starter, int duration, int trackID, bool metric)
@@ -42,6 +45,7 @@ namespace MusicAnalyzer.Models
             this.trackID = trackID;
             this.strongMetric = metric;
             this.octave = (note_id + 9) / 12;
+            noteExtension = 1.0;
         }
 
         public override bool Equals(object obj)
@@ -63,7 +67,7 @@ namespace MusicAnalyzer.Models
 
         public override string ToString()
         {
-            return note + " " + startTime.ToString() + " Duration: " + duration.ToString() + " Track: " + trackID.ToString();
+            return note + " " + startTime.ToString() + " Duration: " + duration.ToString() + " Extension: " + noteExtension.ToString() + " Track: " + trackID.ToString();
         }
     }
 }

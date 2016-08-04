@@ -90,15 +90,14 @@ namespace MusicAnalyzer.GUI
         {
             for (int i = 0; i < sequence.Count; i++)
                 musicPiece.fillScoreViewer(scoreViewers[i], i);
-            scoreGrid.Width = 3000;
+            scoreGrid.Width = 8000;
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
         }
 
         private void addTrackWPFView(int index)
         {
             IncipitViewerWPF scv = new IncipitViewerWPF();
-            scv.MaxWidth = 5000;
-            scv.Width = 3000;
+            scv.Width = 8000;
             scv.Height = scoreViewHeight;
             scoreViewers.Add(scv);
             RowDefinition rd = new RowDefinition();
@@ -253,7 +252,10 @@ namespace MusicAnalyzer.GUI
             musicPiece.completeNotesInfo();
             musicPiece.findBestChords();
             musicPiece.fillNewTrackNotes();
+            addTrackWPFView(scoreViewers.Count);
             musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
+            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+            scoreViewers[scoreViewers.Count - 1].UpdateLayout();
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

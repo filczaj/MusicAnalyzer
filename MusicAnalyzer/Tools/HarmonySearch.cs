@@ -32,13 +32,15 @@ namespace MusicAnalyzer.Tools
         List<ComposedTrack> harmonyMemory; // memory of compositions with harmony match value as a key
         ComposedTrack inputTrack;
         MusicIntelligence musicAI;
+        MusicPiece musicPiece;
 
-        public HarmonySearch(ComposedTrack input, MusicIntelligence musicIntelligence)
+        public HarmonySearch(ComposedTrack input, MusicPiece musicPiece, MusicIntelligence musicIntelligence)
         {
             this.inputTrack = input;
             this.musicAI = musicIntelligence;
             this.harmonyMemory = new List<ComposedTrack>();
             this.bestTrackHistory = new List<string>();
+            this.musicPiece = musicPiece;
         }
 
         public void runHarmonySearchLoop()
@@ -55,7 +57,8 @@ namespace MusicAnalyzer.Tools
                     bestTrackHistory.Add("Epoch: " + it.ToString() + "; match = " + getBestTrack().harmonyMatch.ToString());
                 }
             }
-            genericListSerizliator<string>(bestTrackHistory, configDirectory + "\\bestTrackHistory.txt");
+            MidiTools.genericListSerizliator<string>(bestTrackHistory, configDirectory + "\\bestTrackHistory.txt");
+            MidiTools.genericListSerizliator<Chord>(harmonyMemory[0].noteChords.Values.ToList<Chord>(), configDirectory + "\\composedChords.txt");
             stopwatch.Stop();
         }
 
@@ -64,7 +67,7 @@ namespace MusicAnalyzer.Tools
             ComposedTrack newTrack;
             if (random.NextDouble() > hmcr)
             {
-                newTrack = musicAI.createTrackFromScratch(inputTrack);
+                newTrack = musicAI.createTrackFromScratch(inputTrack, musicPiece);
                 newTrack.setHarmonyMatch(inputTrack, musicAI);
                 isFromMemory = false;
             }
@@ -87,6 +90,7 @@ namespace MusicAnalyzer.Tools
                 track.setHarmonyMatch(inputTrack, musicAI);
             }
         }
+
         void updateMemoryWithTrack(ComposedTrack track)
         {
             if (track.harmonyMatch < harmonyMemory[0].harmonyMatch)
@@ -115,7 +119,7 @@ namespace MusicAnalyzer.Tools
             ComposedTrack newTrack;
             for (int i = 0; i < hms; i++)
             {
-                newTrack = musicAI.createTrackFromScratch(inputTrack);
+                newTrack = musicAI.createTrackFromScratch(inputTrack, musicPiece);
                 newTrack.setHarmonyMatch(inputTrack, musicAI);
                 harmonyMemory.Add(newTrack);
             }
@@ -130,16 +134,6 @@ namespace MusicAnalyzer.Tools
             }                
             else
                 return null;
-        }
-
-        public static void genericListSerizliator<T>(List<T> elements, string fileName)
-        {
-            List<string> allLines = new List<string>();
-            foreach (T element in elements)
-            {
-                allLines.Add(element.ToString());
-            }
-            IOTools.saveTo(allLines, fileName);
         }
     }
 }

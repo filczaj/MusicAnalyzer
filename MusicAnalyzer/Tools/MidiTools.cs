@@ -222,7 +222,7 @@ namespace MusicAnalyzer.Tools
                 return flatFifths * -1;
         }
 
-        public Metrum getCurrentMetrum(int now, List<Metrum> meterChanges)
+        public static Metrum getCurrentMetrum(int now, List<Metrum> meterChanges)
         {
             return meterChanges.FirstOrDefault(x => x.startTick <= now && x.endTick > now);
         }
