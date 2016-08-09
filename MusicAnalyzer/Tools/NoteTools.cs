@@ -212,7 +212,7 @@ namespace MusicAnalyzer.Tools
                 return "";
         }
 
-        public int getSharpOrFlat(Note n)
+        public static int getSharpOrFlat(Note n)
         {
             if (n.basicNote.Contains("Sharp"))
                 return 1;

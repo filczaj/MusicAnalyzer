@@ -28,6 +28,7 @@ namespace MusicAnalyzer.GUI
         List<IncipitViewerWPF> scoreViewers;
         string configDirectory;
         string fileName;
+        string newFileName;
         Sequence sequence;
         bool playing = false;
         bool closing = false;
@@ -62,6 +63,9 @@ namespace MusicAnalyzer.GUI
                 System.Windows.MessageBox.Show("There is some missing information in the input file. Composing music is unavailable.", "Inpute file error", MessageBoxButton.OK);
                 composeButton.IsEnabled = false;
             }
+            if (instrumentCombo.Items.Count > 0)
+                instrumentCombo.SelectedIndex = 0;
+            instrumentCombo.IsEnabled = false;
         }
 
         private void initPlayer()
@@ -90,15 +94,17 @@ namespace MusicAnalyzer.GUI
         {
             for (int i = 0; i < sequence.Count; i++)
                 musicPiece.fillScoreViewer(scoreViewers[i], i);
-            scoreGrid.Width = 8000;
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+            scoreGrid.Width = 15000;
         }
 
         private void addTrackWPFView(int index)
         {
             IncipitViewerWPF scv = new IncipitViewerWPF();
-            scv.Width = 8000;
+            scv.Width = 15000;
             scv.Height = scoreViewHeight;
+            scv.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
+            scv.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             scoreViewers.Add(scv);
             RowDefinition rd = new RowDefinition();
             rd.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
@@ -205,7 +211,8 @@ namespace MusicAnalyzer.GUI
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             //save
-            sequence.SaveAsync(fileName);
+            newFileName = fileName;
+            sequence.SaveAsync(newFileName);
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
@@ -218,9 +225,9 @@ namespace MusicAnalyzer.GUI
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                fileName = dlg.FileName;
-                fileNameBox.Text = fileName;
-                sequence.SaveAsync(fileName);
+                newFileName = dlg.FileName;
+                fileNameBox.Text = newFileName;
+                sequence.SaveAsync(newFileName);
             }
         }
 
@@ -256,6 +263,37 @@ namespace MusicAnalyzer.GUI
             musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
             scoreViewers[scoreViewers.Count - 1].UpdateLayout();
+            updateScoreGridWidth();
+        }
+
+        public void updateScoreGridWidth()
+        {
+            float maxLocationX = 0;
+            foreach (IncipitViewerWPF viewer in scoreViewers)
+            {
+                PSAMControlLibrary.MusicalSymbol noteWPF = null;
+                int lastNoteIndex = viewer.CountIncipitElements - 1;
+                while ((noteWPF == null || noteWPF.Type != MusicalSymbolType.Note) && lastNoteIndex >=0)
+                {
+                    noteWPF = viewer.IncipitElement(lastNoteIndex);
+                    lastNoteIndex--;
+                }
+                if (noteWPF != null){
+                    PSAMControlLibrary.Note note = null;
+                    try{
+                        note = noteWPF as PSAMControlLibrary.Note;
+                    }
+                    catch(InvalidCastException ex){
+
+                    }
+                    if (note != null){
+                        viewer.Width = note.Location.X + 40;
+                        if (maxLocationX < note.Location.X)
+                            maxLocationX = note.Location.X;
+                    }
+                }
+            }
+            scoreGrid.Width = maxLocationX + 44;
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

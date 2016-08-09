@@ -15,7 +15,7 @@ namespace MusicAnalyzer.Models
         public List<int> mainScaleNotes;
         public Offset offset;
         public ChordMode mode;
-        NoteTools noteTools;
+        public NoteTools noteTools;
         public Key key;
 
         public Tonation(MetaMessage metaM, int ticks, NoteTools tools)

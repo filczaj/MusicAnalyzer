@@ -49,11 +49,22 @@ namespace MusicAnalyzer.Models
         Default = 0
     };
 
+    public enum NotePriority
+    {
+        None = 0,
+        Poor = 1,
+        Medium = 2,
+        Good = 4,
+        Strong = 6,
+        Essential = 8
+    };
+
     public enum MeasureBeats
     {
         Begin = 4,
         Strong = 2,
-        Weak = 1
+        Weak = 1,
+        Default = 0
     };
 
     public enum Interval

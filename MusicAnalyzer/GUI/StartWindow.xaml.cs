@@ -119,6 +119,7 @@ namespace MusicAnalyzer
             playerWindow = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
             playerWindow.Owner = this;
             playerWindow.Show();
+            playerWindow.updateScoreGridWidth();
         }
 
         private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

@@ -30,11 +30,12 @@ namespace MusicAnalyzer.Models
             this.priority = priority;
         }
 
-        public TonationChord(Note n, Tonation t) : base(n) // to do!!!!
+        public TonationChord(Note n, Tonation t) : base(n)
         {
             this.offset = t.offset;
             this.scaleChordType = ChordType.Other;
             this.priority = ChordPriority.Default;
+            this.isScaleBasic = false;
             this.tonation = t;
         }
 

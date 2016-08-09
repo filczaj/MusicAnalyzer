@@ -12,6 +12,7 @@ namespace MusicAnalyzer.Models
         public String basicNote { get; set; }
         public String note { get; set; }
         public int noteID { get; set; }
+        public int velocity { get; set; }
         public double freq { get; set; }
         public int duration { get; set; }
         public int startTime { get; set; }
@@ -26,9 +27,10 @@ namespace MusicAnalyzer.Models
 
         public double noteExtension { get; set; }
 
-        public Note(int note_id, int starter, int channel)
+        public Note(int note_id, int vel, int starter, int channel)
         {
             this.noteID = note_id;
+            this.velocity = vel;
             this.startTime = starter;
             this.duration = -1;
             this.endTime = -1;
@@ -36,9 +38,10 @@ namespace MusicAnalyzer.Models
             noteExtension = 1.0;
         }
 
-        public Note(int note_id, int starter, int duration, int trackID, bool metric)
+        public Note(int note_id, int vel, int starter, int duration, int trackID, bool metric)
         {
             this.noteID = note_id;
+            this.velocity = vel;
             this.startTime = starter;
             this.duration = duration;
             this.endTime = starter + duration;

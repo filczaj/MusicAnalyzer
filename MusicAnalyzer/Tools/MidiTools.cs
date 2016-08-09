@@ -59,12 +59,16 @@ namespace MusicAnalyzer.Tools
                     {
                         if (message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 > 0)
                         {
-                            Note n = new Note(message.Data1 - lowNoteID, e.AbsoluteTicks, message.MidiChannel);
+                            Note n = new Note(message.Data1 - lowNoteID, message.Data2, e.AbsoluteTicks, message.MidiChannel);
                             allNotes.Add(n);
                         }
                         else if ((message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 == 0) ||
                             (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID))
                             {
+                                if (message.MidiChannel > 0)
+                                {
+                                    Note n3 = null;
+                                }
                                 Note n2 = setNoteOff(message.Data1 - lowNoteID, e.AbsoluteTicks, allNotes, message.MidiChannel);
                                 fillNoteData(n2);
                             }
@@ -146,7 +150,7 @@ namespace MusicAnalyzer.Tools
             return meters;
         }
 
-        public Tonation getCurrentTonation(List<Tonation> tonations, int timeIndex)
+        public static Tonation getCurrentTonation(List<Tonation> tonations, int timeIndex)
         {
             Tonation outTonation = tonations.FirstOrDefault(x => timeIndex >= x.startTick && (x.endTick == 0 || timeIndex <= x.endTick));
             if (outTonation == null)
@@ -189,7 +193,7 @@ namespace MusicAnalyzer.Tools
             IOTools.saveTo(allLines, fileName);
         }
 
-        public Tonation getSiblingTonation(Tonation t) // returns a minor or major tonation with the same key signature
+        public Tonation getFullSiblingTonation(Tonation t) // returns a minor or major tonation with the same key signature
         {
             ChordMode outTonationMode;
             int newOffset;
@@ -206,15 +210,32 @@ namespace MusicAnalyzer.Tools
             return new Tonation(newOffset, outTonationMode, t.startTick, this, t.endTick);
         }
 
-        public int getTonationFifths(Tonation t) // number of tonation key flat or sharps signs; if flats - negative value
+        public static Tonation getSiblingTonation(Tonation t) // returns a minor or major tonation with the same key signature
+        {
+            ChordMode outTonationMode;
+            int newOffset;
+            if (t.key > Sanford.Multimedia.Key.ASharpMinor)
+            {
+                outTonationMode = ChordMode.Minor;
+                newOffset = ((int)t.offset + 9) % 12;
+            }
+            else
+            {
+                outTonationMode = ChordMode.Major;
+                newOffset = ((int)t.offset + 3) % 12;
+            }
+            return new Tonation(newOffset, outTonationMode, t.startTick, t.noteTools, t.endTick);
+        }
+
+        public static int getTonationFifths(Tonation t) // number of tonation key flat or sharps signs; if flats - negative value
         {
             if (t.mode == ChordMode.Minor)
                 t = getSiblingTonation(t);
             int sharpFifths = 0;
             int flatFifths = 0;
-            while (((int)t.offset + ((int)Interval.Fith * sharpFifths) % 12 != 0) && (sharpFifths > -7))
+            while ((((int)t.offset + ((int)Interval.Fith * sharpFifths)) % 12 != 0) && (sharpFifths > -7))
                 sharpFifths--;
-            while (((int)t.offset + ((int)Interval.Fith * flatFifths) % 12 != 0) && (flatFifths < 7))
+            while ((((int)t.offset + ((int)Interval.Fith * flatFifths)) % 12 != 0) && (flatFifths < 7))
                 flatFifths++;
             if (Math.Abs(sharpFifths) < flatFifths)
                 return sharpFifths * -1;
@@ -251,6 +272,25 @@ namespace MusicAnalyzer.Tools
             if (timeSpanEventCollection.Count > 0)
                 timeSpanEventCollection[timeSpanEventCollection.Count - 1].endTick = int.MaxValue - 1;
             return timeSpanEventCollection;
+        }
+
+        public void AddMidiTrack(ComposedTrack newTrack, MusicPiece musicPiece)
+        {
+            Track midiTrack = new Track();
+            foreach (Note n in musicPiece.notesList.Where(x => x.trackID == newTrack.trackID))
+            {
+                ChannelMessageBuilder builder = new ChannelMessageBuilder();
+                builder.Command = ChannelCommand.NoteOn;
+                builder.Data1 = n.noteID + lowNoteID;
+                builder.Data2 = n.velocity;
+                builder.MidiChannel = newTrack.trackID;
+                builder.Build();
+                midiTrack.Insert(n.startTime, builder.Result);
+                builder.Command = ChannelCommand.NoteOff;
+                builder.Build();
+                midiTrack.Insert(n.endTime, builder.Result);
+            }
+            musicPiece.sequence.Add(midiTrack);
         }
     }
 }

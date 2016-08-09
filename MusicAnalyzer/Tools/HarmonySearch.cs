@@ -16,7 +16,7 @@ namespace MusicAnalyzer.Tools
 
         readonly int hms = 70;
         readonly double hmcr = 0.7; // harmony memory considering rate
-        readonly double par = 0.3; // pitch adjusting rate
+        readonly double par = 0.7; // pitch adjusting rate
         readonly int delta = 1; // the amount between two neighboring values in discrete candidate set
 
         readonly int maxIterations = 30000;
@@ -68,7 +68,7 @@ namespace MusicAnalyzer.Tools
             if (random.NextDouble() > hmcr)
             {
                 newTrack = musicAI.createTrackFromScratch(inputTrack, musicPiece);
-                newTrack.setHarmonyMatch(inputTrack, musicAI);
+                newTrack.setHarmonyMatch(inputTrack, musicAI, musicPiece);
                 isFromMemory = false;
             }
             else
@@ -87,7 +87,7 @@ namespace MusicAnalyzer.Tools
             if (isFromMemory && random.NextDouble() <= par)
             {
                 musicAI.changeRandomChords(ref track, inputTrack, delta);
-                track.setHarmonyMatch(inputTrack, musicAI);
+                track.setHarmonyMatch(inputTrack, musicAI, musicPiece);
             }
         }
 
@@ -114,16 +114,22 @@ namespace MusicAnalyzer.Tools
                 return false;
         }
 
-        public void generateInitialMemorySet()
+        public void generateInitialMemorySet(string dir)
         {
             ComposedTrack newTrack;
             for (int i = 0; i < hms; i++)
             {
                 newTrack = musicAI.createTrackFromScratch(inputTrack, musicPiece);
-                newTrack.setHarmonyMatch(inputTrack, musicAI);
+                newTrack.setHarmonyMatch(inputTrack, musicAI, musicPiece);
                 harmonyMemory.Add(newTrack);
             }
             harmonyMemory.Sort((x, y) => x.harmonyMatch.CompareTo(y.harmonyMatch));
+#if DEBUG
+            List<int> listwa = new List<int>();
+            foreach(ComposedTrack track in harmonyMemory)
+                listwa.Add(track.harmonyMatch);
+            MidiTools.genericListSerizliator<int>(listwa, dir + "\\initalSetMatch.txt");
+#endif
         }
 
         public ComposedTrack getBestTrack()
