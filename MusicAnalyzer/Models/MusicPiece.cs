@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PSAMControlLibrary;
+using System.Windows.Controls;
 
 namespace MusicAnalyzer.Models
 {
@@ -20,7 +21,7 @@ namespace MusicAnalyzer.Models
         int trackCount;
         SortedList<int, TonationChord> orderedNoteChords; // notes played at the specified moment, kept together create a chord
         public List<Metrum> meterChanges;
-        Dictionary<int, int> tracksProjection; // sorted trackID -> viewID
+        public Dictionary<int, int> tracksProjection; // sorted trackID -> viewID
         public int Division { get; set; }
         ComposedTrack composedTrack;
         ComposedTrack inputTrack;
@@ -55,7 +56,8 @@ namespace MusicAnalyzer.Models
         {
             if (notes == null)
                 notes = notesList;
-            tonations = musicIntelligence.setRightTonation(tonations, meterChanges, Division, notes, midiTools);
+            if (meterChanges != null && meterChanges.Count > 0)
+                tonations = musicIntelligence.setRightTonation(tonations, meterChanges, Division, notes, midiTools);
             if (tonations.Count > 0)
                 musicIntelligence.setRightNoteSigns(tonations, ref notes);
         }

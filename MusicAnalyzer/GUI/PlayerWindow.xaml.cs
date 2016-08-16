@@ -26,6 +26,8 @@ namespace MusicAnalyzer.GUI
     public partial class PlayerWindow : Window
     {
         List<IncipitViewerWPF> scoreViewers;
+        List<CheckBox> checkedTracks; // set Checkbox of a track to delete it
+        List<Grid> viewGrids;
         string configDirectory;
         string fileName;
         string newFileName;
@@ -34,14 +36,12 @@ namespace MusicAnalyzer.GUI
         bool closing = false;
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         Sequencer player;
-        int selectedTrack = -1;
 
         private OutputDevice outDevice;
         private int outDeviceID = 0;
         private int scoreViewHeight = 80;
         
         MusicPiece musicPiece;
-        Track newTrack;
 
         public PlayerWindow(MusicPiece musicPieceIn, string configDir, string fullFileName)
         {
@@ -50,6 +50,8 @@ namespace MusicAnalyzer.GUI
             this.configDirectory = configDir;
             this.sequence = musicPiece.sequence;
             this.fileNameBox.Text = fileName = fullFileName;
+            this.checkedTracks = new List<CheckBox>();
+            this.viewGrids = new List<Grid>();
             initWindow();
         }
 
@@ -103,14 +105,28 @@ namespace MusicAnalyzer.GUI
             IncipitViewerWPF scv = new IncipitViewerWPF();
             scv.Width = 15000;
             scv.Height = scoreViewHeight;
-            scv.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
             scv.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            scv.Margin = new Thickness(20, 0, 0, 0);
             scoreViewers.Add(scv);
             RowDefinition rd = new RowDefinition();
             rd.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
             scoreGrid.RowDefinitions.Add(rd);
-            scoreGrid.Children.Add(scv);
-            Grid.SetRow(scv, index);
+            Grid trackGrid = new Grid();
+            RowDefinition rd2 = new RowDefinition();
+            rd2.Height = new GridLength(scoreViewHeight, GridUnitType.Pixel);
+            trackGrid.RowDefinitions.Add(rd2);
+            CheckBox checkBox = new CheckBox();
+            checkBox.Width = 20;
+            checkBox.Height = 20;
+            checkBox.IsChecked = false;
+            checkBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            checkBox.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            trackGrid.Children.Add(checkBox);
+            trackGrid.Children.Add(scv);
+            scoreGrid.Children.Add(trackGrid);
+            checkedTracks.Add(checkBox);
+            viewGrids.Add(trackGrid);
+            Grid.SetRow(trackGrid, index);
         }
 
         private void HandleChannelMessagePlayed(object sender, ChannelMessageEventArgs e)
@@ -238,20 +254,28 @@ namespace MusicAnalyzer.GUI
             this.Close();
         }
 
-        private void addTrackButton_Click(object sender, RoutedEventArgs e)
-        {
-            newTrack = new Track();
-            sequence.Add(newTrack);
-            addTrackWPFView(sequence.Count - 1);
-            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], sequence.Count - 1);
-            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
-            musicPiece.initTrack(scoreViewers.Count - 1, sequence.Count - 1);
-        }
-
         private void deleteTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedTrack >= 0)
-                sequence.Remove(sequence[selectedTrack]);
+            int i = 0;
+            while(i < checkedTracks.Count)
+            {
+                if (checkedTracks[i].IsChecked == true)
+                {
+                    scoreViewers.RemoveAt(i);
+                    sequence.Remove(sequence[i]);
+                    scoreGrid.Children.Remove(viewGrids[i]);
+                    viewGrids.RemoveAt(i);
+                    musicPiece.tracksProjection.Remove(musicPiece.tracksProjection.First(x => x.Value == i).Key);
+                    checkedTracks.RemoveAt(i);
+                    foreach (int key in musicPiece.tracksProjection.Keys.ToList())
+                        if (musicPiece.tracksProjection[key] > i)
+                            musicPiece.tracksProjection[key]--;
+                }
+                else
+                    i++;
+            }
+            updateScoreGridHeight();
+            updateScoreGridWidth();
         }
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
@@ -294,6 +318,17 @@ namespace MusicAnalyzer.GUI
                 }
             }
             scoreGrid.Width = maxLocationX + 44;
+        }
+
+        private void updateScoreGridHeight()
+        {
+            scoreGrid.Children.RemoveRange(0, scoreGrid.Children.Count);
+            for (int i = 0; i < viewGrids.Count; i++)
+            {
+                scoreGrid.Children.Add(viewGrids[i]);
+                Grid.SetRow(viewGrids[i], i);
+            }
+            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

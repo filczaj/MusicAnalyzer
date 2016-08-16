@@ -116,10 +116,17 @@ namespace MusicAnalyzer
 
         private void midiAnalyzer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            playerWindow = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
-            playerWindow.Owner = this;
-            playerWindow.Show();
-            playerWindow.updateScoreGridWidth();
+            if (musicPiece.meterChanges == null || musicPiece.meterChanges.Count == 0)
+            {
+                MessageBox.Show("Input MIDI file has no meter given. Music score cannot be visualized.", "Invalid MIDI file.", MessageBoxButton.OK);
+            }
+            else
+            {
+                playerWindow = new PlayerWindow(musicPiece, configDirectory, midFileTextBox.Text);
+                playerWindow.Owner = this;
+                playerWindow.Show();
+                playerWindow.updateScoreGridWidth();
+            }
         }
 
         private void midiAnalyzer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

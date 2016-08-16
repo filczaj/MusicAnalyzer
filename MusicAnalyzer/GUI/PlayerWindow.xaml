@@ -24,7 +24,9 @@
         </GroupBox>
         <GroupBox x:Name="visualBox" Header="Melody tracks" HorizontalAlignment="Left" Height="421" Margin="10,71,0,0" VerticalAlignment="Top" Width="1000">
             <ScrollViewer x:Name="scroller" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="399"  VerticalAlignment="Top" Width="990" Background="White"/>
+                <Grid x:Name="scoreGrid" HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="990" Background="White" Focusable="True">
+                    
+                </Grid>
             </ScrollViewer>
         </GroupBox>
         <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,497,0,0" VerticalAlignment="Top" Height="70" Width="1000">
@@ -49,11 +51,10 @@
             <Grid x:Name="createGrid">
                 <Label Content="Choose instrument" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <ComboBox Name="instrumentCombo" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="151" Height="24">
-                    <ComboBoxItem Content="Piano"/>
+                    <ComboBoxItem Content="Piano" MouseDown="deleteTrackButton_Click"/>
                 </ComboBox>
-                <Button x:Name="addTrackButton" Content="Add new track" HorizontalAlignment="Left" Margin="219,12,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="addTrackButton_Click"/>
-                <Button x:Name="deleteTrackButton" Content="Delete track(s)" HorizontalAlignment="Left" Margin="390,12,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="deleteTrackButton_Click"/>
-                <Button x:Name="composeButton" Content="Compose music!" HorizontalAlignment="Left" Margin="564,12,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="composeButton_Click"/>
+                <Button x:Name="composeButton" Content="Compose music!" HorizontalAlignment="Left" Margin="219,10,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="composeButton_Click"/>
+                <Button x:Name="deleteButton" Content="Delete track" HorizontalAlignment="Left" Margin="389,8,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="deleteTrackButton_Click"/>
             </Grid>
         </GroupBox>
     </Grid>
