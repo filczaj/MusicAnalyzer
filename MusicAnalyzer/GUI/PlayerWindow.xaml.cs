@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using PSAMWPFControlLibrary;
 using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
-using NAudio.Midi;
 using MusicAnalyzer.Models;
 using PSAMControlLibrary;
 

@@ -54,30 +54,6 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge">
-      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Imaging">
-      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Math">
-      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="DynamicDataDisplay">
-      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.dll</HintPath>
-    </Reference>
-    <Reference Include="DynamicDataDisplay.Maps">
-      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Maps.dll</HintPath>
-    </Reference>
-    <Reference Include="DynamicDataDisplay.Markers">
-      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Markers.dll</HintPath>
-    </Reference>
-    <Reference Include="DynamicDataDisplay.Markers2">
-      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Markers2.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio">
-      <HintPath>..\packages\NAudio.1.7.2\lib\net35\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="Parser">
       <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\Parser.dll</HintPath>
     </Reference>
@@ -99,9 +75,6 @@
     </Reference>
     <Reference Include="Sanford.Multimedia.Timers">
       <HintPath>..\Library\Sanford.Multimedia.Timers.dll</HintPath>
-    </Reference>
-    <Reference Include="Sanford.Threading">
-      <HintPath>..\Library\Sanford.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
