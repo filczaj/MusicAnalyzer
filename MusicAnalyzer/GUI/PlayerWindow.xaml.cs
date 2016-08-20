@@ -16,6 +16,7 @@ using Sanford.Multimedia.Midi;
 using MusicAnalyzer.Tools;
 using MusicAnalyzer.Models;
 using PSAMControlLibrary;
+using System.ComponentModel;
 
 namespace MusicAnalyzer.GUI
 {
@@ -39,6 +40,7 @@ namespace MusicAnalyzer.GUI
         private OutputDevice outDevice;
         private int outDeviceID = 0;
         private int scoreViewHeight = 80;
+        private readonly BackgroundWorker composeWorker = new BackgroundWorker();
         
         MusicPiece musicPiece;
 
@@ -52,6 +54,10 @@ namespace MusicAnalyzer.GUI
             this.checkedTracks = new List<CheckBox>();
             this.viewGrids = new List<Grid>();
             initWindow();
+            composeWorker.DoWork += composeWorker_DoWork;
+            composeWorker.RunWorkerCompleted += composeWorker_RunWorkerCompleted;
+            composeWorker.ProgressChanged += composeWorker_ReportProgress;
+            composeWorker.WorkerReportsProgress = true;
         }
 
         public void initWindow()
@@ -64,9 +70,6 @@ namespace MusicAnalyzer.GUI
                 System.Windows.MessageBox.Show("There is some missing information in the input file. Composing music is unavailable.", "Inpute file error", MessageBoxButton.OK);
                 composeButton.IsEnabled = false;
             }
-            if (instrumentCombo.Items.Count > 0)
-                instrumentCombo.SelectedIndex = 0;
-            instrumentCombo.IsEnabled = false;
         }
 
         private void initPlayer()
@@ -253,6 +256,13 @@ namespace MusicAnalyzer.GUI
             this.Close();
         }
 
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (playing)
+                stopButton_Click(null, null);
+            this.Close();
+        }
+
         private void deleteTrackButton_Click(object sender, RoutedEventArgs e)
         {
             int i = 0;
@@ -279,14 +289,7 @@ namespace MusicAnalyzer.GUI
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
         {
-            musicPiece.completeNotesInfo();
-            musicPiece.findBestChords();
-            musicPiece.fillNewTrackNotes();
-            addTrackWPFView(scoreViewers.Count);
-            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
-            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
-            scoreViewers[scoreViewers.Count - 1].UpdateLayout();
-            updateScoreGridWidth();
+            composeWorker.RunWorkerAsync();
         }
 
         public void updateScoreGridWidth()
@@ -328,6 +331,29 @@ namespace MusicAnalyzer.GUI
                 Grid.SetRow(viewGrids[i], i);
             }
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+        }
+
+        private void composeWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            addTrackWPFView(scoreViewers.Count);
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
+            scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
+            scoreViewers[scoreViewers.Count - 1].UpdateLayout();
+            updateScoreGridWidth();
+        }
+
+        private void composeWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            composeWorker.ReportProgress(0);
+            musicPiece.completeNotesInfo();
+            musicPiece.findBestChords(composeWorker);
+            musicPiece.fillNewTrackNotes();
+            composeWorker.ReportProgress(0);
+        }
+
+        private void composeWorker_ReportProgress(object sender, ProgressChangedEventArgs e)
+        {
+            composeProgressBar.Value = e.ProgressPercentage;
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

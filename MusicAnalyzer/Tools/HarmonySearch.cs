@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MusicAnalyzer.Models;
 using System.Diagnostics;
 using MusicAnalyzer.Tools;
+using System.ComponentModel;
 
 namespace MusicAnalyzer.Tools
 {
@@ -43,7 +44,7 @@ namespace MusicAnalyzer.Tools
             this.musicPiece = musicPiece;
         }
 
-        public void runHarmonySearchLoop()
+        public void runHarmonySearchLoop(BackgroundWorker composeWorker)
         {
             stopwatch = Stopwatch.StartNew();
             while (!isStopCriteriaReached())
@@ -56,6 +57,7 @@ namespace MusicAnalyzer.Tools
                 {
                     bestTrackHistory.Add("Epoch: " + it.ToString() + "; match = " + getBestTrack().harmonyMatch.ToString());
                 }
+                composeWorker.ReportProgress(100 * it / maxIterations);
             }
             MidiTools.genericListSerizliator<string>(bestTrackHistory, configDirectory + "\\bestTrackHistory.txt");
             MidiTools.genericListSerizliator<Chord>(harmonyMemory[0].noteChords.Values.ToList<Chord>(), configDirectory + "\\composedChords.txt");

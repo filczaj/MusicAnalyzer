@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PSAMControlLibrary;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace MusicAnalyzer.Models
 {
@@ -160,11 +161,11 @@ namespace MusicAnalyzer.Models
             view.AddMusicalSymbol(new Barline());
         }
 
-        public void findBestChords()
+        public void findBestChords(BackgroundWorker composeWorker)
         {
             HarmonySearch harmonySearch = new HarmonySearch(inputTrack, this, musicIntelligence);
             harmonySearch.generateInitialMemorySet(midiTools.configDirectory);
-            harmonySearch.runHarmonySearchLoop();
+            harmonySearch.runHarmonySearchLoop(composeWorker);
             composedTrack = harmonySearch.getBestTrack();
         }
 
