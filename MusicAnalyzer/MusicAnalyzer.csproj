@@ -110,7 +110,6 @@
     <Compile Include="GUI\PlayerWindow.xaml.cs">
       <DependentUpon>PlayerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\MidiFileStruct.cs" />
     <Compile Include="GUI\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>

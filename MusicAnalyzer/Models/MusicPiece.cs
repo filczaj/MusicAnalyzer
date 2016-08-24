@@ -192,7 +192,6 @@ namespace MusicAnalyzer.Models
             setNotesRythmicValues(composedTrack.trackID);
             setRightNotesAndTonations(notesList.Where(x => x.trackID == composedTrack.trackID));
 
-            // create MidiTrack from ChordsList - to do !!!!!!!!!
             midiTools.AddMidiTrack(composedTrack, this);
 #if DEBUG
             MidiTools.genericListSerizliator<Note>(notesList.Where(x => x.trackID == composedTrack.trackID).ToList<Note>(), midiTools.configDirectory + "\\allComposedNotes.txt");

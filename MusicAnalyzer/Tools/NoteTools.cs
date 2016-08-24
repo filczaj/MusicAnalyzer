@@ -36,46 +36,6 @@ namespace MusicAnalyzer.Tools
             minorChordsFile = configDir + "\\minorChords.txt";
         }
 
-        #region Old
-        public NoteTools(){
-        }
-
-        public List<Note> setNotesDuration(List<Note> notesList)
-        {
-            for (int i=0; i<notesList.Count-1; i++){
-                notesList[i].endTime = notesList[i + 1].startTime;
-                notesList[i].duration = notesList[i].endTime - notesList[i].startTime;
-            }
-            notesList[notesList.Count - 1].duration = AVGNoteDuration(notesList);
-            notesList[notesList.Count - 1].endTime = notesList[notesList.Count - 1].startTime + notesList[notesList.Count - 1].duration;
-            return notesList;
-        }
-
-        public int AVGNoteDuration(List<Note> allNotes)
-        {
-            int avgDuration = 0;
-            for (int i = 1; i < allNotes.Count - 1; i++)
-            {
-                avgDuration += allNotes[i].duration;
-            }
-            return avgDuration / allNotes.Count - 2;
-        }
-
-        public int getNotesDiff(Note a, Note b){
-            int diff = getBasicNotesDiff(a, b);
-            diff = Math.Min(diff, 12 - diff);
-            int octaves = Math.Abs(getNoteOctave(a) - getNoteOctave(b));
-            return diff + (octaves *12);
-        }
-
-        public int getBasicNotesDiff(Note a, Note b)
-        {
-            int diff = 0;
-            return diff;
-        }
-
-#endregion
-
         public int getNoteOctave(Note note)
         {
             return Convert.ToInt32(note.note[note.note.Length - 1]) - 48;
