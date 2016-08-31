@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MusicAnalyzer.Models;
+using System.IO;
 
 namespace MusicAnalyzer.Tools
 {
@@ -254,6 +255,21 @@ namespace MusicAnalyzer.Tools
                 default:
                     return PSAMControlLibrary.NoteStemDirection.Up;
             }
+        }
+
+        public bool areConfigFilesCorrect()
+        {
+            if (!File.Exists(basicNotesFile))
+                return false;
+            if (!File.Exists(majorChordsFile))
+                return false;
+            if (!File.Exists(majorScaleSeqFile))
+                return false;
+            if (!File.Exists(minorChordsFile))
+                return false;
+            if (!File.Exists(minorScaleSeqFile))
+                return false;
+            return true;
         }
     }
 }

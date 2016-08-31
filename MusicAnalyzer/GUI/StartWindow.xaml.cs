@@ -99,13 +99,14 @@ namespace MusicAnalyzer
             if (e.Error == null)
             {
                 musicPiece = new MusicPiece(reader, configDirectory);
-                if (Directory.Exists(configDirectory))
+                if (musicPiece.isConfigDirCorrect())
                 {
                     midiAnalyzer.RunWorkerAsync();
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Plesase set config directory.", "Incomplete data");
+                    System.Windows.MessageBox.Show("Plesase set right config directory.", "Incomplete data");
+                    readProgressBar.Value = 0;
                 }
             }
             else

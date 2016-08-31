@@ -13,33 +13,6 @@ namespace MusicAnalyzer.Tools
         public MidiTools(string configDir) : base(configDir){
         }
 
-        private void findAndSaveMetaTypes(Sequence seq)
-        {
-            List<MetaType> types = new List<MetaType>();
-            MetaMessage meta;
-            foreach (Track track in seq)
-            {
-                foreach (MidiEvent e in track.Iterator())
-                {
-                    meta = null;
-                    try
-                    {
-                        meta = (e.MidiMessage as MetaMessage);
-                    }
-                    catch ( InvalidCastException exc)
-                    {
-
-                    }
-                    if (meta!= null){
-                        types.Add(meta.MetaType);
-                    }
-                }
-            }
-#if DEBUG
-            MidiTools.genericListSerizliator<MetaType>(types, configDirectory + "\\Tonations.txt");
-#endif
-        }
-
         public IEnumerable<Note> decodeNotes(Sequence sequence)
         {
             NotesList allNotes = new NotesList();
@@ -65,10 +38,6 @@ namespace MusicAnalyzer.Tools
                         else if ((message.Command == ChannelCommand.NoteOn && message.Data1 >= lowNoteID && message.Data1 <= highNoteID && message.Data2 == 0) ||
                             (message.Command == ChannelCommand.NoteOff && message.Data1 >= lowNoteID && message.Data1 <= highNoteID))
                             {
-                                if (message.MidiChannel > 0)
-                                {
-                                    Note n3 = null;
-                                }
                                 Note n2 = setNoteOff(message.Data1 - lowNoteID, e.AbsoluteTicks, allNotes, message.MidiChannel);
                                 fillNoteData(n2);
                             }

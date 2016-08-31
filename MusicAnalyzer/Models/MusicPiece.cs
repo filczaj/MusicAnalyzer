@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using PSAMControlLibrary;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.IO;
 
 namespace MusicAnalyzer.Models
 {
@@ -205,6 +206,15 @@ namespace MusicAnalyzer.Models
             if (notesList.Count() == 0)
                 return false;
             if (meterChanges.Count == 0) 
+                return false;
+            return true;
+        }
+
+        public bool isConfigDirCorrect()
+        {
+            if (!Directory.Exists(midiTools.configDirectory))
+                return false;
+            if (!midiTools.areConfigFilesCorrect())
                 return false;
             return true;
         }
