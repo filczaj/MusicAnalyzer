@@ -11,6 +11,7 @@
                 <Separator />
                 <MenuItem Header="_Save" Click="MenuItem_Click_1" />
                 <MenuItem Header="_Save As..." Click="MenuItem_Click_2" />
+                <MenuItem Header="_Print music score" Click="MenuItem_Click_Print" />
                 <Separator />
                 <MenuItem Header="_Exit" Click="MenuItem_Click_3" />
             </MenuItem>

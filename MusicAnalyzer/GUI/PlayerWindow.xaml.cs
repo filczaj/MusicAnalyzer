@@ -97,7 +97,11 @@ namespace MusicAnalyzer.GUI
         private void fillScoreViewer()
         {
             for (int i = 0; i < sequence.Count; i++)
+            {
+                if (!musicPiece.notesList.Any(x => x.trackID == i))
+                    musicPiece.tracksProjection.Add(musicPiece.tracksProjection.Keys.Max() + 1, musicPiece.tracksProjection.Values.Max() + 1);
                 musicPiece.fillScoreViewer(scoreViewers[i], i);
+            }
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
             scoreGrid.Width = 15000;
         }
@@ -137,13 +141,12 @@ namespace MusicAnalyzer.GUI
             {
                 return;
             }
-
             outDevice.Send(e.Message);
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            // ????????
+            //
         }
 
         private void HandleChased(object sender, ChasedEventArgs e)
@@ -154,7 +157,7 @@ namespace MusicAnalyzer.GUI
 
         private void HandleSysExMessagePlayed(object sender, SysExMessageEventArgs e)
         {
-            // nicość
+            // outDevice.Send(e.Message);
         }
 
         private void HandleStopped(object sender, StoppedEventArgs e)
@@ -283,6 +286,9 @@ namespace MusicAnalyzer.GUI
                 else
                     i++;
             }
+            foreach (var n in musicPiece.notesList.ToArray())
+                if (!musicPiece.tracksProjection.ContainsKey(n.trackID))
+                    musicPiece.notesList.Remove(n);
             updateScoreGridHeight();
             updateScoreGridWidth();
         }
@@ -336,10 +342,11 @@ namespace MusicAnalyzer.GUI
         private void composeWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             addTrackWPFView(scoreViewers.Count);
-            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], scoreViewers.Count - 1);
+            musicPiece.fillScoreViewer(scoreViewers[scoreViewers.Count - 1], musicPiece.tracksProjection.Values.Max());
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
             scoreViewers[scoreViewers.Count - 1].UpdateLayout();
             updateScoreGridWidth();
+            composeButton.IsEnabled = false;
         }
 
         private void composeWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -355,12 +362,39 @@ namespace MusicAnalyzer.GUI
         {
             composeProgressBar.Value = e.ProgressPercentage;
         }
-        
+
+        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
+        {
+            // customize size and keep all viewers at one print - to do!!!!!!!!!
+            PrintDialog dialog = new PrintDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                dialog.PrintVisual(scoreGrid, "Notes print");
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             closing = true;
             if (playing)
                 stopButton_Click(null, null);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            closing = true;
+
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            musicPiece.sequence.Dispose();
+            if (outDevice != null)
+            {
+                outDevice.Dispose();
+            }
+            base.OnClosed(e);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
