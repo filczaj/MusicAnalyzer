@@ -31,6 +31,7 @@ namespace MusicAnalyzer.GUI
         string configDirectory;
         string fileName;
         string newFileName;
+        int selectedInstrumentIndex;
         Sequence sequence;
         bool playing = false;
         bool closing = false;
@@ -52,7 +53,7 @@ namespace MusicAnalyzer.GUI
             this.sequence = musicPiece.sequence;
             this.fileNameBox.Text = fileName = fullFileName;
             this.checkedTracks = new List<CheckBox>();
-            this.viewGrids = new List<Grid>();
+            this.viewGrids = new List<Grid>();            
             initWindow();
             composeWorker.DoWork += composeWorker_DoWork;
             composeWorker.RunWorkerCompleted += composeWorker_RunWorkerCompleted;
@@ -62,7 +63,9 @@ namespace MusicAnalyzer.GUI
 
         public void initWindow()
         {
+            printMenu.IsEnabled = false;
             initPlayer();
+            setPossibleInstrumentsToChoose();
             initScoreViewer();
             fillScoreViewer();
             if (!musicPiece.isInputFileCorrect())
@@ -85,6 +88,14 @@ namespace MusicAnalyzer.GUI
             this.player.Position = 0;
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+        }
+
+        private void setPossibleInstrumentsToChoose()
+        {
+            string[] instrumentsNames = Enum.GetNames(typeof(GeneralMidiInstrument)).ToArray();
+            instrumentCombo.ItemsSource = instrumentsNames;
+            instrumentCombo.SelectedIndex = 1;
+            selectedInstrumentIndex = 1;
         }
 
         private void initScoreViewer()
@@ -295,6 +306,7 @@ namespace MusicAnalyzer.GUI
 
         private void composeButton_Click(object sender, RoutedEventArgs e)
         {
+            selectedInstrumentIndex = instrumentCombo.SelectedIndex;
             composeWorker.RunWorkerAsync();
         }
 
@@ -347,6 +359,7 @@ namespace MusicAnalyzer.GUI
             scoreViewers[scoreViewers.Count - 1].UpdateLayout();
             updateScoreGridWidth();
             composeButton.IsEnabled = false;
+            printMenu.IsEnabled = true;
         }
 
         private void composeWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -354,7 +367,7 @@ namespace MusicAnalyzer.GUI
             composeWorker.ReportProgress(0);
             musicPiece.completeNotesInfo();
             musicPiece.findBestChords(composeWorker);
-            musicPiece.fillNewTrackNotes();
+            musicPiece.fillNewTrackNotes(selectedInstrumentIndex);
             composeWorker.ReportProgress(0);
         }
 
@@ -365,11 +378,11 @@ namespace MusicAnalyzer.GUI
 
         private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
         {
-            // customize size and keep all viewers at one print - to do!!!!!!!!!
-            PrintDialog dialog = new PrintDialog();
-            if (dialog.ShowDialog() == true)
+            IncipitViewerWPF scoreView = scoreViewers.Last();
+            if (scoreView is FrameworkElement)
             {
-                dialog.PrintVisual(scoreGrid, "Notes print");
+                PrintCommand printing = new PrintCommand();
+                printing.Execute(scoreView);
             }
         }
 

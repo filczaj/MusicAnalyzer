@@ -425,12 +425,14 @@ namespace MusicAnalyzer.Tools
             }
             if ((lastChord != null) && ((int)lastChord.priority < (int)composed.priority && lastChord.beatStrength > composed.beatStrength))
                 penalty++;
+            if (lastChord != null && lastChord.scaleChordType == composed.scaleChordType && lastChord.beatStrength < composed.beatStrength)
+                penalty++;
             if (composed.duration > AVGDuration && !composed.isScaleBasic)
                 penalty++;
             if (composed.duration < AVGDuration && composed.isScaleBasic)
                 penalty++;
-            if (composed.duration <= (division * 4 / metrum.Denominator))
-                penalty++;
+            //if (composed.duration <= (division * 4 / metrum.Denominator))
+                //penalty++;
             if (composed.chordNotes.Count == 0)
                 return 100;
             if (composed.chordNotes.Count < 3)

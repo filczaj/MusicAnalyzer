@@ -170,21 +170,24 @@ namespace MusicAnalyzer.Models
             composedTrack = harmonySearch.getBestTrack();
         }
 
-        public void fillNewTrackNotes()
+        public void fillNewTrackNotes(int midiInstrumentIndex)
         {
             composedTrack.trackID = this.tracksProjection.Keys.Max() + 1;
             composedTrack.viewID = this.tracksProjection.Values.Max() + 1;
             this.tracksProjection.Add(composedTrack.trackID, composedTrack.viewID);
             foreach (int timeIndex in composedTrack.noteChords.Keys)
             {
+                int octaveBoost = 27;
                 int lastNoteIndex = 0;
+                if (composedTrack.noteChords[timeIndex].chordNotes[0] < 5)
+                    octaveBoost += 12;
                 foreach (int noteIndex in composedTrack.noteChords[timeIndex].chordNotes)
                 {
                     Note n = null;
-                    if (noteIndex + 15 < lastNoteIndex)
-                        n = new Note(noteIndex + 27, defaultNoteVelocity, timeIndex, (int)(composedTrack.noteChords[timeIndex].duration * 0.9), composedTrack.trackID, true);
+                    if (noteIndex + octaveBoost < lastNoteIndex)
+                        n = new Note(noteIndex + octaveBoost + 12, defaultNoteVelocity, timeIndex, (int)(composedTrack.noteChords[timeIndex].duration * 0.9), composedTrack.trackID, true);
                     else
-                        n = new Note(noteIndex + 15, defaultNoteVelocity, timeIndex, (int)(composedTrack.noteChords[timeIndex].duration * 0.9), composedTrack.trackID, true);
+                        n = new Note(noteIndex + octaveBoost, defaultNoteVelocity, timeIndex, (int)(composedTrack.noteChords[timeIndex].duration * 0.9), composedTrack.trackID, true);
                     lastNoteIndex = n.noteID;
                     midiTools.fillNoteData(n);
                     notesList.Add(n);
@@ -193,7 +196,7 @@ namespace MusicAnalyzer.Models
             setNotesRythmicValues(composedTrack.trackID);
             setRightNotesAndTonations(notesList.Where(x => x.trackID == composedTrack.trackID));
 
-            midiTools.AddMidiTrack(composedTrack, this);
+            midiTools.AddMidiTrack(composedTrack, this, midiInstrumentIndex);
 #if DEBUG
             MidiTools.genericListSerizliator<Note>(notesList.Where(x => x.trackID == composedTrack.trackID).ToList<Note>(), midiTools.configDirectory + "\\allComposedNotes.txt");
 #endif

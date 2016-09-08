@@ -38,7 +38,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,6 +64,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\PSAMWPFControlLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="Sanford.Collections">
       <HintPath>..\Library\Sanford.Collections.dll</HintPath>
     </Reference>
@@ -79,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -116,6 +118,7 @@
     <Compile Include="Models\NotesList.cs" />
     <Compile Include="Tools\IOTools.cs" />
     <Compile Include="Tools\NoteTools.cs" />
+    <Compile Include="Tools\PrintCommand.cs" />
     <Compile Include="Tools\SystemTools.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

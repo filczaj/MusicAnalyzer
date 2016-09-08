@@ -243,12 +243,20 @@ namespace MusicAnalyzer.Tools
             return timeSpanEventCollection;
         }
 
-        public void AddMidiTrack(ComposedTrack newTrack, MusicPiece musicPiece)
+        public void AddMidiTrack(ComposedTrack newTrack, MusicPiece musicPiece, int midiInstrumentIndex)
         {
             Track midiTrack = new Track();
+            //Insert Program change (set Instrument) at the begining of the track
+            ChannelMessageBuilder builder = new ChannelMessageBuilder();
+            builder.Command = ChannelCommand.ProgramChange;
+            builder.Data1 = midiInstrumentIndex;
+            builder.MidiChannel = newTrack.trackID;
+            builder.Build();
+            midiTrack.Insert(0, builder.Result);
+            //Add notes to a track
             foreach (Note n in musicPiece.notesList.Where(x => x.trackID == newTrack.trackID))
             {
-                ChannelMessageBuilder builder = new ChannelMessageBuilder();
+                builder = new ChannelMessageBuilder();
                 builder.Command = ChannelCommand.NoteOn;
                 builder.Data1 = n.noteID + lowNoteID;
                 builder.Data2 = n.velocity;

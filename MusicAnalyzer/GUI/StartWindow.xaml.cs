@@ -135,15 +135,15 @@ namespace MusicAnalyzer
             musicPiece.initTools();
             midiAnalyzer.ReportProgress(30);
             musicPiece.initNotes();
-            midiAnalyzer.ReportProgress(42);
+            midiAnalyzer.ReportProgress(50);
             musicPiece.initTonations();
-            midiAnalyzer.ReportProgress(55);
+            midiAnalyzer.ReportProgress(60);
             musicPiece.initMetrum();
-            midiAnalyzer.ReportProgress(67);
+            midiAnalyzer.ReportProgress(70);
             musicPiece.setRightNotesAndTonations(null);
-            midiAnalyzer.ReportProgress(80);
+            midiAnalyzer.ReportProgress(85);
             musicPiece.setNotesRythmicValues(-1);
-            midiAnalyzer.ReportProgress(90);
+            midiAnalyzer.ReportProgress(100);
         }
 
         private void midiAnalyzer_ReportProgress(object sender, ProgressChangedEventArgs e)
