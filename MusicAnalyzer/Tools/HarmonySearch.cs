@@ -110,7 +110,7 @@ namespace MusicAnalyzer.Tools
 
         bool isStopCriteriaReached()
         {
-            if (bestTrackChangeCounter >= bestTrackUnchanged || it >= maxIterations || stopwatch.ElapsedMilliseconds > maxExecutionTimeInSeconds * 1000)
+            if (bestTrackChangeCounter >= bestTrackUnchanged || it >= maxIterations || stopwatch.ElapsedMilliseconds > (maxExecutionTimeInSeconds * 1000))
                 return true;
             else
                 return false;
