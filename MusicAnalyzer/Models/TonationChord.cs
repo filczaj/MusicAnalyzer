@@ -39,22 +39,6 @@ namespace MusicAnalyzer.Models
             this.tonation = t;
         }
 
-        public TonationChord(Note n, Tonation tonation, MusicIntelligence musicAI) : base(n) // creates a specified chord based on a given note
-        {
-            if (tonation == null)
-                return;
-            else
-            {
-                this.tonation = tonation;
-                this.offset = tonation.offset;
-            }
-            int noteIndex = tonation.getNoteIndexInScale(n);
-            this.chordNotes = tonation.getChordNotesOnIndex(noteIndex);
-            this.turnover = 0; // setTurnover() ???????
-            setChordMode();
-            setChordTypesAndPriority(musicAI);
-        }
-
         public TonationChord(TonationChord inputeChord)
             : base(inputeChord.chordNotes, inputeChord.mode)
         {
@@ -128,7 +112,7 @@ namespace MusicAnalyzer.Models
             scaleChordType = type;
             this.priority = priority;
             offset = off;
-            if (type == ChordType.Other)
+            if ((int)priority >= (int)ChordPriority.Dominant)
                 isScaleBasic = false;
             else
                 isScaleBasic = true;
@@ -151,7 +135,8 @@ namespace MusicAnalyzer.Models
             {
                 ret += i.ToString() + ", ";
             }
-            ret += "T.Offset: " + offset.ToString();
+            ret += "Turn: " + turnover.ToString();
+            ret += " T.Offset: " + offset.ToString();
             ret += " Mode: " + mode.ToString();
             ret += " Duration: " + duration.ToString();
             ret += " Scale chord: " + scaleChordType.ToString();

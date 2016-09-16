@@ -93,36 +93,42 @@ namespace MusicAnalyzer.Tools
             chord.chordNotes = new List<int>();
             int[] asIntegers = lines.ElementAt(0).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             chord = new TonationChord(mode, ChordPriority.Subdominant, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(1).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             chord = new TonationChord(mode, ChordPriority.Dominant, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(2).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             chord = new TonationChord(mode, ChordPriority.SecondStep, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(3).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             chord = new TonationChord(mode, ChordPriority.SixthStep, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(4).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             chord = new TonationChord(mode, ChordPriority.ThirdStep, 0);
             chord.chordNotes = new List<int>();
             asIntegers = lines.ElementAt(5).Split(' ').Select(s => int.Parse(s)).ToArray();
             chord.chordNotes.AddRange(asIntegers);
+            chord.setChordMode();
             chords.Add(chord);
 
             if (lines.ToList().Count > 7)
@@ -131,12 +137,14 @@ namespace MusicAnalyzer.Tools
                 chord.chordNotes = new List<int>();
                 asIntegers = lines.ElementAt(6).Split(' ').Select(s => int.Parse(s)).ToArray();
                 chord.chordNotes.AddRange(asIntegers);
+                chord.setChordMode();
                 chords.Add(chord);
 
                 chord = new TonationChord(mode, ChordPriority.ThirdStep, 0);
                 chord.chordNotes = new List<int>();
                 asIntegers = lines.ElementAt(7).Split(' ').Select(s => int.Parse(s)).ToArray();
                 chord.chordNotes.AddRange(asIntegers);
+                chord.setChordMode();
                 chords.Add(chord);
             }
 
@@ -236,6 +244,15 @@ namespace MusicAnalyzer.Tools
                 else if (scaleDuration > 1.0 / (double)p)
                     n.noteExtension = 1.5;
                 return p;
+        }
+
+        public static int getChordNotesDistance(List<int> lastChordNotes, List<int> chordNotes)
+        {
+            int result = 0;
+            int notesToCompare = Math.Min(lastChordNotes.Count, chordNotes.Count);
+            for (int i = notesToCompare - 1; i >= 0; i--)
+                result += Math.Abs(lastChordNotes[i] - chordNotes[i]);
+            return result;
         }
 
         public PSAMControlLibrary.NoteStemDirection getNoteStemDirection(Note n, Note last, PSAMControlLibrary.ClefType clef)

@@ -175,10 +175,13 @@ namespace MusicAnalyzer.Models
             composedTrack.trackID = this.tracksProjection.Keys.Max() + 1;
             composedTrack.viewID = this.tracksProjection.Values.Max() + 1;
             this.tracksProjection.Add(composedTrack.trackID, composedTrack.viewID);
+            int lastChordIndex = composedTrack.noteChords.Keys[0];
             foreach (int timeIndex in composedTrack.noteChords.Keys)
             {
                 int octaveBoost = 27;
                 int lastNoteIndex = 0;
+                composedTrack.noteChords[timeIndex].turnover = setBestChordTurnover(composedTrack.noteChords[lastChordIndex], composedTrack.noteChords[timeIndex]);
+                composedTrack.noteChords[timeIndex].chordNotes = composedTrack.noteChords[timeIndex].getNotesInTurnover(composedTrack.noteChords[timeIndex].turnover);
                 if (composedTrack.noteChords[timeIndex].chordNotes[0] < 5)
                     octaveBoost += 12;
                 foreach (int noteIndex in composedTrack.noteChords[timeIndex].chordNotes)
@@ -192,6 +195,7 @@ namespace MusicAnalyzer.Models
                     midiTools.fillNoteData(n);
                     notesList.Add(n);
                 }
+                lastChordIndex = timeIndex;
             }
             setNotesRythmicValues(composedTrack.trackID);
             setRightNotesAndTonations(notesList.Where(x => x.trackID == composedTrack.trackID));
@@ -200,6 +204,22 @@ namespace MusicAnalyzer.Models
 #if DEBUG
             MidiTools.genericListSerizliator<Note>(notesList.Where(x => x.trackID == composedTrack.trackID).ToList<Note>(), midiTools.configDirectory + "\\allComposedNotes.txt");
 #endif
+        }
+
+        private int setBestChordTurnover(TonationChord lastChord, TonationChord chord)
+        {
+            if (composedTrack.noteChords.Values.Count == 0)
+                return chord.turnover;
+            int turnZeroDistance = NoteTools.getChordNotesDistance(lastChord.chordNotes, chord.getNotesInTurnover(0));
+            int turnOneDistance = NoteTools.getChordNotesDistance(lastChord.chordNotes, chord.getNotesInTurnover(1));
+            int turnTwoDistance = NoteTools.getChordNotesDistance(lastChord.chordNotes, chord.getNotesInTurnover(2));
+            if (turnOneDistance <= turnZeroDistance && turnOneDistance <= turnTwoDistance)
+                return 1;
+            else
+                if (turnTwoDistance <= turnZeroDistance && turnTwoDistance <= turnOneDistance)
+                    return 2;
+                else
+                    return chord.turnover;
         }
 
         public bool isInputFileCorrect()

@@ -407,6 +407,7 @@ namespace MusicAnalyzer.Tools
             List<TonationChord> possibleChords = getPossibleChords(inputChords);
             TonationChord resultChord = getRandomlyWeightedChord(possibleChords, lastChord, inputChords[0].beatStrength, tonation);
             resultChord.fillTonationChordData(inputChords[0]);
+            addRandomly4thNoteToChord(ref resultChord, lastChord);
             return resultChord;
         }
 
@@ -414,23 +415,39 @@ namespace MusicAnalyzer.Tools
         {
             int penalty = 0;
             if (input.Equals(composed))
-                return penalty;
+                return 1;
             foreach (int noteIndex in input.chordNotes)
             {
                 if (!input.tonation.mainScaleNotes.Contains(noteIndex))
                     continue;
-                if (!composed.chordNotes.Contains(noteIndex))
-                    penalty += 1;
-                penalty += penaltySeventhStepChordCheck(composed, noteIndex);
+                penalty += composedChordWithInputCheck(composed, noteIndex);
             }
-            if ((lastChord != null) && ((int)lastChord.priority < (int)composed.priority && lastChord.beatStrength > composed.beatStrength))
-                penalty++;
-            if (lastChord != null && lastChord.scaleChordType == composed.scaleChordType && lastChord.beatStrength < composed.beatStrength)
-                penalty++;
             if (composed.duration > AVGDuration && !composed.isScaleBasic)
                 penalty++;
             if (composed.duration < AVGDuration && composed.isScaleBasic)
                 penalty++;
+            if (lastChord != null)
+            {
+                if ((int)lastChord.priority < (int)composed.priority && lastChord.beatStrength > composed.beatStrength)
+                    penalty++;
+                if ((int)lastChord.priority > (int)composed.priority && lastChord.beatStrength < composed.beatStrength)
+                    penalty++;
+                if (lastChord.scaleChordType == composed.scaleChordType && lastChord.beatStrength < composed.beatStrength)
+                    penalty++;
+                if (lastChord.scaleChordType == composed.scaleChordType && lastChord.beatStrength > composed.beatStrength)
+                    penalty--;
+                ChordType[] majorChordTypes = { ChordType.Dominant, ChordType.ThirdStep, ChordType.SecondStep }; // czterodźwięki tyklko w ostatnim akordzie przy rozwiązaniu na tonikę lub 6th step
+                ChordType[] minorChordTypes = { ChordType.Dominant, ChordType.SecondStep };
+                if (((lastChord.tonation.mode == ChordMode.Major && majorChordTypes.Contains(lastChord.scaleChordType)) || 
+                    (lastChord.tonation.mode == ChordMode.Minor && minorChordTypes.Contains(lastChord.scaleChordType))) &&
+                        (composed.scaleChordType == ChordType.Tonic || composed.scaleChordType == ChordType.SixthStep) &&
+                            lastChord.chordNotes.Count < 4 && composed.beatStrength == MeasureBeats.Begin)
+                    penalty++;
+                if (((lastChord.tonation.mode == ChordMode.Major && majorChordTypes.Contains(lastChord.scaleChordType)) || 
+                    (lastChord.tonation.mode == ChordMode.Minor && minorChordTypes.Contains(lastChord.scaleChordType))) &&
+                        lastChord.chordNotes.Count == 4 && composed.beatStrength != MeasureBeats.Begin)
+                    penalty++;
+            }
             //if (composed.duration <= (division * 4 / metrum.Denominator))
                 //penalty++;
             if (composed.chordNotes.Count == 0)
@@ -440,13 +457,18 @@ namespace MusicAnalyzer.Tools
             return penalty;
         }
 
-        private int penaltySeventhStepChordCheck(TonationChord chord, int noteIndex)
+        private int composedChordWithInputCheck(TonationChord composedChord, int note)
         {
-            int seventh = (chord.chordNotes.Last() + 3) % 12;
-            if ((chord.tonation.mainScaleNotes.Contains(seventh)) && (seventh == noteIndex))
-                return -1;
-            else
+            if (composedChord.chordNotes.Contains(note))
                 return 0;
+            else
+            {
+                TonationChord tempChord = new TonationChord(composedChord);
+                tempChord.addNoteIndex(note);
+                if (tempChord.mode == ChordMode.Other)
+                    return 2;
+            }
+            return 0;
         }
 
         public Match matchChords(Chord a, Chord b)
@@ -533,13 +555,22 @@ namespace MusicAnalyzer.Tools
             {
                 foreach (TonationChord possibleChord in possibleChords)
                 {
-                    if (!possibleChord.chordNotes.Intersect(inputChord.chordNotes).Any())
-                        isChordFine[possibleChord] = false;
+                    foreach(int noteID in inputChord.chordNotes)
+                        if (composedChordWithInputCheck(possibleChord, noteID) > 0)
+                            isChordFine[possibleChord] = false;
                 }
             }
             possibleChords.RemoveAll(x => isChordFine[x] == false);
-            if (possibleChords.Count == 0)
-                possibleChords.Add(inputChords[0].tonation.dominant);
+            if (possibleChords.Count == 0){
+                Random rand = new Random();
+                int number = rand.Next() % 3;
+                if (number == 0)
+                    possibleChords.Add(inputChords[0].tonation.tonic);
+                else if (number == 1)
+                    possibleChords.Add(inputChords[0].tonation.subdominant);
+                else
+                    possibleChords.Add(inputChords[0].tonation.dominant);
+            }
             if (inputChords.Count == 1 && inputChords[0].chordNotes.Count == 1)
             {
                 TonationChord tch = possibleChords.Find(x => x.chordNotes[0] == inputChords[0].chordNotes[0]);
@@ -581,6 +612,20 @@ namespace MusicAnalyzer.Tools
             index = chordsPriorities.First(x => x >= index);
             index = chordsPriorities.IndexOf(index);
             return new TonationChord(possibleChords[index]);
+        }
+
+        void addRandomly4thNoteToChord(ref TonationChord chord, TonationChord lastChord) // Add 7th step of a chord to a dominant, third- or second-step chord; give it 25% chance, because it's preferred only at the end of a bar
+        {
+            if (lastChord == null)
+                return;
+            Random random = new Random();
+            ChordType[] majorChordTypes = {ChordType.Dominant, ChordType.ThirdStep, ChordType.SecondStep};
+            ChordType[] minorChordTypes = { ChordType.Dominant, ChordType.SecondStep };
+            if ((lastChord.tonation.mode == ChordMode.Major && majorChordTypes.Contains(lastChord.scaleChordType) && chord.beatStrength == MeasureBeats.Begin && (random.Next() % 2 == 0)) ||
+                (lastChord.tonation.mode == ChordMode.Minor && minorChordTypes.Contains(lastChord.scaleChordType) && chord.beatStrength == MeasureBeats.Begin && (random.Next() % 2 == 0)))
+            {
+                lastChord.chordNotes.Add((lastChord.chordNotes[0] + 10) % 12);
+            }
         }
     }
 }
