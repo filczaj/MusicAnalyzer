@@ -15,12 +15,12 @@ namespace MusicAnalyzer.Tools
         string configDirectory = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
         List<string> bestTrackHistory;
 
-        readonly int hms = 40;
+        readonly int hms = 4;
         readonly double hmcr = 0.6; // harmony memory considering rate
         readonly double par = 0.8; // pitch adjusting rate
         readonly int delta = 2; // the amount between two neighboring values in discrete candidate set
 
-        readonly int maxIterations = 10000;
+        readonly int maxIterations = 100;
         readonly int bestTrackUnchanged = 3000;
         readonly int maxExecutionTimeInSeconds = 120;
 

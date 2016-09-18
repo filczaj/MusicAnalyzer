@@ -184,7 +184,10 @@ namespace MusicAnalyzer.Tools
                         beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
                         break;
                     case 8:
-                        beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong};
+                        if (m.Numerator == 2)
+                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong};
+                        else
+                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };
                         break;
                     case 12:
                         beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
@@ -196,7 +199,7 @@ namespace MusicAnalyzer.Tools
                         if (m.Numerator == 3)
                             beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Strong, MeasureBeats.Strong };
                         else
-                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };
+                            beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Strong, MeasureBeats.Strong, MeasureBeats.Weak };
                         break;
                     case 32:
                         beats = new List<MeasureBeats>() { MeasureBeats.Begin, MeasureBeats.Weak, MeasureBeats.Strong, MeasureBeats.Weak };

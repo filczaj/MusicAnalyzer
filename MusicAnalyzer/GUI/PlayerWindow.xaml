@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PSAMWPFControlLibrary="clr-namespace:PSAMWPFControlLibrary;assembly=PSAMWPFControlLibrary"
         xmlns:PSAMControlLibrary="clr-namespace:PSAMControlLibrary;assembly=PSAMControlLibrary"
-        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer - player" Height="685" Width="1028" Closing="Window_Closing" Loaded="Window_Loaded">
-    <Grid>
-        <Menu>
+        Icon="/MusicAnalyzer;component/Icons/piano.ico" Title="MusicAnalyzer - player" Height="685" Width="1028" Closing="Window_Closing" Loaded="Window_Loaded" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+        <Menu BorderBrush="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
             <MenuItem Header="_File">
                 <MenuItem Header="_Change file" Click="MenuItem_Click" />
                 <Separator />
@@ -16,9 +16,9 @@
                 <MenuItem Header="_Exit" Click="MenuItem_Click_3" />
             </MenuItem>
         </Menu>
-        <GroupBox x:Name="headerBox" Header="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="1000">
+        <GroupBox x:Name="headerBox" Header="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="56" Width="1000" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
             <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="811" Margin="10,0,-2,0">
-                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="backButton_Click_1"/>
+                <Button x:Name="backButton" Content="Change file" HorizontalAlignment="Left" Margin="659,0,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="backButton_Click_1" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
                 <TextBox x:Name="fileNameBox" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Margin="46,0,0,0" IsEnabled="False"/>
                 <Image HorizontalAlignment="Left" Height="32" Margin="9,0,0,0" VerticalAlignment="Top" Width="32" Source="/MusicAnalyzer;component/Icons/note.png"/>
             </Grid>
@@ -30,32 +30,32 @@
                 </Grid>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,497,0,0" VerticalAlignment="Top" Height="70" Width="719">
+        <GroupBox Header="Player" HorizontalAlignment="Left" Margin="10,497,0,0" VerticalAlignment="Top" Height="70" Width="719" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
             <Grid>
-                <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="playButton_Click"/>
-                <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="pauseButton_Click"/>
-                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="stopButton_Click"/>
+                <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="playButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
+                <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="pauseButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="stopButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
                 <Label Content="Volume" HorizontalAlignment="Left" Margin="530,15,0,0" VerticalAlignment="Top" Width="56" Height="25"/>
-                <Button x:Name="volDownButton" HorizontalAlignment="Left" Margin="602,15,0,0" VerticalAlignment="Top" Width="40" Height="27" Click="volDownButton_Click">
+                <Button x:Name="volDownButton" HorizontalAlignment="Left" Margin="602,15,0,0" VerticalAlignment="Top" Width="40" Height="27" Click="volDownButton_Click" BorderThickness="3">
                     <StackPanel Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="/Icons/volume_down.png" Height="23" Width="23"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="volUpButton" HorizontalAlignment="Left" Margin="647,15,0,0" VerticalAlignment="Top" Width="40" Height="27" Click="volUpButton_Click">
+                <Button x:Name="volUpButton" HorizontalAlignment="Left" Margin="647,15,0,0" VerticalAlignment="Top" Width="40" Height="27" Click="volUpButton_Click" BorderThickness="3">
                     <StackPanel Height="23" Width="23" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="/Icons/volume_up.png" Height="23" Width="23" />
                     </StackPanel>
                 </Button>
             </Grid>
         </GroupBox>
-        <Button x:Name="deleteButton" Content="Delete track" HorizontalAlignment="Left" Margin="803,523,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="deleteTrackButton_Click"/>
-        <GroupBox x:Name="createGroup" Header="Create accompaniment" HorizontalAlignment="Left" Height="72" Margin="10,572,0,0" VerticalAlignment="Top" Width="719">
+        <Button x:Name="deleteButton" Content="Delete track" HorizontalAlignment="Left" Margin="803,523,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="deleteTrackButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
+        <GroupBox x:Name="createGroup" Header="Create accompaniment" HorizontalAlignment="Left" Height="72" Margin="10,572,0,0" VerticalAlignment="Top" Width="719" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
             <Grid x:Name="createGrid">
                 <ComboBox x:Name="instrumentCombo" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Width="147" Height="32"/>
-                <Button x:Name="composeButton" Content="Compose music!" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="composeButton_Click"/>
+                <Button x:Name="composeButton" Content="Compose music!" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="composeButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
                 <ProgressBar x:Name="composeProgressBar" HorizontalAlignment="Left" Height="30" Margin="378,10,0,0" VerticalAlignment="Top" Width="310"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" Margin="803,596,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="exitButton_Click"/>
+        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" Margin="803,596,0,0" VerticalAlignment="Top" Width="147" Height="32" Click="exitButton_Click" BorderThickness="3" FontSize="14" FontWeight="Bold"/>
     </Grid>
 </Window>
