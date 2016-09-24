@@ -308,6 +308,7 @@ namespace MusicAnalyzer.GUI
         {
             selectedInstrumentIndex = instrumentCombo.SelectedIndex;
             composeWorker.RunWorkerAsync();
+            composeButton.IsEnabled = false;
         }
 
         public void updateScoreGridWidth()
@@ -358,7 +359,6 @@ namespace MusicAnalyzer.GUI
             scoreGrid.Height = scoreViewHeight * scoreViewers.Count;
             scoreViewers[scoreViewers.Count - 1].UpdateLayout();
             updateScoreGridWidth();
-            composeButton.IsEnabled = false;
             printMenu.IsEnabled = true;
         }
 

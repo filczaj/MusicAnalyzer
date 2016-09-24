@@ -12,7 +12,7 @@ namespace MusicAnalyzer.Models
         public int trackID;
         public int viewID;
         public SortedList<int, TonationChord> noteChords; // chords in the track
-        public int harmonyMatch;
+        public double harmonyMatch;
         public double AVGChordDuration;
 
         public ComposedTrack(int vID, int tID)
@@ -44,7 +44,7 @@ namespace MusicAnalyzer.Models
                     timeIndices = inputTrack.noteChords.Keys.Where(x => x >= this.noteChords.Keys[i]).ToArray();
                 foreach (int inputIndex in timeIndices)
                 {
-                    harmonyMatch += (musicAI.penaltyMatchChords(this.noteChords[noteChords.Keys[i]], inputTrack.noteChords[inputIndex], i > 0 ? this.noteChords[noteChords.Keys[i-1]] : null, inputTrack.AVGChordDuration, MidiTools.getCurrentMetrum(inputIndex, musicPiece.meterChanges), musicPiece.Division) * inputTrack.noteChords[inputIndex].duration) / 100;
+                    harmonyMatch += (musicAI.penaltyMatchChords(this.noteChords[noteChords.Keys[i]], inputTrack.noteChords[inputIndex], i > 0 ? this.noteChords[noteChords.Keys[i-1]] : null, inputTrack.AVGChordDuration, MidiTools.getCurrentMetrum(inputIndex, musicPiece.meterChanges), musicPiece.Division) * inputTrack.noteChords[inputIndex].duration) /(double) 100.0;
                 }
             }
         }

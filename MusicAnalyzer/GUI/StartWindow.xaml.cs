@@ -53,6 +53,7 @@ namespace MusicAnalyzer
             if (result == true)
             {
                 midFileTextBox.Text = dlg.FileName;
+                readProgressBar.Value = 0;
             }
         }
 
@@ -73,6 +74,7 @@ namespace MusicAnalyzer
         {
             if (File.Exists(midFileTextBox.Text))
             {
+                readProgressBar.Value = 0;
                 reader = new Sequence();
                 reader.LoadProgressChanged += HandleLoadProgressChanged;
                 reader.LoadCompleted += HandleLoadCompleted;

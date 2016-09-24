@@ -15,14 +15,14 @@ namespace MusicAnalyzer.Tools
         string configDirectory = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + "\\ConfigFiles";
         List<string> bestTrackHistory;
 
-        readonly int hms = 4;
-        readonly double hmcr = 0.6; // harmony memory considering rate
+        readonly int hms = 30;
+        readonly double hmcr = 0.7; // harmony memory considering rate
         readonly double par = 0.8; // pitch adjusting rate
         readonly int delta = 2; // the amount between two neighboring values in discrete candidate set
 
-        readonly int maxIterations = 100;
-        readonly int bestTrackUnchanged = 3000;
-        readonly int maxExecutionTimeInSeconds = 120;
+        readonly int maxIterations = 100000;
+        readonly int bestTrackUnchanged = 30000;
+        readonly int maxExecutionTimeInSeconds = 45;
 
         int it = 0;
         int bestTrackChangeCounter = 0;
@@ -30,7 +30,7 @@ namespace MusicAnalyzer.Tools
         Stopwatch stopwatch;
         Random random = new Random();
 
-        List<ComposedTrack> harmonyMemory; // memory of compositions with harmony match value as a key
+        List<ComposedTrack> harmonyMemory; // memory of compositions tracks
         ComposedTrack inputTrack;
         MusicIntelligence musicAI;
         MusicPiece musicPiece;
@@ -46,6 +46,7 @@ namespace MusicAnalyzer.Tools
 
         public void runHarmonySearchLoop(BackgroundWorker composeWorker)
         {
+            List<string> bestTrackHistory2 = new List<string>();
             stopwatch = Stopwatch.StartNew();
             while (!isStopCriteriaReached())
             {
@@ -55,11 +56,14 @@ namespace MusicAnalyzer.Tools
                 updateMemoryWithTrack(newTrack);
                 if (it % 10 == 1)
                 {
-                    bestTrackHistory.Add("Epoch: " + it.ToString() + "; match = " + getBestTrack().harmonyMatch.ToString());
+                    //bestTrackHistory.Add("Epoch: " + it.ToString() + "; match = " + getBestTrack().harmonyMatch.ToString());
+                    bestTrackHistory.Add(it.ToString());
+                    bestTrackHistory2.Add(getBestTrack().harmonyMatch.ToString());
                 }
                 composeWorker.ReportProgress(100 * it / maxIterations);
             }
             MidiTools.genericListSerizliator<string>(bestTrackHistory, configDirectory + "\\bestTrackHistory.txt");
+            MidiTools.genericListSerizliator<string>(bestTrackHistory2, configDirectory + "\\bestTrackHistory2.txt");
             MidiTools.genericListSerizliator<Chord>(harmonyMemory[0].noteChords.Values.ToList<Chord>(), configDirectory + "\\composedChords.txt");
             stopwatch.Stop();
         }
@@ -127,10 +131,10 @@ namespace MusicAnalyzer.Tools
             }
             harmonyMemory.Sort((x, y) => x.harmonyMatch.CompareTo(y.harmonyMatch));
 #if DEBUG
-            List<int> listwa = new List<int>();
+            List<double> listwa = new List<double>();
             foreach(ComposedTrack track in harmonyMemory)
                 listwa.Add(track.harmonyMatch);
-            MidiTools.genericListSerizliator<int>(listwa, dir + "\\initalSetMatch.txt");
+            MidiTools.genericListSerizliator<double>(listwa, dir + "\\initalSetMatch.txt");
 #endif
         }
 
