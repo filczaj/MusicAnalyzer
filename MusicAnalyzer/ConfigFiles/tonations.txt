@@ -1,1 +1,1 @@
-Key: EMinor Mode: Minor Offset: EMajor Start: 0 End: 2147483646
+Key: GMajor Mode: Major Offset: GMinor Start: 0 End: 2147483646
