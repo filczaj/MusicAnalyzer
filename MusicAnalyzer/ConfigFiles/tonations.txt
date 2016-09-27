@@ -1,4 +1,1 @@
-Key: FSharpMinor Mode: Minor Offset: FSharpMinor Start: 0 End: 15840
-Key: BMinor Mode: Minor Offset: BMinor Start: 15840 End: 24480
-Key: FSharpMinor Mode: Minor Offset: FSharpMinor Start: 24480 End: 34560
-Key: DMajor Mode: Major Offset: DMinor Start: 34560 End: 2147483646
+Key: EMinor Mode: Minor Offset: EMajor Start: 0 End: 2147483646

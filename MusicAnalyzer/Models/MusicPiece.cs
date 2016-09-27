@@ -27,14 +27,16 @@ namespace MusicAnalyzer.Models
         public int Division { get; set; }
         ComposedTrack composedTrack;
         ComposedTrack inputTrack;
+        HarmonySearchParams HSParams;
 
-        public MusicPiece(Sequence seq, string configDir)
+        public MusicPiece(Sequence seq, string configDir, HarmonySearchParams HSParams)
         {
             this.sequence = seq;
             this.Division = seq.Division;
             this.midiTools = new MidiTools(configDir);
             this.trackCount = this.sequence.Count;
             this.musicIntelligence = new MusicIntelligence();
+            this.HSParams = HSParams;
         }
 
         public void initTools()
@@ -164,7 +166,7 @@ namespace MusicAnalyzer.Models
 
         public void findBestChords(BackgroundWorker composeWorker)
         {
-            HarmonySearch harmonySearch = new HarmonySearch(inputTrack, this, musicIntelligence);
+            HarmonySearch harmonySearch = new HarmonySearch(inputTrack, this, musicIntelligence, this.HSParams);
             harmonySearch.generateInitialMemorySet(midiTools.configDirectory);
             harmonySearch.runHarmonySearchLoop(composeWorker);
             composedTrack = harmonySearch.getBestTrack();

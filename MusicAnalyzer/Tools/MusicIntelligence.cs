@@ -324,7 +324,8 @@ namespace MusicAnalyzer.Tools
             for (int i = 0; i < count; i++)
             {
                 tries = 0;
-                while (tries < 30 && (tchInitial == null || tchInitial.scaleChordType == ChordType.Other)){
+                while (tries < 30 && (tchInitial == null || tchInitial.scaleChordType == ChordType.Other) && !inputTrack.noteChords.ContainsKey(track.noteChords.Keys[timeId]))
+                {
                     timeId = random.Next(track.noteChords.Keys.Count);
                     tchInitial = track.noteChords[track.noteChords.Keys[timeId]];
                     tries++;
@@ -333,14 +334,19 @@ namespace MusicAnalyzer.Tools
                     continue;
                 tries = 0;
                 constDuration = tchInitial.duration;
-                while (tries < 30 && (tchInitial.priority == track.noteChords[track.noteChords.Keys[timeId]].priority))
+                while (tries < 30 && (tchInitial.scaleChordType == track.noteChords[track.noteChords.Keys[timeId]].scaleChordType))
                 {
                     tries++;
+                    if (!inputTrack.noteChords.ContainsKey(track.noteChords.Keys[timeId]))
+                        continue;
                     tchInitial = getRandomAlternativeChord(inputTrack.noteChords[track.noteChords.Keys[timeId]]);
                 }
-                track.noteChords[track.noteChords.Keys[timeId]] = tchInitial;
-                track.noteChords[track.noteChords.Keys[timeId]].duration = constDuration;
-                track.noteChords[track.noteChords.Keys[timeId]].fillTonationChordData(inputTrack.noteChords[track.noteChords.Keys[timeId]]);
+                if (inputTrack.noteChords.ContainsKey(track.noteChords.Keys[timeId]))
+                {
+                    track.noteChords[track.noteChords.Keys[timeId]] = tchInitial;
+                    track.noteChords[track.noteChords.Keys[timeId]].duration = constDuration;
+                    track.noteChords[track.noteChords.Keys[timeId]].fillTonationChordData(inputTrack.noteChords[track.noteChords.Keys[timeId]]);
+                }
             }
         }
 
@@ -451,8 +457,6 @@ namespace MusicAnalyzer.Tools
                         lastChord.chordNotes.Count == 4 && composed.beatStrength != MeasureBeats.Begin)
                     penalty++;
             }
-            //if (composed.duration <= (division * 4 / metrum.Denominator))
-                //penalty++;
             if (composed.chordNotes.Count == 0)
                 return 100;
             if (composed.chordNotes.Count < 3)

@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\HarmonySearchParams.cs" />
     <Compile Include="Tools\MusicIntelligence.cs" />
     <Compile Include="Models\ComposedTrack.cs" />
     <Compile Include="Models\Enums.cs" />

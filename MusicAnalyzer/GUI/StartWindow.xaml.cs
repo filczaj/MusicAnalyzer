@@ -31,6 +31,7 @@ namespace MusicAnalyzer
         private readonly BackgroundWorker midiAnalyzer = new BackgroundWorker();
         private MusicPiece musicPiece;
         private PlayerWindow playerWindow;
+        private HarmonySearchParams HSParams;
 
         public StartWindow()
         {
@@ -40,6 +41,7 @@ namespace MusicAnalyzer
             midiAnalyzer.RunWorkerCompleted += midiAnalyzer_RunWorkerCompleted;
             midiAnalyzer.ProgressChanged += midiAnalyzer_ReportProgress;
             midiAnalyzer.WorkerReportsProgress = true;
+            HSParams = new HarmonySearchParams(50, 0.8, 0.8, 2, 80000, 20000, 500);
         }
 
         private void openMidButton_Click(object sender, RoutedEventArgs e)
@@ -100,7 +102,7 @@ namespace MusicAnalyzer
         {
             if (e.Error == null)
             {
-                musicPiece = new MusicPiece(reader, configDirectory);
+                musicPiece = new MusicPiece(reader, configDirectory, HSParams);
                 if (musicPiece.isConfigDirCorrect())
                 {
                     midiAnalyzer.RunWorkerAsync();
@@ -151,6 +153,33 @@ namespace MusicAnalyzer
         private void midiAnalyzer_ReportProgress(object sender, ProgressChangedEventArgs e)
         {
             readProgressBar.Value = e.ProgressPercentage;
+        }
+
+        private void setParamsButton_Click(object sender, RoutedEventArgs e)
+        {
+            int hms;
+            double hmcr; 
+            double par; 
+            int delta; 
+            int maxIterations;
+            int bestTrackUnchanged;
+            int maxExecutionTimeInSeconds;
+            try
+            {
+                hms = Convert.ToInt32(HMSTextBox.Text);
+                hmcr = Convert.ToDouble(hmcrTextBox.Text);
+                par = Convert.ToDouble(parTextBox.Text);
+                delta = Convert.ToInt32(deltaTextBox.Text);
+                maxIterations = Convert.ToInt32(maxIterationsTextBox.Text);
+                bestTrackUnchanged = Convert.ToInt32(maxBestUnchangedTextBox.Text);
+                maxExecutionTimeInSeconds = Convert.ToInt32(maxTimeTextBox.Text);
+                HSParams = new HarmonySearchParams(hms, hmcr, par, delta, maxIterations, bestTrackUnchanged, maxExecutionTimeInSeconds);
+            }
+            catch (FormatException exc)
+            {
+                HSParams = new HarmonySearchParams(50, 0.8, 0.7, 2, 80000, 20000, 500);
+                System.Windows.Forms.MessageBox.Show("Incorrect params.", "Validation error", System.Windows.Forms.MessageBoxButtons.OK);
+            }
         }
     }
 }
